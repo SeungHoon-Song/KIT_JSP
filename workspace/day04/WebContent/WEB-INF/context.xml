@@ -30,15 +30,15 @@
     name="jdbc/oracle"
     auth="Container"
     type="javax.sql.DataSource"
-    driverClassName = "Oracle.jdbc.OracleDriver"
+    driverClassName = "oracle.jdbc.OracleDriver"
     url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
     username="hr"
     password="hr"
     maxActive="20"
-   	maxIdle="20"
-   	maxWait="-1"
+    maxIdle="20"
+    maxWait="-1"
     />
-    <!--
+    <!-- 
     	name : dbcp name
     	username : oracle user name
     	password : oracle user password
@@ -46,6 +46,28 @@
     	maxIdle : 항상 연결상태를 유지하는 개수
     	
     	*maxActive와 maxIdle는 같은 값으로 주는 것이 일반적이다.
-    -->
-    
+     -->
 </Context>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
