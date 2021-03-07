@@ -33,6 +33,7 @@ public class MemberJoinOkAction implements Action{
 		private String memberAddressDetail;
 		private String memberAddressEtc;*/
 		
+		//사용자가 입력한 정보들
 		m_vo.setMemberId(req.getParameter("memberId"));
 		m_vo.setMemberPw(req.getParameter("memberPw"));
 		m_vo.setMemberName(req.getParameter("memberName"));
@@ -44,14 +45,18 @@ public class MemberJoinOkAction implements Action{
 		m_vo.setMemberAddressDetail(req.getParameter("memberAddressDetail"));
 		m_vo.setMemberAddressEtc(req.getParameter("memberAddressEtc"));
 		
+		//DB에서 INSERT 실패 시
 		if(!m_dao.join(m_vo)) {
+			//직접 HTML문서로 응답
 			PrintWriter out = resp.getWriter();
 			resp.setContentType("text/html;charset=utf-8");
 			out.println("<script>alert('서버가 불안정합니다. 잠시 후 다시 시도해주세요.');</script>");
 			out.close();
 		}else {
+			//DB에서 INSERT 성공 시
 			forward = new ActionForward();
 			
+			//이동할 페이지 정보를 담아서 리턴
 			forward.setRedirect(false);
 			forward.setPath("/member/MemberLogin.me");
 		}

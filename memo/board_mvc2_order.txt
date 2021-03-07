@@ -1,0 +1,40 @@
+[model2]
+				사용		1.redirect	2.forward
+	a.jsp  -->  web.xml  -->  Front-Controller.java  -------------------------------->  c.jsp
+				↕
+				↕
+				↕
+				선언
+			   ★Controller.java(로직구현   DB,연산,응답방식,응답페이지)(execute(requset,response))
+				↕
+				↕
+				↕
+			            DAO
+				↕
+				↕
+				↕
+				DB
+구현순서
+1. web.xml
+2. Front-Controller.java
+3. Action
+4. ActionForward
+5. Front-Controller.java
+6. DB
+7. DAO
+8. Controller.java
+9. Front-Controller.java
+
+
+빌드패스 → VO → DAO → MyBatis 패키지 가져오기(config → member) → DAO →Controller(MemberCheckIdOkAction) → Action →
+ActionForward → Controller(MemberCheckIdOkAction) → Front-Controller(MemberFrontController) → web(서블릿 이름 선언, 요청 URL 분석)
+→ Front-Controller(MemberFrontController doProcess)
+
+구현 완성하기
+loginForm.jsp
+
+세션 선언(로그인된 아이디 저장)
+HttpSession session = req.getSession();
+
+로그인 실패 시 alert으로 경고 후
+다시 로그인 페이지로 응답

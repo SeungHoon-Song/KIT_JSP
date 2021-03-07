@@ -14,20 +14,4 @@
 	<select id="checkId" parameterType="string" resultType="_int">
 		SELECT COUNT(*) FROM TABLE_MEMBER WHERE MEMBERID = #{memberId}
 	</select>
-	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
