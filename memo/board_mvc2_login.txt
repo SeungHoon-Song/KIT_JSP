@@ -1,0 +1,11 @@
+로그인 시도 -> LoginOkAction
+-> 1. 로그인 성공(게시판 목록)
+    2. 로그인 실패(로그인 페이지 - 경고 메세지 출력)
+
+-> 1. 로그인 버튼 클릭(loginForm.jsp 페이지 이동)
+    2. 로그인 실패(loginForm.jsp 페이지 이동)
+
+
+
+LoginOkAction.java에서 로그인 실패 시 
+login=false 파라미터를 Login 프론트 컨트롤러로 전달한다.

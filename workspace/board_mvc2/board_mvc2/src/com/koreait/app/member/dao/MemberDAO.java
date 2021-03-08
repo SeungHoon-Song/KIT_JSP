@@ -66,3 +66,17 @@ public class MemberDAO {
 		return (Integer)session.selectOne("Member.login", member) == 1;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
