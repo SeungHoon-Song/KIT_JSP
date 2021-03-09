@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>TestLogin</title>
+		<title>TestFindPw</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
@@ -24,11 +24,6 @@
 		}
 	</style>
 	<body class="right-sidebar is-preload">
-	<c:if test="${not empty param.login}">
-   	<c:if test="${not param.login}">
-   		<script>alert("Invalid Login or password");</script>
-   	</c:if>
-   </c:if>
 		<div id="page-wrapper">
 
 			<!-- Header -->
@@ -57,38 +52,42 @@
 				
 
 			<!-- Main -->
-		<div id="main" class="container">
+				<div id="main" class="container">
+				
+								<form name="findPwForm" action="${pageContext.request.contextPath}/member/MemberFindPwOkAction.me" method="post">
+					
+				
+				<p style="text-align: center; font-size:24px; font-weight: bold;">Forgot your password?</p>
+				<p style="text-align: center;">Please enter the e-mail address you use to log in, 
+				and we’ll send you a link to reset your password.</p>
 
-			<form name="loginForm" action="${pageContext.request.contextPath}/member/MemberLoginOk.me" method="post">
-
-						<!-- Login -->	
 						
 				<!-- <label for="email">Email</label><br>  -->
 				<div id="membertext">
-					<label for="email">E-mail</label>
+					<label for="memberEmail">E-mail</label>
 				
-
 							<input type="email" style="color:black" class="text"	name="memberEmail" id="memberEmail" value=""/>
-
-				<br>
-				<!-- <label for="pw">Password</label><br>  -->
-
-					<label for="pw">Password</label> 
-
-							<input type="password" style="color:black" class="text"	name="memberPw" id="memberPw" value=""/>
-
+								<p id="emailCheck_text">
 				
-							<a href="findPwForm.jsp" style="font-size: 0.9rem;">Forgot your password?</a>
+				<br><br>
+				
+				
+							<a href="loginForm.jsp" style="font-size: 0.9rem;">Already a member? Log in here</a>
+							
+							<!-- <a href="mailto:s10269@naver.com?subject=Forgot%20
+							your%20password?&body=본문%20테스트중" target="_top">send mail!</a> -->
+							
 					<ul class="actions">
 							<li style="margin: 0 auto;">
-								<input type="button" value="LOGIN" onclick="login()"/>
+								<input type="button" value="FIND PASSWORD" onclick="findPw()"/>
+							
 							</li>
 						</ul>
+				</div>
+				</form>
 					</div>
-					</form>
-			</div>
 
-		
+
 		</div>
 
 		<!-- Scripts -->
@@ -102,6 +101,6 @@
 		<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 		<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-		<script src="${pageContext.request.contextPath}/app/member/login.js"></script>
+		<script src="${pageContext.request.contextPath}/app/member/findPw.js"></script>
 	</body>
 </html>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <!--
 	Axiom by Pixelarity
 	pixelarity.com | hello@pixelarity.com
@@ -54,26 +54,24 @@
 			<!-- Main -->
 			<div id="main" class="container">
 					<!-- Join -->
+					<form name="joinForm" action="${pageContext.request.contextPath}/member/MemberJoinOk.me" method="post"> <!-- id="subscribe" -->
 		
 				<div id="membertext">
 					<label for="memberEmail">E-mail</label>
-				</div>
-				<form method="post" action="${pageContext.request.contextPath}/member/MemberJoin.me" id="subscribe">
-		
-							<input type="text" style="color:black" class="text" name="memberEmail" id="memberEmail" value="" placeholder="abc@gmail.com"  />
-				</form>
 				
+							<input type="email" style="color:black" class="text" name="memberEmail" id="memberEmail" value="" placeholder="abc@gmail.com"  />
+							<p id="emailCheck_text"></p>
+
+
 				
-				
-				<div id="membertext">
 					<label for="memberPw">Password</label>
-					<label for="confirmpw">Confirm Password</label>
-				<form method="post" action="${pageContext.request.contextPath}/member/MemberJoin.me" id="subscribe2">		<!-- subs2 width -->
+					<!-- subs2 width -->
 							<input type="password" style="color:black" class="text"	name="memberPw" id="memberPw" value=""/>
-				</form>
-				<form method="post" action="${pageContext.request.contextPath}/member/MemberJoin.me" id="subscribe2">
-							<input type="password" style="color:black" class="text"	name="confirmpw" id="confirmpw" value=""/>
-				</form>
+				
+					<label for="confirmpw">Confirm Password</label>
+				
+							<input type="password" style="color:black" class="text"	name="confirmPw" id="confirmPw" value=""/>
+				
 				</div>
 				
 				
@@ -81,25 +79,25 @@
 				
 				<div id="membertext">
 				<label for="memberName">Name</label>
-				</div>
-				<form method="post" action="${pageContext.request.contextPath}/member/MemberJoin.me" id="subscribe">
+				
+				
 							<input type="text" style="color:black" class="text"	name="memberName" id="memberName" value=""/>
-				</form>
 				
-				<div id="membertext">
+				
+				
 				<label for="memberPhoneNumber">Phone Number</label>
-				</div>
-				<form method="post" action="${pageContext.request.contextPath}/member/MemberJoin.me" id="subscribe">
-							<input type="text" style="color:black" class="text"	name="memberPhoneNumber" id="memberPhoneNumber" value=""/>
-				</form>
 				
-					<form method="post" action="#">
+							<input type="text" style="color:black" class="text"	name="memberPhoneNumber" id="memberPhoneNumber" value=""/>
+				</div>
+				
+				
+				
 								<br><br>
 								<textarea name="term" id="term"	rows="6" style="resize:none" readonly>
 시행일자 : 2020년 11월 16일
 
 제1조 (목적)
-본 약관은 한동석 주식회사(이하 '회사')가 고도 사이트(이하 ‘사이트’)를 통하여 인터넷상에서 제공하는 서비스(이하 ‘서비스’)를 이용하는 고객 (이하 '고객')간의 권리와 의무 및 책임 등 기타 제반사항을 규정함을 목적으로 합니다.
+본 약관은 송승훈 주식회사(이하 '회사')가 고도 사이트(이하 ‘사이트’)를 통하여 인터넷상에서 제공하는 서비스(이하 ‘서비스’)를 이용하는 고객 (이하 '고객')간의 권리와 의무 및 책임 등 기타 제반사항을 규정함을 목적으로 합니다.
 
 제2조 (용어의 정의)
 이 약관에서 사용하는 용어의 정의는 다음과 같습니다.
@@ -208,26 +206,28 @@
 					
 					<ul class="actions">
 							<li style="margin: 0 auto;">
-								<input type="submit" value="CREATE" class="primary" />
-								<input type="reset" value="RESET" />
+								<input type="button" value="CREATE" class="primary" onclick="join()"/>
 							</li>
-						</ul>
-						
+					</ul>
+									
 				</form>
-					</div>
-
-		
+			</div>	
 
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.slidertron.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		<script>var contextPath = "${pageContext.request.contextPath}";</script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery.dropotron.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery.slidertron.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/browser.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/breakpoints.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/util.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+		<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+		<script src="${pageContext.request.contextPath}/app/member/join.js"></script>
+		<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 
 	</body>
 </html>

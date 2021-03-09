@@ -9,48 +9,30 @@ import com.koreait.action.Action;
 import com.koreait.action.ActionForward;
 import com.koreait.app.member.dao.MemberDAO;
 
-//컨트롤러
-public class MemberCheckIdOkAction implements Action{
-
+public class MemberCheckEmailOkAction implements Action{
+	
 	@Override
 	public ActionForward execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		//전달받은 데이터 중 한글이 있다면 깨지지 않도록 방지
 		req.setCharacterEncoding("UTF-8");
 		
-		String id = req.getParameter("id");
+		String email = req.getParameter("email");
 		MemberDAO m_dao = new MemberDAO();
 		
 		PrintWriter out = resp.getWriter();
 		
 		resp.setContentType("text/html;charset=utf-8");
 		
-		//Ajax에서 요청한 데이터를 DB에서 조회한 후
-		//text로 출력하여 응답해준다.
-		if(m_dao.checkId(id)) {
-			//not-ok
+		System.out.println("CheckEmailOkAction 들어옴");
+		
+		if(m_dao.checkEmail(email)) {
+			System.out.println("중복이메일");
 			out.println("not-ok");
 		}else {
-			//ok
+			System.out.println("가능이메일");
 			out.println("ok");
 		}
 		out.close();
 		
-		//페이지 이동을 하지 않는다.
 		return null;
 	}
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

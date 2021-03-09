@@ -179,13 +179,16 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.slidertron.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		<script>var contextPath = "${pageContext.request.contextPath}";</script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery.dropotron.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery.slidertron.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/browser.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/breakpoints.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/util.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+		<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 
 	</body>
 </html>

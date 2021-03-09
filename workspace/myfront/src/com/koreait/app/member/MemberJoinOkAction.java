@@ -31,15 +31,18 @@ public class MemberJoinOkAction implements Action{
 		m_vo.setMemberName(req.getParameter("memberName"));
 		m_vo.setMemberPhoneNumber(req.getParameter("memberPhoneNumber"));
 
+		System.out.println("joinOkaction");
 		//DB에서 INSERT 실패 시
 		if(!m_dao.join(m_vo)) {
 			//직접 HTML문서로 응답
+			System.out.println("insert실패시");
 			PrintWriter out = resp.getWriter();
 			resp.setContentType("text/html;charset=utf-8");
 			out.println("<script>alert('서버가 불안정합니다. 잠시 후 다시 시도해주세요.');</script>");
 			out.close();
 		}else {
 			//DB에서 INSERT 성공 시
+			System.out.println("insert성공시");
 			forward = new ActionForward();
 			
 			//이동할 페이지 정보를 담아서 리턴
