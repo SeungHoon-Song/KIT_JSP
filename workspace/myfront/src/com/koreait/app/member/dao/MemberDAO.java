@@ -56,5 +56,15 @@ public class MemberDAO {
 		
 		return (Integer)session.selectOne("Member.login", member) == 1;
 	}
+	
+	//비밀번호 찾기
+	/*public boolean findPw(String email) {
+		return (Integer)session.selectOne("Member.findPw", email) == 1;
+	}*/
+	
+	public String findPw(String email) {
+		return decrypt(session.selectOne("Member.findPw", email));
+	}
+
 
 }

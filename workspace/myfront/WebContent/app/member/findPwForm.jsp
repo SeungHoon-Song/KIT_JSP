@@ -67,15 +67,13 @@
 					<label for="memberEmail">E-mail</label>
 				
 							<input type="email" style="color:black" class="text"	name="memberEmail" id="memberEmail" value=""/>
-								<p id="emailCheck_text">
 				
-				<br><br>
+				<br>
+				<br>
 				
 				
 							<a href="loginForm.jsp" style="font-size: 0.9rem;">Already a member? Log in here</a>
 							
-							<!-- <a href="mailto:s10269@naver.com?subject=Forgot%20
-							your%20password?&body=본문%20테스트중" target="_top">send mail!</a> -->
 							
 					<ul class="actions">
 							<li style="margin: 0 auto;">
@@ -102,5 +100,6 @@
 		<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 		<script src="${pageContext.request.contextPath}/app/member/findPw.js"></script>
+		<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 	</body>
 </html>

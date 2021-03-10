@@ -15,7 +15,13 @@
 		WHERE MEMBEREMAIL = #{email} AND MEMBERPW = #{pw}
 	</select>
 	
-	<select id="findPw" parameterType="string" resultType="_int">
+	<!-- <select id="findPw" parameterType="string" resultType="_int">
 		SELECT COUNT(*) FROM FRONT_MEMBER WHERE MEMBEREMAIL = #{memberEmail}
+	</select>  -->
+	
+	<select id="findPw" parameterType="string" resultType="string">
+		SELECT MEMBERPW FROM FRONT_MEMBER WHERE MEMBEREMAIL = #{memberEmail}
 	</select> 
+	
+	
 </mapper>

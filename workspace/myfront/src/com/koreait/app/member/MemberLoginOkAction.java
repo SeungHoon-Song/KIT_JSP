@@ -33,7 +33,7 @@ public class MemberLoginOkAction implements Action {
 			System.out.println("로그인 실패");
 			forward.setRedirect(false);
 			// 로그인 실패 시 경고창을 출력해주기 위해서 login 파라미터를 같이 전송해준다.
-			forward.setPath("/member/MemberLogin.me?login=false");
+			forward.setPath("/member/MemberLoginFalse.me?login=false");
 		}
 		return forward;
 	}

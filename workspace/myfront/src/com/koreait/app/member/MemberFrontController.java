@@ -24,6 +24,8 @@ public class MemberFrontController extends HttpServlet{
 	}
 	
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		
 		String requestURI = req.getRequestURI();
 		
 		String contextPath = req.getContextPath();
@@ -49,12 +51,18 @@ public class MemberFrontController extends HttpServlet{
 				forward = new MemberCheckEmailOkAction().execute(req, resp);
 			} catch (Exception e) {;}
 			
+		}else if(command.equals("/member/MemberLogin.me")) {
+			System.out.println("성공후 로그인창");
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/app/member/loginForm.jsp");
+			
 		}else if(command.equals("/member/MemberLoginOk.me")) {
 			try {
 				forward = new MemberLoginOkAction().execute(req, resp);
 			} catch (Exception e) {;}
 			
-		}else if(command.equals("/member/MemberLogin.me")) {
+		}else if(command.equals("/member/MemberLoginFalse.me")) {
 			//전달받은 login 값을 가져온다.
 			String login = req.getParameter("login");
 			forward = new ActionForward();

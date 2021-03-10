@@ -67,10 +67,12 @@
 					<label for="memberPw">Password</label>
 					<!-- subs2 width -->
 							<input type="password" style="color:black" class="text"	name="memberPw" id="memberPw" value=""/>
+							
 				
-					<label for="confirmpw">Confirm Password</label>
+					<label for="confirmPw">Confirm Password</label>
 				
 							<input type="password" style="color:black" class="text"	name="confirmPw" id="confirmPw" value=""/>
+							<span toggle="#memberPw,#confirmPw" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 				
 				</div>
 				
@@ -227,6 +229,7 @@
 		<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 		<script src="${pageContext.request.contextPath}/app/member/join.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/visiblePw.js"></script>
 		<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 
 	</body>

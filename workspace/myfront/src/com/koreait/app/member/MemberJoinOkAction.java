@@ -51,6 +51,6 @@ public class MemberJoinOkAction implements Action{
 		}
 		//alert창 띄우고 페이지이동 : 오류, 절대 불가능
 		//컨트롤러에서 응답은 반드시 한 번만 가능하다.
-		return null;
+		return forward;
 	}
 }
