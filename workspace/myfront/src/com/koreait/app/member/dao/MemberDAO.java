@@ -62,6 +62,7 @@ public class MemberDAO {
 		return (Integer)session.selectOne("Member.findPw", email) == 1;
 	}*/
 	
+	//비밀번호 찾기 복호화
 	public String findPw(String email) {
 		return decrypt(session.selectOne("Member.findPw", email));
 	}

@@ -17,11 +17,18 @@ function join() {
 	// 비밀번호 검사
 	if (form.memberPw.value == "" || !check) {
 		alert("Please fill out Password");
-		form.memberEmail.focus();
+		form.memberPw.focus();
 		return false;
 	}
+	// 비밀번호 4자이상, 16자이하
+	if (form.memberPw.value.length < 4) {
+		alert("Password should be at least 4 characters long.");
+		form.memberPw.focus();
+		return false;
+	}
+
 	// 비밀번호 중복 검사
-	if (form.memberPw.value != form.confirmPw.value){
+	if (form.memberPw.value != form.confirmPw.value) {
 		alert("Incorrect Passwrod");
 		form.memberPw.focus();
 		return false;
@@ -32,13 +39,13 @@ function join() {
 		form.memberName.focus();
 		return false;
 	}
-	//	연락처 검사
+	// 연락처 검사
 	if (form.memberPhoneNumber.value == "" || !check) {
 		alert("Please fill out PhoneNumber");
 		form.memberPhoneNumber.focus();
 		return false;
 	}
-	
+
 	form.submit();
 }
 
@@ -53,7 +60,7 @@ function checkEmail(email) {
 		$.ajax({
 			// 외부 js에서는 contextPath를 가져올 수 없기 때문에 jsp에 선언한 contextPath를 사용한다.
 			url : contextPath + "/member/MemberCheckEmailOk.me?email=" + email, // 요청할
-																				// url
+			// url
 			type : "get", // method
 			dataType : "text", // 전달받을 데이터의 타입
 			success : function(result) { // 통신 성공 시 응답 값을 result로 받는다.
@@ -69,8 +76,7 @@ function checkEmail(email) {
 				console.log("오류");
 			}
 		});
-		
-		
+
 	}
 }
 
