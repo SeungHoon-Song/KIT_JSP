@@ -1,0 +1,24 @@
+게시글 상세보기
+1. 사용자가 요청한 게시글 번호를 컨트롤러로 전달.
+2. 사용자가 머물러 있었던 페이지번호
+3. DB 조회한 결과는 한 개의 게시글 정보가 나오므로
+   객체 한 개만 view에 뿌려준다.
+
+게시글 목록 -> boardNum, page -> BoardView.bo
+-> page, BoardVO -> boardView.jsp
+-------------------------------------------------------------------------------------------------------------
+게시글 수정
+로그인 -> 게시판 목록 -> 게시판 상세보기 -> boardNum -> 수정 -> BoardVO
+-> 수정페이지 -> page, boardNum, boardTitle, boardContent -> 수정완료 -> boardNum, page -> 게시판 상세보기
+
+[실습]
+게시글 삭제(이전 페이지 유지)
+mapper.xml -> DAO -> Controller -> Front-Controller
+
+게시판 상세보기 -> boardNum, page -> 게시글 삭제 -> page
+-> 게시글 목록
+
+
+첨부파일
+
+댓글
