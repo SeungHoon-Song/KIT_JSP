@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.koreait.app.board.vo.BoardReplyVO;
 import com.koreait.app.board.vo.BoardVO;
 import com.koreait.mybatis.config.SqlMapConfig;
 
@@ -48,7 +49,7 @@ public class BoardDAO {
 	public BoardVO getDetail(int boardNum) {
 		return session.selectOne("Board.getDetail", boardNum);
 	}
-
+	
 	//게시글 수정
 	public void updateBoard(BoardVO b_vo) {
 		session.update("Board.updateBoard", b_vo);
@@ -57,5 +58,24 @@ public class BoardDAO {
 	//게시글 삭제
 	public void deleteBoard(int boardNum) {
 		session.delete("Board.deleteBoard", boardNum);
+	}
+	
+	//번호 가져오기 (시퀀스)
+	public int getBoardNum() {
+		return session.selectOne("Board.getBoardNum");
+	}
+	
+	/*
+	 * 댓글
+	 */
+	
+	//댓글 추가
+	public void insertReply(BoardReplyVO r_vo) {
+		session.insert("Board.insertReply", r_vo);
+	}
+	
+	//댓글 목록
+	public List<BoardReplyVO> getReplyList(int boardNum){
+		return session.selectList("Board.getReplyList", boardNum);
 	}
 }

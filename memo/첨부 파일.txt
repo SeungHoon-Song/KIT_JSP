@@ -1,0 +1,15 @@
+[게시글 작성]
+- 파일 업로드 
+	enctype 설정 -> MultipartRequest
+
+[게시글 상세보기]
+- 파일 다운로드
+	다운로드할 파일 클릭 -> 파일이름 ->
+	해당 파일이 있는 경로설정  -> FileInputStream으로 불러오기
+	-> Header 설정 -> FileOutputStream 준비 ->
+	-> 브라우저 판단 -> 출력(다운로드) -> close()
+
+[게시글 수정]
+- 파일 수정
+	첨부파일 전체 삭제(DB, upload)
+	새롭게 추가된 첨부파일 INSERT(DB, upload)

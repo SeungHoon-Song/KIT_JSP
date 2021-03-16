@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.koreait.action.Action;
 import com.koreait.action.ActionForward;
 import com.koreait.app.board.dao.BoardDAO;
+import com.koreait.app.board.dao.FilesDAO;
 import com.koreait.app.board.vo.BoardVO;
+import com.koreait.app.board.vo.FilesVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -17,6 +19,7 @@ public class BoardWriteOkAction implements Action{
 		
 		BoardVO b_vo = new BoardVO();
 		BoardDAO b_dao = new BoardDAO();
+		FilesDAO f_dao = new FilesDAO();
 		ActionForward forward = null;
 		
 		String saveFolder = "C:\\0900_gb_ssh\\jsp\\workspace\\board_mvc2\\WebContent\\app\\upload";
@@ -33,10 +36,12 @@ public class BoardWriteOkAction implements Action{
 		b_vo.setBoardContent(multi.getParameter("boardContent"));
 		
 		if(b_dao.insertBoard(b_vo)) {
+			if(f_dao.insertFiles(b_dao.getBoardNum(), multi)) {
 			//첨부파일 추가
 			forward = new ActionForward();
 			forward.setRedirect(true);
 			forward.setPath(req.getContextPath() + "/board/BoardList.bo");
+			}
 		}
 		return forward;
 	}

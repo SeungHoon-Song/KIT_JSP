@@ -9,6 +9,8 @@
 	</head>
 	<body>
 		<c:set var="b_vo" value="${b_vo}"/>
+		<c:set var="replies" value="${replies}"/>
+		<c:set var="files" value="${files}"/>
 		<center>
 		<c:choose>
 			<c:when test="${session_id eq null}">
@@ -52,6 +54,17 @@
 					<td align="center" width="150px">내 용</td>
 					<td valign="top" style="padding-top:10px; padding-left:10px;">${b_vo.getBoardContent()}</td>
 				</tr>
+				
+				<c:if test="${files != null}">
+					<tr height="30px">
+						<td align="center">첨부파일</td>
+						<td>
+							<c:forEach var="file" items="${files}">
+								<a href="${pageContext.request.contextPath}/board/FileDownload.bo?fileName=${file.getFileName()}">${file.getFileName()}</a>
+							</c:forEach>
+						</td>
+					</tr>
+				</c:if>
 			</table>
 			<table width="900px" border="0" cellpadding="0" cellspacing="0">
 				<tr align="right" valign="middle">
@@ -68,14 +81,67 @@
 				<input type="hidden" name="boardNum" value="${b_vo.getBoardNum()}">
 				<input type="hidden" name="page" value="${page}">
 			</form>
+			<!-- 댓글 -->
+			<form action="${pageContext.request.contextPath}/board/BoardReplyOk.bo" method="post" name="boardReply">
+				<input type="hidden" name="boardNum" value="${b_vo.getBoardNum()}">
+				<input type="hidden" name="page" value="${page}">
+				<table>
+					<tr height="200px">
+						<td align="center" width="80px">
+							<div align="center">댓 글</div>
+						</td>
+						<!-- 댓글 추가 -->
+						<td style="padding-left:10px">
+							<textarea name="replyContent" style="width:750px; height:85px; resize:none;"></textarea>
+							<a href="javascript:insertReply()">[등록]</a>
+						</td>
+					</tr>
+					<!-- 댓글 목록 -->
+					<c:choose>
+						<c:when test="${replies != null and fn:length(replies) > 0}">
+							<c:forEach var="reply" items="${replies}">
+								<tr>
+									<td align="center" width="150px">${reply.getMemberId()}</td>
+									<td valign="top" style="padding-left:10px;">
+										<textarea class="re" style="width:750px; height:85px; resize:none;" readonly>${reply.getReplyContent()}</textarea>
+										<c:if test="${session_id eq reply.getMemberId()}">
+											<a>[수정]</a>
+											<a style="display:none;">[수정 완료]</a>
+											<a>[삭제]</a>
+										</c:if>
+									</td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr align="center">
+								<td align="center" width="150px;">댓글이 없습니다.</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+				</table>
+			</form>
 		</center>
 	</body>
+	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 	<script>
+		autosize($("textarea.re"));
+		
 		function deleteBoard(){
 			//만약 이미 사용중인 객체명을 사용하고 싶다면(form태그 name)
 			//1. name을 다른 이름으로 수정해준다.
 			//2. DOM으로 가져온다.
 			document.getElementsByName("deleteBoard")[0].submit();
 		}
+		
+		function insertReply(){
+			if($("textarea[name='replyContent']").val() == ""){
+				alert("댓글을 작성해주세요.");
+				return false;
+			}
+			boardReply.submit();
+		}
+		
 	</script>
 </html>

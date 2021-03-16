@@ -61,20 +61,3 @@ public class BoardListOkAction implements Action{
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

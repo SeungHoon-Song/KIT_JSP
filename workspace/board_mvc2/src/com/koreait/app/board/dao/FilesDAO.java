@@ -1,6 +1,7 @@
 package com.koreait.app.board.dao;
 
 import java.util.Enumeration;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -38,7 +39,13 @@ public class FilesDAO {
 			}
 		}
 		return check;
-		
 	}
-
+	
+	public List<FilesVO> getFileList(int boardNum) {
+		return session.selectList("Files.getFileList", boardNum);
+	}
+	
+	public void deleteFile(int boardNum) {
+		session.delete("Files.deleteFile", boardNum);
+	}
 }

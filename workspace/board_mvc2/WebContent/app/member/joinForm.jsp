@@ -7,7 +7,7 @@
       <title>회원가입 페이지</title>
    </head>
    <body>
-      <form name="joinForm" action="${pageContext.request.contextPath}/member/MemberJoin.me" method="post">
+      <form name="joinForm" action="${pageContext.request.contextPath}/member/MemberJoinOk.me" method="post">
          <center>
             <table  border="1" cellpadding="0" cellspacing="0" width="25%">
                <tr height="50px">
@@ -86,9 +86,3 @@
 <script src="${pageContext.request.contextPath}/app/member/join.js"></script>
 <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 </html>
-
-
-
-
-
-
