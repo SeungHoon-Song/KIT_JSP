@@ -70,12 +70,22 @@ public class BoardDAO {
 	 */
 	
 	//댓글 추가
-	public void insertReply(BoardReplyVO r_vo) {
-		session.insert("Board.insertReply", r_vo);
+	public boolean insertReply(BoardReplyVO r_vo) {
+		return session.insert("Board.insertReply", r_vo) == 1;
 	}
 	
 	//댓글 목록
 	public List<BoardReplyVO> getReplyList(int boardNum){
 		return session.selectList("Board.getReplyList", boardNum);
+	}
+	
+	//댓글 삭제
+	public boolean deleteReply(int replyNum) {
+		return session.delete("Board.deleteReply", replyNum) == 1;
+	}
+	
+	//댓글 수정
+	public boolean updateReply(BoardReplyVO r_vo) {
+		return session.update("Board.updateReply", r_vo) == 1;
 	}
 }

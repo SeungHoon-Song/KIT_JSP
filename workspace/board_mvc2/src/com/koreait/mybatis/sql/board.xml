@@ -75,4 +75,14 @@
 	<select id="getReplyList" parameterType="_int" resultType="boardReplyVO">
 		SELECT * FROM TABLE_REPLY WHERE BOARDNUM = #{boardNum} ORDER BY REPLYNUM DESC
 	</select>
+	
+	<delete id="deleteReply" parameterType="_int">
+		DELETE FROM TABLE_REPLY WHERE REPLYNUM = #{replyNum}
+	</delete>
+	
+	<update id="updateReply" parameterType="boardReplyVO">
+		UPDATE TABLE_REPLY 
+		SET REPLYCONTENT = #{replyContent} 
+		WHERE REPLYNUM = #{replyNum}
+	</update>
 </mapper>

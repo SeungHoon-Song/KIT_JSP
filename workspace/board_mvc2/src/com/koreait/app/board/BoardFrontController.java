@@ -91,6 +91,27 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
+		case "/board/BoardReplyList.bo":
+			try {
+				forward = new BoardReplyListAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/BoardReplyDeleteOk.bo":
+			try {
+				forward = new BoardReplyDeleteOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/BoardReplyModifyOk.bo":
+			try {
+				forward = new BoardReplyModifyOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 		default:
 			forward = new ActionForward();
 			forward.setRedirect(false);
