@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+	<select id="listAll" parameterType="map" resultType="boardVO">
+		SELECT * FROM
+			(SELECT ROWNUM R, D.* FROM
+				(SELECT * FROM FRONT_BOARD ORDER BY BOARDNUM DESC) D) B
+		WHERE B.R BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getBoardCnt" resultType="_int">
+		SELECT COUNT(*) FROM FRONT_BOARD
+	</select>
+	
+	<update id="updateReadCount" parameterType="_int">
+		UPDATE FRONT_BOARD
+		SET READCOUNT = READCOUNT + 1
+		WHERE BOARDNUM = #{boardNum}
+	</update>
+</mapper>

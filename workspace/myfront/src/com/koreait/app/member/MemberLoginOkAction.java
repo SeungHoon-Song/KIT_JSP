@@ -27,7 +27,7 @@ public class MemberLoginOkAction implements Action {
 			System.out.println("로그인 성공");
 			session.setAttribute("session_id", email);
 			forward.setRedirect(true);
-			forward.setPath(req.getContextPath() + "/board/BoardList.do");
+			forward.setPath(req.getContextPath() + "/board/BoardList.bo");
 		} else {
 			// 로그인 실패
 			System.out.println("로그인 실패");
