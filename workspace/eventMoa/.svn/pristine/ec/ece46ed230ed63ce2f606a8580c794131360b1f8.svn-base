@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<hr>
+<p>layout: post<br>title:  &quot;day01&quot;<br>date: 2021-03-22 13:10:00 +0900<br>comments: true # 코멘트 허용<br>categories: project</p>
+<hr>
+<h1>Build Log</h1>
+<h3>!!! JDK ver 1.8.0_281</h3>
+<h3>!!! Tomcat 8.5</h3>
+<h3></h3>
+<p><code>cos.jar</code> - 파일 업로드 라이브러리</p>
+<p><code>mybatis-3.5.6</code> - mybatis 라이브러리</p>
+<p><code>postgresql-42.2.19.jar</code>  - jdk 8 버전 이상부터 4.2 driver 사용(jdbc)</p>
+<p><strong>이메일 발송 라이브러리</strong></p>
+<p><code>activation.jar</code> <code>mail.jar</code></p>
+<p><strong>jstl 라이브러리</strong></p>
+<p><code>jstl.jar</code> <code>standard.jar</code></p>
+<hr>
+<p>PUBLIC <code>-//mybatis.org//DTD Config 3.0//EN</code></p>
+<p> <code>http://mybatis.org/dtd/mybatis-3-config.dtd</code></p>
+<p>//config.xml 파일 DTD 를 위한 코드 </p>
+<hr>
+<p><code>-//mybatis.org//DTD Mapper 3.0//EN</code></p>
+<p><code>http://mybatis.org/dtd/mybatis-3-mapper.dtd</code></p>
+
+
+</body>
+</html>

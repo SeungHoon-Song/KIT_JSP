@@ -34,4 +34,17 @@ public class BoardDAO {
 	public void updateReadCount(int boardNum) {
 		session.update("Board.updateReadCount", boardNum);
 	}
+	
+	public boolean insertBoard(BoardVO board) {
+		return session.insert("Board.insertBoard", board) == 1;
+	}
+	
+	public BoardVO getDetail(int boardNum) {
+		return session.selectOne("Board.getDetail", boardNum);
+	}
+	
+	public void updateBoard(BoardVO board) {
+		session.update("Board.updateBoard", board);
+	}
+
 }

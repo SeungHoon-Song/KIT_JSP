@@ -24,7 +24,7 @@
          <table border="0" cellpadding="0" cellspacing="0" width="900px" >
             <tr align="right" valign="middle">
                <td>
-                  ${session_id} 님 환영합니다.
+                  ${session_id} 접속중
                   <a href="${pageContext.request.contextPath}/member/MemberLogout.me">로그아웃</a>
                </td>
             </tr>

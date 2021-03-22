@@ -17,4 +17,20 @@
 		SET READCOUNT = READCOUNT + 1
 		WHERE BOARDNUM = #{boardNum}
 	</update>
+	
+	<insert id="insertBoard" parameterType="boardVO">
+		INSERT INTO FRONT_BOARD 
+		VALUES (MYBOARD_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, #{boardEmail}, SYSDATE, 0)
+	</insert>
+	
+	<select id="getDetail" parameterType="_int" resultType="boardVO">
+		SELECT * FROM FRONT_BOARD 
+		WHERE BOARDNUM = #{boardNum}
+	</select>
+	
+	<select id="updateBoard" parameterType="boardVO">
+		UPDATE FRONT_BOARD 
+		SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent} 
+		WHERE BOARDNUM = #{boardNum}
+	</select>
 </mapper>
