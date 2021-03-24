@@ -20,6 +20,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/0900_gb_ssh/jsp/resource/이벤트모아/mail.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/0900_gb_ssh/jsp/resource/이벤트모아/mybatis-3.5.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/0900_gb_ssh/jsp/resource/이벤트모아/standard.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/0900_gb_ssh/jsp/resource/이벤트모아/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/0900_gb_ssh/jsp/resource/이벤트모아/ojdbc6.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
