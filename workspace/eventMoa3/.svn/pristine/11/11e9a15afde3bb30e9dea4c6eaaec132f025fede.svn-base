@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>이벤트 모아 (Event Moa)</title>
+		<meta charset="utf-8" />
+	</head>
+	
+	<body class="is-preload">
+
+		<!-- search-bar -->w
+				  
+		<span class="logo"></span>
+		    <div class="search">
+			      <i class="fas fa-search"></i>
+			      <img src="${pageContext.request.contextPath}/images/location.gif" style="width:50px; height: 50px; float: left;">
+			      	<input type="text" style="float:left; width: 400px;">
+					<input type="button" class="box" value="EVENT 검색" style="float: right;">
+			      <i class="fas fa-keyboard"></i>
+			      <i class="fas fa-microphone"></i>
+		    </div>
+			<p></p>
+ 
+</body>
+</html>
