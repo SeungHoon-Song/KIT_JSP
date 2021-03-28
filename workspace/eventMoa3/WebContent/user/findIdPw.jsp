@@ -17,10 +17,8 @@
 		<!-- Main -->
 			<div id="main">
 
-				<!-- Header -->
-					<header>
-					<span class="logo"></span>
-					</header>
+					<!-- Header -->
+				<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
 						
 
 				<!-- Content -->

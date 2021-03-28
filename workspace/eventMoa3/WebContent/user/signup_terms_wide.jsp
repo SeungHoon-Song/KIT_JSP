@@ -40,9 +40,9 @@
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
 
 				<!-- Header -->
-					<header>
-					<span class="logo"></span>
-					</header>
+					<!-- Header -->
+				<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
+				
 						<div class="login_message">
 							<h1>약관동의</h1>
 							<br>
@@ -246,8 +246,8 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
 					</div>
 					<div id="btnDiv" style="margin:0 auto;">
 						<ul class="actions">
-							<li><a href="#" class="button primary">확인</a></li>
-							<li><a href="#" class="button">취소</a></li>
+							<li><a href="javascript:member_join('')" class="button primary">확인</a></li>
+							<li><a href="${pageContext.request.contextPath}/index.jsp" class="button">취소</a></li>
 						</ul>
 					</div>
 				</div>
@@ -273,7 +273,46 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
 					}else{
 						$("input[name='term']").prop("checked", false);
 					}
-				})
+  function member_join(m_gp){
+
+        //if(m_gp=='1'){
+
+                if(loginForm.chk.checked == false){
+                        alert('약관을 다 읽으셨나요? 그럼 체크해주세요.');
+                        form1.chk.focus();
+                        return ;
+                }
+
+                /* if(form1.chk2.checked == false){
+                        alert('개인정보보호를 위한 이용자 동의사항에 동의 하셔야만 회원에 가입할수 있습니다
+.');
+                        form1.chk2.focus();
+                        return ;
+                }*/
+
+                parent.location.replace('${pageContext.request.contextPath}/user/signup.jsp');
+        //}
+
+        //if(m_gp=='2'){
+
+                /* if(form1.chk.checked == false){
+                        alert('약관에 동의 하셔야만 회원에 가입할수 있습니다.');
+                        form1.chk.focus();
+                        return ;
+                }
+
+                if(form1.chk2.checked == false){
+                        alert('개인정보보호를 위한 이용자 동의사항에 동의 하셔야만 회원에 가입할수 있습니다.');
+                        form1.chk2.focus();
+                        return ;
+                }
+
+                parent.location.replace('member_com.html'); */
+        //}
+}				})
 			</script>
+			
+			
+			
 	</body>
 </html>

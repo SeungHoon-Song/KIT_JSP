@@ -42,9 +42,9 @@
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
 
 				<!-- Header -->
-					<header>
-					<span class="logo"></span>
-					</header>
+					<!-- Header -->
+				<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
+				
 						<div class="login_message">
 							<h1>약관동의</h1>
 							<br>
@@ -248,7 +248,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
 					</div>
 					<div id="btnDiv" style="margin:0 auto;">
 						<ul class="actions">
-							<li><a href="#" class="button primary">확인</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/signup.jsp" class="button primary">확인</a></li>
 							<li><a href="#" class="button">취소</a></li>
 						</ul>
 					</div>

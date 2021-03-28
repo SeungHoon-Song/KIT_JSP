@@ -3,12 +3,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>이벤트 모아 (Event Moa)</title>
 		
 	</head>
 	<body class="is-preload">
 
-	<!-- Footer -->
 			<div id="footer">
 				<h2>서비스 정보</h2>
 					<p>
@@ -31,11 +29,9 @@
 					</li>
 				</ul>
 				<ul class="joined-icons">
-					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="https://github.com/Eight-Corner/eventMoa/blob/master/CHANGELOG.md" class="icon brands fa-github">
+					<span class="label">GitHub</span></a></li>
 					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
 				</ul>
 				<p class="copyright">&copy;Copyright 2021. EventMoa All rights reserved.</p>
 			</div>

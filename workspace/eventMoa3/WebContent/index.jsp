@@ -2,20 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
-	team 	: EVENT MOA
-	auth 	: 킹기훈 
-	작업		: 2021-03-23
 	작업내역	: 
-			> 메인 슬라이드 사진 (사진 사이즈는 맞춤형 통일) 구현완료  
-			> section 정리 -> elements에 넣음
-			> footer 수정 
-			> search-bar style 생성 	
-			> KAKAO MAP 지도 생성
-			
-    *작업예정	: 
-    		> *Bug == 슬라이드 next , previous icon 
-    		> search-bar 카테고리 생성
-    		> 검색바 카테고리 
+> map 사이즈 반응형 조절 
+> 검색창 반응형 조절 (검색 버튼을 검색 인풋태그 하단에 width 100%)
+> slider 왼쪽 오른쪽 버튼 아이콘 깨짐 현상 수정 , 반응형 사이즈 조절 수정
+> 광고 배너 사이즈 통일 (width: 600px; height:337px;)
+> header 경로 수정
+
+작업예정 :
+> mobile 메인 MAP 표현 못하는 현상
+> logo에 main으로 가는 Link 걸기 
+> navbar에 검색창 달기
 -->
 <html>
 	<head>
@@ -23,7 +20,6 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
 		<meta name="author" content="corner3499">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/map.css">
 	</head>
@@ -92,7 +88,7 @@
 			<!-- KAKAO MAP -->
 		<article class="column col4">
 			<h2 class="col_tit" style="text-align: center;"> MAP</h2>
-			<div id="map" style="width:810px;height:400px;"></div>
+			<div id="map"></div>
 		</article>
 			 
 			 <br>
@@ -104,83 +100,77 @@
 
 		
 			
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014e09a77678170402c5f935f0a72af"></script>
-	 <script>
-     //이미지 슬라이더
-     $(".slider").slick({
-         dots: true,
-         autoplay: true,
-         autoplaySpeed: 3000,
-         arrows: true,
-         responsive: [
-             {
-                 breakpoint: 768,
-                 settings: {
-                     autoplay: false,
-                     }
-             }
-         ]
-     });
-     
-     //sns 공유하기
-     $(".facebook").click(function(e){
-         e.preventDefault();
-         window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no, toolbar=no, resizable=yes, scrollbars=yes, height=300, width=600'); 
-     });
-     $(".twitter").click(function(e){
-         e.preventDefault();
-         window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no, toolbar=no, resizable=yes, scrollbars=yes, height=300, width=600');
-     });
-        </script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014e09a77678170402c5f935f0a72af"></script>
+<script>
+   //이미지 슬라이더
+   $(".slider").slick({
+       dots: true,
+       autoplay: true,
+       autoplaySpeed: 3000,
+       arrows: true,
+       responsive: [
+           {
+               breakpoint: 768,
+               settings: {
+                   autoplay: false,
+                   }
+           }
+       ]
+   });
+   
+ 
+</script>
 
-        <script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(37.50006529736203, 127.03547036224), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
+<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = { 
+	        center: new kakao.maps.LatLng(37.50006529736203, 127.03547036224), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };
+	
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	
+	if(navigator.geolocation){
+		
+	    navigator.geolocation.getCurrentPosition(function(position) {
 
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	        var lat = position.coords.latitude, // 위도
+            lon = position.coords.longitude; // 경도
+        
+        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+        
+        // 마커와 인포윈도우를 표시합니다
+        displayMarker(locPosition, message);
+		});
+	} else {
+		var locPosition = new kakao.maps.LatLng(37.50006529736203, 127.03547036224),
+		message = 'geolocation을 사용할 수 없습니다..'
+		
+		displayMaker(locPosition, message);
+	}
+	
+	function displayMaker(locPosition, message) {
+		
+		var marker = new kakao.maps.Marker({
+			map: map,
+			position: locPosition
+		});
+		
+		var iwContent = message, 
+		iwRemoveable = true;
+		
+		var infowindow = new kakao.maps.InfoWindow({
+			content : iwContent,
+			removeable : iwRemoveable
+		});
+	
+		infowindow.open(map, marker);
+	
+		map.setCenter(locPosition);
+		
+	}
 
-// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-var mapTypeControl = new kakao.maps.MapTypeControl();
-
-// 지도 타입 컨트롤을 지도에 표시합니다
-map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
-function getInfo() {
-    // 지도의 현재 중심좌표를 얻어옵니다 
-    var center = map.getCenter(); 
-    
-    // 지도의 현재 레벨을 얻어옵니다
-    var level = map.getLevel();
-    
-    // 지도타입을 얻어옵니다
-    var mapTypeId = map.getMapTypeId(); 
-    
-    // 지도의 현재 영역을 얻어옵니다 
-    var bounds = map.getBounds();
-    
-    // 영역의 남서쪽 좌표를 얻어옵니다 
-    var swLatLng = bounds.getSouthWest(); 
-    
-    // 영역의 북동쪽 좌표를 얻어옵니다 
-    var neLatLng = bounds.getNorthEast(); 
-    
-    // 영역정보를 문자열로 얻어옵니다. ((남,서), (북,동)) 형식입니다
-    var boundsStr = bounds.toString();
-    
-    
-    var message = '지도 중심좌표는 위도 ' + center.getLat() + ', <br>';
-    message += '경도 ' + center.getLng() + ' 이고 <br>';
-    message += '지도 레벨은 ' + level + ' 입니다 <br> <br>';
-    message += '지도 타입은 ' + mapTypeId + ' 이고 <br> ';
-    message += '지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', ' + swLatLng.getLng() + ' 이고 <br>';
-    message += '북동쪽 좌표는 ' + neLatLng.getLat() + ', ' + neLatLng.getLng() + ' 입니다';
-    
-    // 개발자도구를 통해 직접 message 내용을 확인해 보세요.
-    // ex) console.log(message);
-}
 </script>
 	</body>
 </html>
