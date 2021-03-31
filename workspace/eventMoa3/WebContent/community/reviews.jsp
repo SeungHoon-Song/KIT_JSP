@@ -16,6 +16,8 @@
 	</head>
 	
 	<body class="is-preload">
+	<!-- sideBar -->
+<jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 
 		<!-- Header -->
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>

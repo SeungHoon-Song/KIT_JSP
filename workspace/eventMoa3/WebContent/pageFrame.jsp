@@ -13,6 +13,7 @@
 		<meta name="author" content="corner3499">
 		<!-- title Icon -->
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
+		
 	</head>
 	
 	<body class="is-preload">

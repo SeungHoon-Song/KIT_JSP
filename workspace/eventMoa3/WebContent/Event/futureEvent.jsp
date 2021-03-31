@@ -2,35 +2,166 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+	<html>
 	<head>
-		<title>이벤트 모아 Generic</title>
+		<title>이벤트 모아 (Event Moa)</title>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<meta name="author" content="corner3499">
+		<!-- title Icon -->
+		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
+		<link rel="stylesheet" href="${pagetext.request.contextPath}/assets/css/event.css">
 	</head>
+	
 	<body class="is-preload">
-
+<!-- sideBar -->
+<jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 		<!-- Header -->
-			<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
-
+		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
+	<p></p>
 		<!-- Main -->
 			<div id="main">
+			
+		<!-- Logo -->
+		<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
 
-		<!-- Header -->		<!-- search-bar -->
-		<jsp:include page="${pageContext.request.contextPath}/searchBar.jsp"></jsp:include>
-
-		<p></p>
-				<!-- Content -->
-					<section id="content" class="wrapper">
-						<span class="image main"><img src="images/pic08.jpg" alt="" /></span>
-						<h2>Magna sed consequat</h2>
-						<p>Cep risus aliquam gravida cep ut lacus amet. Adipiscing faucibus nunc placerat. Tempus adipiscing turpis non blandit accumsan eget lacinia nunc integer interdum amet aliquam ut orci non col ut ut praesent. Semper amet interdum mi. Phasellus enim laoreet ac ac commodo faucibus faucibus. Curae ante vestibulum ante. Blandit. Ante accumsan nisi eu placerat gravida placerat adipiscing in risus fusce vitae ac mi accumsan nunc in accumsan tempor blandit aliquet aliquet lobortis. Ultricies blandit lobortis praesent turpis. Adipiscing accumsan adipiscing adipiscing ac lacinia cep. Orci blandit a iaculis adipiscing ac. Vivamus ornare laoreet odio vis praesent nunc lorem mi. Erat. Tempus sem faucibus ac id. Vis in blandit. Nascetur ultricies blandit ac. Arcu aliquam. Accumsan mi eget adipiscing nulla. Non vestibulum ac interdum condimentum semper commodo massa arcu.</p>
-						<p>Blandit ante accumsan nisi eu placerat gravida placerat adipiscing in risus fusce vitae ac mi accumsan nunc in accumsan tempor blandit aliquet aliquet lobortis. Ultricies blandit lobortis praesent turpis. Adipiscing accumsan adipiscing adipiscing ac lacinia cep. Orci blandit a iaculis adipiscing ac. Vivamus ornare laoreet odio vis praesent nunc lorem mi. Erat. Tempus sem faucibus ac id. Vis in blandit. Nascetur ultricies blandit ac. Arcu aliquam. Accumsan mi eget adipiscing nulla. Non vestibulum ac interdum condimentum semper commodo massa arcu.</p>
-						<p>Adipiscing faucibus nunc placerat. Tempus adipiscing turpis non blandit accumsan eget lacinia nunc integer interdum amet aliquam ut orci non col ut ut praesent. Semper amet interdum mi. Phasellus enim laoreet ac ac commodo faucibus faucibus. Curae lorem ipsum adipiscing ac. Vivamus ornare laoreet odio vis praesent.</p>
-					</section>
-
+	
+	<section id="" class="wrapper special">
+		<div class="pmobi_glist">
+			<div class="detailnfo,showstep1">
+				<div class= ""> 
+		 			<div class="content">
+			<ul>			 
+			  <li>
+			 <a href="#">
+			 <img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" onerror="noimage(this)">
+			 <dl>
+			 	<dt id="title">소개글</dt>
+			 	<dd class="#">맛집</dd>
+			 </dl>
+			  <dl>
+			 	<dt id="title" class="glist_dt_T2">지역</dt>
+			 	<dd class="#">경기</dd>
+			 </dl>
+			 </a> 
+			 </li>
+			   <li>
+			 <a href="#">
+			 <img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" onerror="noimage(this)">
+			 <dl>
+			 	<dt id="title">소개글</dt>
+			 	<dd class="#">맛집</dd>
+			 </dl>
+			  <dl>
+			 	<dt id="title" class="glist_dt_T2">지역</dt>
+			 	<dd class="#">경기</dd>
+			 </dl>
+			 </a> 
+			 </li>
+			   <li>
+			 <a href="#">
+			 <img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" onerror="noimage(this)">
+			 <dl>
+			 	<dt id="title">소개글</dt>
+			 	<dd class="#">맛집</dd>
+			 </dl>
+			  <dl>
+			 	<dt id="title" class="glist_dt_T2">지역</dt>
+			 	<dd class="#">경기</dd>
+			 </dl>
+			 </a> 
+			 </li>
+			   <li>
+			 <a href="#">
+			 <img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" onerror="noimage(this)">
+			 <dl>
+			 	<dt id="title">소개글</dt>
+			 	<dd class="#">맛집</dd>
+			 </dl>
+			  <dl>
+			 	<dt id="title" class="glist_dt_T2">지역</dt>
+			 	<dd class="#">경기</dd>
+			 </dl>
+			 </a> 
+			 </li>
+			   <li>
+			 <a href="#">
+			 <img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" onerror="noimage(this)">
+			 <dl>
+			 	<dt id="title">소개글</dt>
+			 	<dd class="#">맛집</dd>
+			 </dl>
+			  <dl>
+			 	<dt id="title" class="glist_dt_T2">지역</dt>
+			 	<dd class="#">경기</dd>
+			 </dl>
+			 </a> 
+			 </li>
+			   <li>
+			 <a href="#">
+			 <img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" onerror="noimage(this)">
+			 <dl>
+			 	<dt id="title">소개글</dt>
+			 	<dd class="#">맛집</dd>
+			 </dl>
+			  <dl>
+			 	<dt id="title" class="glist_dt_T2">지역</dt>
+			 	<dd class="#">경기</dd>
+			 </dl>
+			 </a> 
+			 </li>
+			   <li>
+			 <a href="#">
+			 <img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" onerror="noimage(this)">
+			 <dl>
+			 	<dt id="title">소개글</dt>
+			 	<dd class="#">맛집</dd>
+			 </dl>
+			  <dl>
+			 	<dt id="title" class="glist_dt_T2">지역</dt>
+			 	<dd class="#">경기</dd>
+			 </dl>
+			 </a> 
+			 </li>
+			   <li>
+			 <a href="#">
+			 <img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" onerror="noimage(this)">
+			 <dl>
+			 	<dt id="title">소개글</dt>
+			 	<dd class="#">맛집</dd>
+			 </dl>
+			  <dl>
+			 	<dt id="title" class="glist_dt_T2">지역</dt>
+			 	<dd class="#">경기</dd>
+			 </dl>
+			 </a> 
+			 </li>  <li>
+			 <a href="#">
+			 <img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" onerror="noimage(this)">
+			 <dl>
+			 	<dt id="title">소개글</dt>
+			 	<dd class="#">맛집</dd>
+			 </dl>
+			  <dl>
+			 	<dt id="title" class="glist_dt_T2">지역</dt>
+			 	<dd class="#">경기</dd>
+			 </dl>
+			 </a> 
+			 </li>
+			</ul>
+					</div>
+				</div>
 			</div>
-
+		</div>
+		<a href="#" class="btn_open">더보기</a>
+		<!-- <a href="#" class="btn_close hide">감추기</a> -->
+</section>
+</div>
 	<!-- Footer -->
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
-
 	</body>
+	<script>
+	
+	</script>
+	
 </html>

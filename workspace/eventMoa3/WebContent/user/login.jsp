@@ -3,14 +3,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Untitled</title>
+		<title>로그인 | 이벤트 모아(Event Moa)</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
 	</head>
 	<body class="is-preload">
-
+		<!-- sideBar -->
+<jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 		<!-- Header -->
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
 
@@ -25,7 +26,7 @@
 							<br>
 							<p>이벤트모아 회원이 아니면, 지금 "
 								<span>
-									<a href="${pageContext.request.contextPath}/user/signup_terms.jsp" style="color: blue;">회원가입</a>
+									<a href="${pageContext.request.contextPath}/user/signup.jsp" style="color: blue;">회원가입</a>
 								</span>
 								"을 해주세요.
 							</p>
@@ -41,7 +42,7 @@
 								name="memberPw" id="memberPw" value="" />
 								
 							<p class="signup-forgotten">
-								<a href="${pageContext.request.contextPath}/user/signup_terms.jsp" class="sign-up" style="font-weight: bold;">회원가입</a>
+								<a href="${pageContext.request.contextPath}/user/signup.jsp" class="sign-up" style="font-weight: bold;">회원가입</a>
 								<span></span>
 								<a href="${pageContext.request.contextPath}/user/findIdPw.jsp" class="forgotten">아이디/비밀번호 찾기</a>
 							</p>

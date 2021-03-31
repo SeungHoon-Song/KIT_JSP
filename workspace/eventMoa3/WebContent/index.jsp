@@ -2,17 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
-	작업내역	: 
-> map 사이즈 반응형 조절 
-> 검색창 반응형 조절 (검색 버튼을 검색 인풋태그 하단에 width 100%)
-> slider 왼쪽 오른쪽 버튼 아이콘 깨짐 현상 수정 , 반응형 사이즈 조절 수정
-> 광고 배너 사이즈 통일 (width: 600px; height:337px;)
-> header 경로 수정
-
-작업예정 :
-> mobile 메인 MAP 표현 못하는 현상
-> logo에 main으로 가는 Link 걸기 
-> navbar에 검색창 달기
+ 
 -->
 <html>
 	<head>
@@ -25,7 +15,6 @@
 	</head>
 	
 	<body class="is-preload">
-
 		<!-- Header -->
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
 	<p></p>
@@ -36,6 +25,8 @@
 				<!-- Header -->		<!-- search-bar -->
 		<jsp:include page="${pageContext.request.contextPath}/searchBar.jsp"></jsp:include>
 		
+<!-- sideBar -->
+<jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 			<!-- Slider -->
 			<section id="banner">
 				<h3 class="ir_su">  </h3>
@@ -84,17 +75,89 @@
 				</article>
 				 -->
 			</section>
-			
-			<!-- KAKAO MAP -->
-		<article class="column col4">
-			<h2 class="col_tit" style="text-align: center;"> MAP</h2>
-			<div id="map"></div>
-		</article>
-			 
+	
 			 <br>
 
-			</div> <!-- div id="main" end -->
+			 <section id="two">
+				 <article class="column col4">
+					 <h2 class="col_tit" style="text-align: center;"> 
+									   지금 따끈따끈 올라온 이벤트 
+					 </h2>
+				 <div class="box alt">
+					 <div class="row gtr-uniform">
+						 <div class="col-4"><span class="image fit"><img src="${pageContext.request.contextPath}/images/ad/ad1.jpg" alt="" /></span></div>
+						 <div class="col-4"><span class="image fit"><img src="${pageContext.request.contextPath}/images/ad/ad2.jpg" alt="" /></span></div>
+						 <div class="col-4"><span class="image fit"><img src="${pageContext.request.contextPath}/images/ad/ad3.jpg" alt="" /></span></div>
+						 <div class="col-4"><span class="image fit"><img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" alt="" /></span></div>
+						 <div class="col-4"><span class="image fit"><img src="${pageContext.request.contextPath}/images/banner/ADbanner1.jpg" alt="" /></span></div>
+						 <div class="col-4"><span class="image fit"><img src="${pageContext.request.contextPath}/images/banner/ADbanner2.jpg" alt="" /></span></div>
+						 <div class="col-4"><span class="image fit"><img src="${pageContext.request.contextPath}/images/banner/banner1.jpg" alt="" /></span></div>
+						 <div class="col-4"><span class="image fit"><img src="${pageContext.request.contextPath}/images/banner/banner2.jpg" alt="" /></span></div>
+						 <div class="col-4"><span class="image fit"><img src="${pageContext.request.contextPath}/images/banner/banner3.jpg" alt="" /></span></div>
+					 </div>
+				 </div>
+		 
+			<!-- <p>
+				<span class="image left"><img src="images/pic05.jpg" alt="" />
+				</span>
+				Morbi mattis mi consectetur tortor elementum, varius pellentesque velit convallis. Aenean tincidunt lectus auctor mauris maximus, ac scelerisque ipsum tempor. Duis vulputate ex et ex tincidunt, quis lacinia velit aliquet. Duis non efficitur nisi, id malesuada justo. Maecenas sagittis felis ac sagittis semper. Curabitur purus leo, tempus sed finibus eget, fringilla quis risus. Maecenas et lorem quis sem varius sagittis et a est. Maecenas iaculis iaculis sem. Donec vel dolor at arcu tincidunt bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce ut aliquet justo. Donec id neque ipsum. Integer eget ultricies odio. Nam vel ex a orci fringilla tincidunt. Aliquam eleifend ligula non velit accumsan cursus. Etiam ut gravida sapien. Morbi mattis mi consectetur tortor elementum, varius pellentesque velit convallis. Aenean tincidunt lectus auctor mauris maximus, ac scelerisque ipsum tempor. Duis vulputate ex et ex tincidunt, quis lacinia velit aliquet. Duis non efficitur nisi, id malesuada justo. Maecenas sagittis felis ac sagittis semper. Curabitur purus leo, tempus sed finibus eget, fringilla quis risus. Maecenas et lorem quis sem varius sagittis et a est. Maecenas iaculis iaculis sem. Donec vel dolor at arcu tincidunt bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce ut aliquet justo. Donec id neque ipsum. Integer eget ultricies odio. Nam vel ex a orci fringilla tincidunt. Aliquam eleifend ligula non velit accumsan.
+			</p>
+			<p>
+				<span class="image right"><img src="images/pic06.jpg" alt="" />
+				</span>
+				Vestibulum ultrices risus velit, sit amet blandit massa auctor sit amet. Sed eu lectus sem. Phasellus in odio at ipsum porttitor mollis id vel diam. Praesent sit amet posuere risus, eu faucibus lectus. Vivamus ex ligula, tempus pulvinar ipsum in, auctor porta quam. Proin nec dui cursus, posuere dui eget interdum. Fusce lectus magna, sagittis at facilisis vitae, pellentesque at etiam. Quisque posuere leo quis sem commodo, vel scelerisque nisi scelerisque. Suspendisse id quam vel tortor tincidunt suscipit. Nullam auctor orci eu dolor consectetur, interdum ullamcorper ante tincidunt. Mauris felis nec felis elementum varius. Nam sapien ante, varius in pulvinar vitae, rhoncus id massa. Donec varius ex in mauris ornare, eget euismod urna egestas. Etiam lacinia tempor ipsum, sodales porttitor justo. Aliquam dolor quam, semper in tortor eu, volutpat efficitur quam. Fusce nec fermentum nisl. Aenean erat diam, tempus aliquet erat. Etiam iaculis nulla ipsum, et pharetra libero rhoncus ut. Phasellus rutrum cursus velit, eget condimentum nunc blandit vel. In at pulvinar lectus. Morbi diam ante, vulputate et imperdiet eget, fermentum non dolor. Ut eleifend sagittis tincidunt. Sed viverra commodo mi, ac rhoncus justo. Duis neque ligula, elementum ut enim vel, posuere finibus justo. Vivamus facilisis maximus nibh quis pulvinar.
+			</p> -->
+			</section>
 
+	
+		
+		
+			<!-- KAKAO MAP -->
+			<article class="column col4">
+				<h2 class="col_tit" style="text-align: center;"> MAP</h2>
+				<div id="map" style="border-radius: 10px;"></div>
+			</article>
+				 
+
+			</div> <!-- div id="main" end -->
+	<!-- One -->
+	<section id="one" class="wrapper spotlight" style="text-align: center;text-align-last: center;margin: 0 auto;padding-left: 40%;padding-top: 1%;" >
+		<ul class="grid-icons" style="border-left: outset;border-right: inset;border-bottom: inset;border-top: outset;">
+			<li>
+				<div class="inner">
+					<a href="${pageContext.request.contextPath}/Event/nowEvent.jsp">
+						<span class="icon solid fa-check major"></span>
+						<h3>최신 이벤트</h3>
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="inner">
+					<a href="${pageContext.request.contextPath}/user/mypage/myPage_list.jsp">
+						<span class="icon solid fa-user-lock major"></span>
+						<h3>내 정보</h3>
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="inner">
+					<a href="${pageContext.request.contextPath}/community/freeTalk.jsp">
+						<span class="icon solid fa-comment major"></span>
+						<h3>자유게시판 베스트</h3>
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="inner">
+					<a href="${pageContext.request.contextPath}/index.jsp">
+						<span class="icon solid fa-cog major"></span>
+						<h3>문의하기</h3>
+					</a>
+				</div>
+			</li>
+		</ul>
+ 
+	</section>
 		<!-- Footer -->
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
 
@@ -170,7 +233,53 @@
 		map.setCenter(locPosition);
 		
 	}
+	var positions = [
+    {
+        content: '<div>코리아IT학원 강남점</div>', 
+        latlng: new kakao.maps.LatLng(37.50006529736203, 127.03547036224)
+    },
+    {
+        content: '<div>코리아IT학원 신촌점</div>', 
+        latlng: new kakao.maps.LatLng(37.55410558539051, 126.93571109822075)
+    },
+    {
+        content: '<div>코리아IT학원 대구점</div>', 
+        latlng: new kakao.maps.LatLng(35.902817019272156, 128.5827827209257)
+    },
+    {
+        content: '<div>코리아IT학원 부산점</div>',
+        latlng: new kakao.maps.LatLng(35.35733616857707, 128.98044293168113)
+    }
+];
 
+for (var i = 0; i < positions.length; i ++) {
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng // 마커의 위치
+    });
+
+    // 마커에 표시할 인포윈도우를 생성 
+    var infowindow = new kakao.maps.InfoWindow({
+        content: positions[i].content // 인포윈도우에 표시할 내용
+    });
+
+    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+}
+
+// 인포윈도우를 표시하는 클로저를 만드는 함수
+function makeOverListener(map, marker, infowindow) {
+    return function() {
+        infowindow.open(map, marker);
+    };
+}
+
+function makeOutListener(infowindow) {
+    return function() {
+        infowindow.close();
+    };
+}
 </script>
 	</body>
 </html>

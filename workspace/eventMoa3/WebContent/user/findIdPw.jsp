@@ -3,14 +3,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Untitled</title>
+		<title>아이디,비밀번호 찾기 | 이벤트 모아(Event Moa)</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
 	</head>
 	<body class="is-preload">
-
+	<!-- sideBar -->
+<jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 		<!-- Header -->
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
 

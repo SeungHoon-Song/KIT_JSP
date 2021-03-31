@@ -32,7 +32,8 @@
 		<!-- search-bar -->
 	<form action="${pageContext.request.contextPath}/search/" name="searchForm" id="search" method="post">
 			<div class="search">
-			<select name="category" class="button primary icon solid fa-search" id="category" style="margin: 0 auto; width: 40%;">
+			<select name="category" class="button primary icon solid fa-search" id="category" 
+			style="margin: 0 auto; width: 40%; border-radius: initial;">
                     <option value="select">- 지역별 -</option>
                     <option value="alpha">서울</option>
                     <option value="beta">경기</option>
@@ -43,8 +44,10 @@
                     <option value="zeta">충남</option>
                     <option value="theta">제주</option>
                 </select>
-				<input type="search" class="searchTerm" placeholder="검색어를 입력하세요">
-				<a href="#" class="button primary icon solid fa-search">Search</a>
+				<input type="search" class="searchTerm" placeholder="검색어를 입력하세요"
+				style="border-radius: initial; height: 39px;">
+				<a href="${pageContext.request.contextPath}/searchViewPage.jsp" class="button primary icon solid fa-search"
+				style="border-radius: initial;"> Search</a>
 			</div>
 	</form>
 	<br>
