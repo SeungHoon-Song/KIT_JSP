@@ -55,9 +55,9 @@
 	   		 </tbody>
 		   </table>
 			<form method="post" action="#" style="margin-bottom: 30%;">
-         			<button id="dayToBtn">오늘</button> 
-         			<button id="dayToBtn">일주</button>
-         			<button id="dayToBtn">한달</button>
+         			<button id="dayToBtn">일별</button> 
+         			<button id="dayToBtn">주별</button>
+         			<button id="dayToBtn">월별</button>
          			<p></p>
 					<table class="alt">
 						<thead>

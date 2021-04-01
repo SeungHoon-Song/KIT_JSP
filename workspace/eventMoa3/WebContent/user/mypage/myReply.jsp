@@ -7,7 +7,7 @@
 -->
 <html>
 <head>
-<title>내가 쓴 글 | 이벤트 모아(Event Moa)</title>
+<title>내가 쓴 댓글 | 이벤트 모아(Event Moa)</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
@@ -61,7 +61,7 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="col" style="text-align: center;"><span class="article_title">댓글</span></th>
+								<th scope="col"><span class="article_title" style="margin-left: 40px;">댓글</span></th>
 								<th scope="col" style="text-align: center;">작성일</th>
 							</tr>
 						</thead>
