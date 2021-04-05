@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+	<% request.setCharacterEncoding("utf-8"); %>	
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<title>아이디,비밀번호 찾기 | 이벤트 모아(Event Moa)</title>
@@ -28,16 +30,16 @@
 				<p style="text-align: center;">회원가입 시, 입력하신 이름 + 이메일로 아이디를 확인하실 수 있습니다.</p>
 				<div class="row gtr-uniform" id="findFrame">
 					<div class="col-12">
-							<input type="text" name="memberName" id="memberName" value="" placeholder="이름" />
+							<input type="text" name="user_Name" id="user_Name" value="" placeholder="이름" />
 							<br>
-							<input type="email" name="memberEmail" id="memberEmail" value="" placeholder="가입메일주소" />
+							<input type="email" name="user_Email" id="user_Email" value="" placeholder="가입메일주소" />
 							
 					</div>
 				</div>			
 					<br>
 					<ul class="actions" style="display: table; margin-left: auto; margin-right: auto;">
-										<li style="float: left;"><a href="#" class="button primary">　　아이디 찾기　　</a></li>
-										<li style="float: right;"><a href="#" class="button">　　　로그인　　　</a></li>
+										<li style="float: left;"><a href="javascript:findId();" class="button primary">　　아이디 찾기　　</a></li>
+										<li style="float: right;"><a href="${pageContext.request.contextPath}/user/UserLogin.us" class="button">　　　로그인　　　</a></li>
 					</ul>
 					
 				<hr style="width: 80%; margin-inline: auto;">
@@ -46,16 +48,16 @@
 				<p style="text-align: center;">가입하신 아이디+이메일 입력, 본인인증을 통해 이메일로 임시 비밀번호를 보내드립니다.</p>
 				<div class="row gtr-uniform" id="findFrame">
 					<div class="col-12">
-							<input type="text" name="memberId" id="memberId" value="" placeholder="아이디" />
+							<input type="text" name="user_Id" id="user_Id" value="" placeholder="아이디" />
 							<br>
-							<input type="email" name="memberEmail" id="memberEmail" value="" placeholder="가입메일주소" />
+							<input type="email" name="user_Email2" id="user_Email2" value="" placeholder="가입메일주소" />
 							
 					</div>
 				</div>
 					<br>
 								<ul class="actions" style="display: table; margin-left: auto; margin-right: auto;">
-										<li style="float: left;"><a href="#" class="button primary">임시 비밀번호 발급</a></li>
-										<li style="float: right;"><a href="#" class="button">　　　로그인　　　</a></li>
+										<li style="float: left;"><a href="javascript:findPw();" class="button primary">임시 비밀번호 발급</a></li>
+										<li style="float: right;"><a href="${pageContext.request.contextPath}/user/UserLogin.us" class="button">　　　로그인　　　</a></li>
 								</ul>			
 				
 			</form>
@@ -68,13 +70,10 @@
 		</div>
 		
 		<!-- Scripts -->
-			<script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
-			<script src="${pageContext.request.contextPath}/assets/js/jquery.dropotron.min.js"></script>
-			<script src="${pageContext.request.contextPath}/assets/js/jquery.scrollex.min.js"></script>
-			<script src="${pageContext.request.contextPath}/assets/js/browser.min.js"></script>
-			<script src="${pageContext.request.contextPath}/assets/js/breakpoints.min.js"></script>
-			<script src="${pageContext.request.contextPath}/assets/js/util.js"></script>
-			<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+			<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+			<script>var contextPath = "${pageContext.request.contextPath}";</script>
+			<script src="${pageContext.request.contextPath}/assets/js/user_js/findIdPw.js"></script>
+			
 
 	</body>
 </html>

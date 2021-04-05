@@ -33,11 +33,12 @@ public class UserFindIdOkAction implements Action{
 		
 		resp.setContentType("text/html;charset=utf-8");
 		
+		System.out.println(req.getParameter("user_Name"));
+		System.out.println(req.getParameter("user_Email"));
 		if(u_dao.findId(name, email).isEmpty()) {
 			out.println("not-ok");
 		}else {
 			out.println("ok");
-			
 			String host = "http://event-moa.kro.kr";
 			String from = "eventmoa1515@gmail.com";
 			String to = email;

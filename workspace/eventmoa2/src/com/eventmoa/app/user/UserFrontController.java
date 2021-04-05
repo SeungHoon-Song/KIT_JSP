@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.eventmoa.action.ActionForward;
 
 public class UserFrontController extends HttpServlet {
-
+// ddfdf
 	/**
 	 * 
 	 */
@@ -67,12 +67,11 @@ public class UserFrontController extends HttpServlet {
 			}
 		}
 		else if (command.equals("/user/UserLogin.us")) {
-			//전달받은 login 값을 가져온다.
-			String login = req.getParameter("login");
+//			String login = req.getParameter("login");
 			forward = new ActionForward();
 			forward.setRedirect(false);
 																	
-			forward.setPath("/user/login.jsp" + (login != null ? "?login=false" : ""));
+			forward.setPath("/user/login.jsp" + (type != null ? "?type=false" : ""));
 		}
 		
 		/* 이메일 인증 부분 */
@@ -102,7 +101,8 @@ public class UserFrontController extends HttpServlet {
 		// 중복검사 아이디 / 이메일 
 		else if (command.equals("/user/UserCheckIdOk.us")) {
 			try {
-				forward = new UserCheckIdOkAction().execute(req, resp);
+				// 아이디 중복검사 
+				 forward = new UserCheckIdOkAction().execute(req, resp); 
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -126,7 +126,9 @@ public class UserFrontController extends HttpServlet {
 		
 		/*아이디 비밀번호 찾기 부분*/
 		else if (command.equals("/user/UserFindIdOk.us")) {
+			System.out.println("front 진입");
 			try {
+					System.out.println("front try 진입");
 				 forward = new UserFindIdOkAction().execute(req, resp);  
 			} catch (Exception e) {
 				System.out.println(e);
@@ -147,7 +149,6 @@ public class UserFrontController extends HttpServlet {
 			forward.setRedirect(false);
 			forward.setPath("/error/404.jsp");
 		}
-		
 		
 		if(forward != null ) {
 			if(forward.isRedirect()) {

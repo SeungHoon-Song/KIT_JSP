@@ -17,12 +17,12 @@
    </select>
  
     <select id="findId" parameterType="map" resultType="string">
-       SELECT USER_ID FROM TABLE_USER WHERE USER_NAME = #{user_Name} AND USER_EMAIL = #{user_Email}
+       SELECT USER_ID FROM TABLE_USER WHERE USER_NAME = #{name} AND USER_EMAIL = #{email}
     </select>
     
-    <select id="findPw" parameterType="map">
-      UPDATE TABLE_USER SET USER_PW = #{user_Pw} WHERE USER_ID = #{user_Id} AND USER_EMAIL = #{user_Email}
-    </select>
+    <update id="findPw" parameterType="map">
+      UPDATE TABLE_USER SET USER_PW = #{pw} WHERE USER_ID = #{id} AND USER_EMAIL = #{email2}
+    </update>
 
 	<select id="login" parameterType="map" resultType="_int">
 		SELECT COUNT(*) FROM TABLE_USER 
