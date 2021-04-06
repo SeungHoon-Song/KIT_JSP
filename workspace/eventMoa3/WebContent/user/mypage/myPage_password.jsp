@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% request.setCharacterEncoding("UTF-8"); %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML>
 <!--
 페이지 프레임 입니다.
@@ -36,6 +38,13 @@
 	</head>
 	
 	<body class="is-preload">
+		<c:if test="${session_id eq null}">
+         <script>
+            alert("로그인 후 이용해주세요");
+            location.replace("${pageContext.request.contextPath}/main.us");
+         </script>
+      </c:if>
+      
 	<!-- sideBar -->
 <jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 		<!-- Header -->
@@ -44,13 +53,15 @@
 		<!-- Main -->
 		<div id="main">
 		<!-- Logo -->
-		<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
+		<header>
+		</header>
+		<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px; text-align: center;">비밀번호</h1>
 		<div class="contents" id="mypagePassword">
 			<form name="myPage" action="" method="post">
 			<div style="text-align: center;">					
 				<div class="row gtr-uniform" id="loginFrame">
 					<div class="col-12">
-						<label for="memberPw">비밀번호</label> <input type="password"
+						<label for="memberPw" style="text-align: initial;">비밀번호</label> <input type="password"
 								name="memberPw" id="usingmemberPw" value="" />
 					</div>
 				</div>
@@ -115,7 +126,8 @@
 			<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 			<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 			<script>
-	
+		
+				
 		
 			
 			const divPassword = document.getElementById("mypagePassword");

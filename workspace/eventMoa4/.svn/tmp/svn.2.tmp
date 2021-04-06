@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.eventmoa.app.user.vo.UserVO" alias="userVO"/>
+		<typeAlias type="com.eventmoa.app.user.vo.PointVO" alias="point_boardVO"/>
+		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeBoardVO" alias="freeTalk_boardVO"/>
+		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeFilesVO" alias="freeTalk_filesVO"/>
+		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeReplyVO" alias="freeTalk_ReplyVO"/>
+		<typeAlias type="com.eventmoa.app.eventboard.vo.EventBoardVO" alias="event_boardVO"/>
+		<typeAlias type="com.eventmoa.app.eventboard.vo.EventFilesVO" alias="event_filesVO"/>
+		<typeAlias type="com.eventmoa.app.eventboard.vo.EventReplyVO" alias="event_replyVO"/>
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@localhost:1515/XE"/>
+				<property name="username" value="eventmoa"/>
+				<property name="password" value="0008"/>
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="com/eventmoa/mybatis/sql/user.xml"/>
+		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_board.xml"/>
+		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_files.xml"/>
+	</mappers>
+</configuration>

@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.eventmoa.action.ActionForward;
+import com.eventmoa.app.user.mypage.UserNameModifyAction;
+import com.eventmoa.app.user.mypage.UserPwModifyAction;
 
 public class UserFrontController extends HttpServlet {
-// ddfdf
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -124,7 +122,7 @@ public class UserFrontController extends HttpServlet {
 			}
 		}
 		
-		/*아이디 비밀번호 찾기 부분*/
+		/* 아이디 비밀번호 찾기 부분 */
 		else if (command.equals("/user/UserFindIdOk.us")) {
 			try {
 				 forward = new UserFindIdOkAction().execute(req, resp);  
@@ -134,10 +132,43 @@ public class UserFrontController extends HttpServlet {
 		}
 		
 		else if (command.equals("/user/UserFindPwOk.us")) {
-			System.out.println("프론트컨트롤러 진입");
 			try {
-				System.out.println("프론트컨트롤러 진입 try");
 				 forward = new UserFindPwOkAction().execute(req, resp);  
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+
+		/* 정보수정 컨트롤러 */
+		else if (command.equals("/user/UserModifyName.us")) {
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/user/mypage/myPage_name.jsp");  
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/user/UserModifyNameOk.us")) {
+			try {
+				 forward = new UserNameModifyAction().execute(req, resp);  
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		
+		else if (command.equals("/user/UserPwModify.us")) {
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/user/mypage/myPage_name.jsp");  
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/user/UserPwModifyOk.us")) {
+			try {
+				 forward = new UserPwModifyAction().execute(req, resp);  
 			} catch (Exception e) {
 				System.out.println(e);
 			}

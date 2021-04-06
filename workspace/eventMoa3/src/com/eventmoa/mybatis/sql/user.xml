@@ -28,4 +28,21 @@
 		SELECT COUNT(*) FROM TABLE_USER 
 		WHERE USER_ID = #{id} AND USER_PW = #{pw}
 	</select>
+
+   <!-- 유저 이름 변경 -->
+   <select id="findName" parameterType="string" resultType="_int">
+      SELECT USER_NAME FROM TABLE_USER WHERE USER_ID = #{user_Id}
+   </select>
+   <update id="modifyName" parameterType="string">
+      UPDATE TABLE_USER SET USER_NAME = #{user_Name}
+   </update>
+   
+   <select id="checkPw" parameterType="string" resultType="_int">
+   	SELECT USER_PW FROM TABLE_USER WHERE USER_PW = #{user_Pw}
+   </select>
+   <update id="modifyPw" parameterType="string">
+   	UPDATE TABLE_USER SET USER_PW = #{user_Pw}
+   </update>
+   
+
 </mapper>

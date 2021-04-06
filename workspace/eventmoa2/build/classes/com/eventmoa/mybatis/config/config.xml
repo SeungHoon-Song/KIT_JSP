@@ -29,5 +29,4 @@
 		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_board.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_files.xml"/>
 	</mappers>
-	
 </configuration>
