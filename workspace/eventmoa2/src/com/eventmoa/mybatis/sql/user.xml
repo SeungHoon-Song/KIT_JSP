@@ -24,8 +24,53 @@
       UPDATE TABLE_USER SET USER_PW = #{pw} WHERE USER_ID = #{id} AND USER_EMAIL = #{email2}
     </update>
 
-	<select id="login" parameterType="map" resultType="_int">
+	<select id="Login" parameterType="map" resultType="_int">
 		SELECT COUNT(*) FROM TABLE_USER 
 		WHERE USER_ID = #{id} AND USER_PW = #{pw}
 	</select>
+	
+  <!-- 유저 MYPAGE INFO -->
+   <select id="findName" parameterType="string" resultType="string">
+      SELECT USER_NAME FROM TABLE_USER WHERE USER_ID = #{user_Id}
+   </select>
+   <select id="findEmail" parameterType="string" resultType="string">
+      SELECT USER_EMAIL FROM TABLE_USER WHERE USER_ID = #{user_Id}
+   </select>
+
+   <select id="findZipcode" parameterType="string" resultType="string">
+   	SELECT USER_ZIPCODE FROM TABLE_USER WHERE USER_ID = #{user_Id}
+   </select>
+   <select id="findAddress" parameterType="string" resultType="string">
+   	SELECT USER_ADDRESS FROM TABLE_USER WHERE USER_ID = #{user_Id}
+   </select>
+   <select id="findAddressEtc" parameterType="string" resultType="string">
+   	SELECT USER_ADDRESS_ETC FROM TABLE_USER WHERE USER_ID = #{user_Id}
+   </select>
+   <select id="findAddressDETAIL" parameterType="string" resultType="string">
+   	SELECT USER_ADDRESS_DETAIL FROM TABLE_USER WHERE USER_ID = #{user_Id}
+   </select>
+   <select id="findAddressAll" parameterType="string" resultType="string">
+   	SELECT USER_ZIPCODE, USER_ADDRESS, USER_ADDRESS_DETAIL, USER_ADDRESS_ETC FROM TABLE_USER WHERE USER_ID = #{user_Id}
+   </select>
+   
+   <!-- 유저 이름 변경 -->
+   <update id="modifyName" parameterType="map">
+      UPDATE TABLE_USER SET USER_NAME = #{user_Name} WHERE USER_ID = #{user_Id}
+   </update>
+   
+   <!-- 주소 변경 -->
+   <update id="modifyAddress" parameterType="userVO">
+   	UPDATE TABLE_USER SET USER_ZIPCODE = #{user_Zipcode}, 
+   	USER_ADDRESS = #{user_Address}, 
+   	USER_ADDRESS_DETAIL = #{user_Address_DETAIL}, 
+   	USER_ADDRESS_ETC = #{user_Address_Etc} WHERE USER_ID = #{user_Id}
+   </update>
+
+	<!-- 비밀번호 변경 -->
+   <select id="currentPw" parameterType="string" resultType="string">
+   	SELECT USER_PW FROM TABLE_USER WHERE USER_ID = #{user_Id}
+   </select>
+   <update id="modifyPw" parameterType="map">
+   	UPDATE TABLE_USER SET USER_PW = #{user_Pw} WHERE USER_PW = #{user_Id}
+   </update>
 </mapper>

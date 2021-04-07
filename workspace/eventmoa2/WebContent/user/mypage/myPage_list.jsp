@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<!--
-페이지 프레임 입니다.
-편하게 복사해서 작업하세요.
--->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<title>마이페이지 | 이벤트 모아 (Event Moa)</title>
@@ -24,6 +22,12 @@
 	</head>
 	
 	<body class="is-preload">
+		<c:if test="${session_id eq null}">
+         <script>
+            alert("로그인 후 이용해주세요");
+            location.replace("${pageContext.request.contextPath}/main.us");
+         </script>
+      </c:if>
 	<!-- sideBar -->
 <jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 		<!-- Header -->
@@ -59,7 +63,7 @@
 				<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px;">회원 정보</h1>
 				<div class="col-6 col-12-medium" style="margin: 0 0 -2em 0;">
         			<ul class="actions" style="display: inline-flex;">
-						<li><a href="${pageContext.request.contextPath}/user/mypage/myPage_info.jsp" class="button primary fit" style="display: flex; margin: 0 auto;">
+						<li><a href="${pageContext.request.contextPath}/user/mypage/MyPageInfo.us" class="button primary fit" style="display: flex; margin: 0 auto;">
 						<img src="${pageContext.request.contextPath}/images/user/edit2.png" style="width: auto;">　회원정보 수정</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/mypage/myPage_unregister.jsp" class="button primary fit" style="display: flex; margin: 0 auto;">
 						<img src="${pageContext.request.contextPath}/images/user/remove2.png" style="width: auto;">　회원 탈퇴　　　</a></li>

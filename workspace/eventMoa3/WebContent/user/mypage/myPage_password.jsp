@@ -45,8 +45,6 @@
          </script>
       </c:if>
       
-	<!-- sideBar -->
-<jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 		<!-- Header -->
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
 		
@@ -61,8 +59,8 @@
 			<div style="text-align: center;">					
 				<div class="row gtr-uniform" id="loginFrame">
 					<div class="col-12">
-						<label for="memberPw" style="text-align: initial;">비밀번호</label> <input type="password"
-								name="memberPw" id="usingmemberPw" value="" />
+						<label for="usinguser_Pw" style="text-align: initial;">비밀번호</label> 
+						<input type="password" name="usinguser_Pw" id="usinguser_Pw" value="" />
 					</div>
 				</div>
         		<br>
@@ -85,7 +83,7 @@
 
 				<!-- Content -->
 			<div class="contents2" id="myPage">
-			<form name="loginForm" action="" method="post">
+			<form name="modifyPwForm" action="${pageContext.request.contextPath}/user/UserPwModifyOk.us" method="post">
 
 			
 			<div class="row gtr-uniform" id="findFrame">
@@ -93,15 +91,15 @@
 						<br>
 						
 						<p>
-							<input type="password" name="memberPw" id="memberPw" autocomplete="off" required/>
-							<label for="memberPw" style="color: silver;"><span>현재 비밀번호</span></label>
-							<i toggle="#memberPw" id="eyeIcon" class="fa fa-fw fa-eye field-icon toggle-password"></i>
+							<input type="password" name="user_Pw" id="user_Pw" autocomplete="off" required/>
+							<label for="user_Pw" style="color: silver;"><span>새 비밀번호</span></label>
+							<i toggle="user_Pw" id="eyeIcon" class="fa fa-fw fa-eye field-icon toggle-password"></i>
 						</p>
 						
 						<p>
-							<input type="password" name="memberPw2" id="memberPw2" autocomplete="off" required/>
-							<label for="memberPw2" style="color: silver;"><span>새 비밀번호</span></label>
-							<i toggle="#memberPw2" id="eyeIcon" class="fa fa-fw fa-eye field-icon toggle-password"></i>
+							<input type="password" name="user_Pw2" id="user_Pw2" autocomplete="off" required/>
+							<label for="user_Pw2" style="color: silver;"><span>새 비밀번호 확인</span></label>
+							<i toggle="user_Pw2" id="eyeIcon" class="fa fa-fw fa-eye field-icon toggle-password"></i>
 						</p>						
 					</div>
 			</div>		
@@ -110,7 +108,7 @@
 
 						<div class="col-12">
 							<ul class="actions stacked">
-								<li><a href="#" class="button primary fit">비밀번호 변경</a></li>
+								<li><a href="javascript:modifySubmit();" type="submit" class="button primary fit">비밀번호 변경</a></li>
 							</ul>
 						</div>
 				</div>
@@ -126,15 +124,12 @@
 			<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 			<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 			<script>
-		
-				
-		
-			
 			const divPassword = document.getElementById("mypagePassword");
 			const divmyPage = document.getElementById("myPage");
 			
 			divPassword.style.display = 'block';
 			divmyPage.style.display = 'none';
+			
 			
 			function formSubmit(){
 				
@@ -144,9 +139,15 @@
 				
 				
 			}
+			</script>
+			<script>
+			var form = document.modifyPwForm;
 			
-			
-			
+			function modifySubmit(){
+				
+				form.submit();
+				
+			}
 			
 			</script>
 			

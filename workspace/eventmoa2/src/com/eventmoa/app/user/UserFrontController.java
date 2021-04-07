@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.eventmoa.action.ActionForward;
+import com.eventmoa.app.user.mypage.UserAddressModifyAction;
+import com.eventmoa.app.user.mypage.UserNameModifyAction;
 
 public class UserFrontController extends HttpServlet {
-// ddfdf
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -34,16 +32,17 @@ public class UserFrontController extends HttpServlet {
 		String requestURI = req.getRequestURI();
 		String contextPath = req.getContextPath();
 		String command = requestURI.substring(contextPath.length());
-
+		
+		String login = req.getParameter("login");
 		ActionForward forward = null;
-		String type = req.getParameter("type");
-			
 		/* main 컨트롤러 */
 		if(command.equals("/main.us")) {
-			type = req.getParameter("type");
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("/index.jsp" + (type != null ? "?type=login" : ""));
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+//				forward.setPath("/index.jsp" + (login != null ? "?login=1" : ""));
+				forward.setPath("/index.jsp");
+			} catch (Exception e) {;}
 		}
 		
 		/* 회원가입 컨트롤러 */
@@ -67,11 +66,18 @@ public class UserFrontController extends HttpServlet {
 			}
 		}
 		else if (command.equals("/user/UserLogin.us")) {
-//			String login = req.getParameter("login");
 			forward = new ActionForward();
 			forward.setRedirect(false);
-																	
-			forward.setPath("/user/login.jsp" + (type != null ? "?type=false" : ""));
+			forward.setPath("/user/login.jsp");
+		}
+		
+		/* 로그아웃 부분 */
+		else if (command.equals("/user/UserLogout.us")) {
+			try {
+				 forward = new UserLogoutAction().execute(req, resp);  
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		}
 		
 		/* 이메일 인증 부분 */
@@ -115,16 +121,18 @@ public class UserFrontController extends HttpServlet {
 			}
 		}
 		
-		/* 로그아웃 부분 */
-		else if (command.equals("/user/UserLogout.us")) {
+		
+		/* 아이디 비밀번호 찾기 부분 */
+		else if (command.equals("/user/UserFindIdPw.us")) {
 			try {
-				 forward = new UserLogoutAction().execute(req, resp);  
+				
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/user/findIdPw.jsp");  
 			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
-		
-		/*아이디 비밀번호 찾기 부분*/
 		else if (command.equals("/user/UserFindIdOk.us")) {
 			try {
 				 forward = new UserFindIdOkAction().execute(req, resp);  
@@ -134,10 +142,98 @@ public class UserFrontController extends HttpServlet {
 		}
 		
 		else if (command.equals("/user/UserFindPwOk.us")) {
-			System.out.println("프론트컨트롤러 진입");
 			try {
-				System.out.println("프론트컨트롤러 진입 try");
 				 forward = new UserFindPwOkAction().execute(req, resp);  
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+
+		/* 마이페이지 부분 컨트롤러 */
+		else if (command.equals("/mypage/myPage.us")) {
+			try {
+				
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/user/mypage/myPage_list.jsp");  
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/user/mypage/MyPageInfo.us")) {
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/user/mypage/myPage_info.jsp");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		/* 정보수정 컨트롤러 */
+		else if (command.equals("/user/mypage/UserModifyName.us")) {
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/user/mypage/myPage_name.jsp");  
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/user/UserModifyNameOk.us")) {
+			try {
+				 forward = new UserNameModifyAction().execute(req, resp);  
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		/* 이메일 작업 컨트롤러 */
+		else if (command.equals("/user/mypage/UserModifyEmail.us")) {
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/user/mypage/myPage_email.jsp");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/user/mypage/UserModifyEmailOk.us")) {
+			try {
+//				forward = new UserNameModifyAction().execute(req, resp);  
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		
+		/* 주소수정 */
+		else if (command.equals("/user/mypage/UserModifyAddress.us")) {
+			try {
+				 forward = new ActionForward();
+				 forward.setRedirect(false);
+				 forward.setPath("/user/mypage/myPage_address.jsp");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/user/UserModifyAddressOk.us")) {
+			try {
+				 forward = new UserAddressModifyAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		/* 비밀번호 수정*/
+		else if (command.equals("/user/mypage/UserModifyPw.us")) {
+			try {
+				 forward = new ActionForward();
+				 forward.setRedirect(false);
+				 forward.setPath("/user/mypage/myPage_password.jsp");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/user/UserModifyPwOk.us")) {
+			try {
+				 forward = new UserAddressModifyAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println(e);
 			}

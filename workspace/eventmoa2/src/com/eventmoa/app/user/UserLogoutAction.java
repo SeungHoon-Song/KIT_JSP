@@ -16,7 +16,7 @@ public class UserLogoutAction {
 		session.invalidate();
 
 		forward.setRedirect(true);
-		forward.setPath(req.getContextPath() + "/user/UserLogout.us");
+		forward.setPath(req.getContextPath() + "/main.us");
 		return forward;
 	}
 

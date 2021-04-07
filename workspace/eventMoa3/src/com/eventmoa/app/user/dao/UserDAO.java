@@ -12,108 +12,108 @@ import com.eventmoa.mybatis.config.SqlMapConfig;
 import com.eventmoa.util.SHA256;
 
 public class UserDAO {
-	//암호화 복호화를 위한 키
+	// 암호화 복호화를 위한 키
 	private static final int KEY = 3;
 
 	SqlSessionFactory sessionf = SqlMapConfig.getSqlMapInstance();
 	SqlSession session;
-	
+
 	public UserDAO() {
 		session = sessionf.openSession(true);
 	}
-	
-	//회원가입
-	public boolean join (UserVO user) {
+
+	// 회원가입
+	public boolean join(UserVO user) {
 		user.setUser_Pw(encrypt(user.getUser_Pw()));
 		user.setUser_Email_Hash(SHA256.getSHA256(user.getUser_Email()));
 		return session.insert("User.Join", user) == 1;
 	}
-	
-	// 이메일 아이디로 불러오기 
+
+	// 이메일 아이디로 불러오기
 	/**
 	 * 
 	 * @param id
 	 * @return String
-	 * @author corner
-	 * 이메일로 아이디 불러오기 
+	 * @author corner 이메일로 아이디 불러오기
 	 */
 	public String getUserEmail(String id) {
 		return session.selectOne("User.getEmail", id);
 	}
-	
-	
-	//암호화
+
+	// 암호화
 	public String encrypt(String pw) {
 		String en_pw = "";
-		for(int i = 0; i < pw.length(); i++) {
-			en_pw += (char)(pw.charAt(i) * KEY);
+		for (int i = 0; i < pw.length(); i++) {
+			en_pw += (char) (pw.charAt(i) * KEY);
 		}
 		return en_pw;
 	}
-	
-	//복호화
+
+	// 복호화
 	public String decrypt(String en_pw) {
 		String de_pw = "";
-		for(int i = 0; i< en_pw.length(); i++) {
-			de_pw += (char)(en_pw.charAt(i) / KEY);
+		for (int i = 0; i < en_pw.length(); i++) {
+			de_pw += (char) (en_pw.charAt(i) / KEY);
 		}
 		return de_pw;
 	}
-	
-	//아이디 검사 		true : 중복 아이디 	false : 사용가능 아이디 
+
+	// 아이디 검사 true : 중복 아이디 false : 사용가능 아이디
 	public boolean checkId(String id) {
-		return (Integer)session.selectOne("User.checkId", id) == 1;
+		return (Integer) session.selectOne("User.checkId", id) == 1;
 	}
-	
-	//이메일 인증번호
+
+	// 이메일 인증번호
 	public boolean checkEmailHash(String email) {
-		return (Integer)session.selectOne("User.checkEmailHash", email) == 1;
+		return (Integer) session.selectOne("User.checkEmailHash", email) == 1;
 	}
-	
-	//아이디 찾기
+
+	// 아이디 찾기
 	public String findId(String name, String email) {
 		HashMap<String, String> user = new HashMap<>();
 		user.put("name", name);
 		user.put("email", email);
-		
+
 		return session.selectOne("User.findId", user);
 	}
 
-			
-	//임시 비밀번호 발급
+	// 임시 비밀번호 발급
 	public String findPw(String id, String email2) {
 		HashMap<String, String> user = new HashMap<>();
-		String randomPw = getTempPw(); 
-		
+		String randomPw = getTempPw();
+
 		user.put("id", id);
 		user.put("email2", email2);
 		user.put("pw", randomPw);
-		if(session.update("User.findPw", user) == 1) {
-			return randomPw;	
-			
+		if (session.update("User.findPw", user) == 1) {
+			return randomPw;
+
 		}
 		return null;
 	}
-	//로그인 
-	public boolean login(String id, String pw) {
-		HashMap<String,String> member=new HashMap<>();
-		
-		member.put("id", id);
-		member.put("pw", encrypt(pw));
-     
-		return (Integer)session.selectOne("Uesr.login", member) == 1;
-	
-	}
 
-	//임시 비밀번호
+	// 임시 비밀번호 생성 메소드
 	protected String getTempPw() {
 		String random = UUID.randomUUID().toString().replaceAll("-", "");
-		String randomPw = random.substring(0,8);
-		
+		String randomPw = random.substring(0, 8);
+
 		return randomPw;
-		
+
 	}
-	
+
+	// 로그인
+	public boolean login(String id, String pw) {
+		HashMap<String, String> user = new HashMap<>();
+
+		System.out.println("체크1");
+		user.put("id", id);
+		System.out.println("체크2");
+		user.put("pw", encrypt(pw));
+		System.out.println("체크3");
+
+		return (Integer) session.selectOne("User.login", user) == 1;
+
+	}
 
 	/**
 	 * 
@@ -125,20 +125,32 @@ public class UserDAO {
 	public boolean getUserName(String id) {
 		return (Integer) session.selectOne("User.findName", id) == 1;
 	}
+
 	public String modifyUserName(String name) {
-		if(session.update("User.modifyName", name) == 1) {
+		if (session.update("User.modifyName", name) == 1) {
 			return name;
 		}
 		return null;
 	}
-	
-	public boolean getUserPw(String id) {
-		return (Integer) session.selectOne("User.checkPw", id) == 1;
+
+	public boolean getUserAddress(String id) {
+		return (Integer) session.selectOne("User.findAddress", id) == 1;
 	}
-	public String modifyUserPw(String pw) {
-		if(session.update("User.modifyPw", pw) == 1) {
-			return pw;
-		}
-		return null;
+
+	public boolean modifyUserAddress(UserVO u_vo) {
+		return session.update("User.modifyAddress", u_vo) == 1;
+	}
+
+	// 비밀번호 수정 1단계
+	public String getUserPw(String id) {
+		return decrypt(session.selectOne("User.currnetPw", id));
+	}
+
+	// 비밀번호 수정 2단계
+	public boolean modifyUserPw(String pw, String id) {
+		HashMap<String, String> user = new HashMap<>();
+		user.put("pw", pw);
+		user.put("id", id);
+		return session.update("User.modifyPw", user) == 1;
 	}
 }

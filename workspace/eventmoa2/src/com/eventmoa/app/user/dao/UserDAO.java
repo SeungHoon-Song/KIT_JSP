@@ -38,7 +38,7 @@ public class UserDAO {
 	 * 이메일로 아이디 불러오기 
 	 */
 	public String getUserEmail(String id) {
-		return session.selectOne("User.getEmail", id);
+		return session.selectOne("User.findEmail", id);
 	}
 	
 	
@@ -94,18 +94,19 @@ public class UserDAO {
 		}
 		return null;
 	}
+	
 	//로그인 
 	public boolean login(String id, String pw) {
-		HashMap<String,String> member=new HashMap<>();
-		
-		member.put("id", id);
-		member.put("pw", encrypt(pw));
+		HashMap<String,String> user = new HashMap<>();
+		user.put("id", id);
+		user.put("pw", encrypt(pw));
      
-		return (Integer)session.selectOne("Uesr.login", member) == 1;
+		return (Integer)session.selectOne("Login", user) == 1;
 	
 	}
+	
 
-	//임시 비밀번호
+	//임시 비밀번호 생성 메소드
 	protected String getTempPw() {
 		String random = UUID.randomUUID().toString().replaceAll("-", "");
 		String randomPw = random.substring(0,8);
@@ -114,5 +115,69 @@ public class UserDAO {
 		
 	}
 	
+
+	/**
+	 * 
+	 * @param id
+	 * @return boolean true = ok / false = none
+	 * @author corner
+	 * @note 유저 이름 변경전 아이디로 이름 조회하는 메소드
+	 */
+	public String getUserName(String id) {
+		String name = "";
+		name = session.selectOne("User.findName", id);
+		return name;
+	}
+	public boolean modifyUserName(String id, String name) {
+		HashMap<String, String> user = new HashMap<>();
+		user.put("user_Id", id);
+		user.put("user_Name", name);
+		return (Integer) session.update("User.modifyName", user) == 1;
+	}
+	
+//	유저 MYPAGE INFO
+	
+	/**
+	 * 
+	 * @param String id
+	 * @return String
+	 * @apiNote 유저의 주소 참고항목을 가져올 메소드
+	 */
+	public String getUserZipcode(String id) {
+		return session.selectOne("User.findZipcode", id);
+	}
+	public String getUserAddress(String id) {
+		return session.selectOne("User.findAddress", id);
+	}
+	public String getUserAddressEtc(String id) {
+		return session.selectOne("User.findAddressEtc", id);
+	}
+	public String getUserAddressDETAIL(String id) {
+		return session.selectOne("User.findAddressDETAIL", id);
+	}
+	
+	//주소 수정
+	public String getUserAddressAll(String id) {
+		String addr = "";
+		addr = session.selectOne("User.findAddressAll", id);
+		return addr;
+	}
+	public boolean modifyUserAddress(UserVO u_vo) {
+		return session.update("User.modifyAddress", u_vo) == 1;
+	}
+	
+	
+	//비밀번호 수정
+	public String getUserPw(String id) {
+		String pw = "";
+		pw = decrypt(session.selectOne("User.currentPw", id));
+		return pw;
+	}
+	public boolean modifyPw(String id, String pw) {
+		HashMap<String, String> user = new HashMap<>();
+		user.put("user_Id", id);
+		user.put("user_Pw", pw);
 		
+		return (Integer)session.update("User.modifyPw", user) == 1;
+	}
 }

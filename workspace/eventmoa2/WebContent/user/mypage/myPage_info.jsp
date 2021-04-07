@@ -1,101 +1,168 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<!--
-페이지 프레임 입니다.
-편하게 복사해서 작업하세요.
--->
-<html>
-	<head>
-		<title>이벤트 모아 (Event Moa)</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
-		<meta name="author" content="corner3499">
-		<!-- title Icon -->
-		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
-		
-	</head>
-	
-	<body class="is-preload">
-	<!-- sideBar -->
+ <% request.setCharacterEncoding("UTF-8"); %>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+   <html>
+   <head>
+      <title>회원가입 | 이벤트 모아(Event Moa)</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
+      <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
+      
+      <!-- 회원가입 css -->
+      <style>
+      .field-icon {
+           float: right;
+           margin-right: 15px;
+           margin-top: -25px;
+           position: relative;
+           z-index: 2;
+           }
+           
+      p { position:relative; width:100%; height:50px; } /* 기본세팅 */
+      p input { box-sizing:border-box; padding:20px 0 0; width:100%; height:100%; border:0 none; color:#595f63; outline:none; }
+      p label { position:absolute; left:3%; bottom:10%; width:100%; height:100%; text-align:left; pointer-events:none; }
+      p label span { position:absolute; left:0; bottom:5px; transition:all .3s ease; }
+      p input:focus + label span, 
+      p input:valid + label span { transform:translateY(-150%); font-size:14px; color:#5fa8d3; }  
+      /* input에 글을 입력하고 포커스가 지나간 상태에서 제어하려면 valid 선택자를 써야한다. */
+      /* 포커스 될 때 label span(name)이 위로 올라감 */
+      p input:focus + label::after,
+      p input:valid + label::after { width:100%; transform:translateX(0); }
+      </style>
+      <!-- signup_terms 약관 동의 css  -->
+      <style>
+         #selectAllSmall{
+            display:none;
+         }
+         @media (min-width:481px){
+            #terms1{
+               display: none;
+            }
+         }
+         @media (max-width:480px){
+            textarea#termsServiceContent{
+               display:none;
+            }
+            textarea#termsPrivacyContent{
+               display:none;
+            }
+            div#termsDiv{
+               width:100% !important;
+            }
+            div#btnDiv{
+               width:100%;
+               padding-left:0;
+            }
+            #selectAllSmall{
+               display:inline;
+            }
+            #selectAll{
+               display:none;
+            }
+            
+         
+         }
+         .cate{
+         letter-spacing: .00625em;
+          font-family: Roboto,Arial,sans-serif;
+          font-size: 1rem;
+          font-weight: 400;
+          line-height: 1.5rem;
+          hyphens: auto;
+          word-break: break-word;
+          word-wrap: break-word;
+          color: #202124;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+         }
+         
+         .arrow {
+         font-family: 'Jua';
+          hyphens: auto;
+          word-break: break-word;
+          word-wrap: break-word;
+          color: #5f6368;
+          font-size: 20px;
+          font-weight: 400;
+         }
+      </style>
+
+   </head>
+   <body class="is-preload">
+   <c:set var="user_Name" value="${user_Name}"/>
+   <c:set var="user_Email" value="${user_Email}"/>
+   <c:set var="user_Zipcode" value="${user_Zipcode}"/>
+   <c:set var="user_Address" value="${user_Address}"/>
+   <c:set var="user_AddressDETAIL" value="${user_AddressDETAIL}"/>
+   <c:set var="user_AddressEtc" value="${user_AddressEtc}"/>
+      
+      <c:if test="${session_id eq null}">
+         <script>
+            alert("로그인 후 이용해주세요");
+            location.replace("${pageContext.request.contextPath}/main.us");
+         </script>
+      </c:if>
+      
+   <!-- sideBar -->
 <jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
-		<!-- Header -->
-		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
-	<p></p>
-		<!-- Main -->
-			<div id="main">
-		<!-- Logo -->
-		<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
-		<form name="myPage" action="" method="post">
-			<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px; text-align: center;">회원정보 수정</h1>
-			<hr style="width: 80%; margin-inline: auto;">
-			<section id="two" class="wrapper style1 spotlight alt" style="background-color: #1ec9ff">
-						<div class="content">
-							<div class="inner">
-								<h2>이름</h2>
-								<p>개명하셨거나 사용하고 싶은 닉네임처럼 사용 가능한 이름입니다.</p>
-								<ul class="actions">
-									<li><a href="#" class="button">이름 변경</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="image" style="background-image: url(&quot;images/pic02.jpg&quot;);">
-							<img src="${pageContext.request.contextPath}/images/user/changeName2.png" alt="이름변경">
-						</div>
-					</section>
-					
-					<section id="three" class="wrapper style2 spotlight" style="background-color: #246197">
-						<div class="content">
-							<div class="inner">
-								<h2>이메일</h2>
-								<p>나와 다른 사용자에게 나의 이벤트모아 계정임을 알리는 데 사용되는 이메일 주소입니다.</p>
-								<ul class="actions">
-									<li><a href="#" class="button">이메일 변경</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="image" style="background-image: url(&quot;images/pic03.jpg&quot;);">
-							<img src="${pageContext.request.contextPath}/images/user/changeEmail2.png" alt="이메일변경">
-						</div>
-					</section>
-					
-					<section id="two" class="wrapper style1 spotlight alt" style="background-color: #36c6f4">
-						<div class="content">
-							<div class="inner">
-								<h2>비밀번호</h2>
-								<p>본인임을 인증하고 안전한 비밀번호를 만들고 같은 비밀번호를 다른 계정에 사용하지 마세요.</p>
-								<ul class="actions">
-									<li><a href="${pageContext.request.contextPath}/user/mypage/myPage_password.jsp"class="button">비밀번호 변경</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="image" style="background-image: url(&quot;images/pic02.jpg&quot;);">
-							<img src="${pageContext.request.contextPath}/images/user/changePw2.png" alt="비밀번호변경">
-						</div>
-					</section>
-					
-					<section id="three" class="wrapper style2 spotlight" style="background-color: #246197">
-						<div class="content">
-							<div class="inner">
-								<h2>주소</h2>
-								<p>직장이나 자택 등 원하는 주소로 변경하실 수 있습니다.</p>
-								<ul class="actions">
-									<li><a href="#" class="button">주소 변경</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="image" style="background-image: url(&quot;images/pic03.jpg&quot;);">
-							<img src="${pageContext.request.contextPath}/images/user/changeAddress2.png" alt="주소변경">
-						</div>
-					</section>
-				
-		</form>
 
+      <!-- Header -->
+         <jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
 
-			</div> <!-- div id="main" end -->
+      <!-- Main -->
+         <div id="main">
 
-		<!-- Footer -->
-			<jsp:include page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
-			
-	</body>
+               <!-- Content -->
+               <h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px; text-align: center;">개인 정보</h1>
+         <div class="contents" id="signupContents" style="padding: 12px 20px; width: 80%; margin: 0 auto;">
+            <form name="joinForm" action="${pageContext.request.contextPath}/user/UserJoinOk.us" method="post" style="padding-bottom: 0;">
+            <div class="signup_message" id="signup_message">
+               <br>
+            </div>
+				<a href="#" style="display: flex; cursor: default;">
+					<div class="col-12" style="width: 35%; color: #202124;">아이디</div><div class="cate">${session_id}</div>
+				</a>
+				<hr style="margin-inline: auto;">
+                  <a href="${pageContext.request.contextPath}/user/mypage/UserModifyName.us" style="display: flex;">
+                     <div class="col-12" style="width: 35%; color: #202124;">이름</div><div class="cate">${user_Name}</div><span class="arrow" aria-hidden="true">></span>
+                  </a>
+                  <hr style="margin-inline: auto;">
+                  <a href="${pageContext.request.contextPath}/user/mypage/UserModifyEmail.us" style="display: flex;">
+                     <div class="col-12" style="width: 35%; color: #202124;">이메일</div><div class="cate">${user_Email}</div><span class="arrow" aria-hidden="true">></span>
+                  </a>
+                  <hr style="margin-inline: auto;">
+                  <a href="${pageContext.request.contextPath}/user/mypage/UserModifyAddress.us" style="display: flex;">
+                     <div class="col-12" style="width: 35%; color: #202124;">주소</div><div class="cate">
+                     ${user_Zipcode} / ${user_Address} ${user_AddressDETAIL} ${user_AddressEtc}
+                     </div><span class="arrow" aria-hidden="true">></span>
+                  </a>
+                  <hr style="margin-inline: auto;">
+                  <a href="${pageContext.request.contextPath}/user/mypage/myPage_password.jsp" style="display: flex;">
+                     <div class="col-12" style="width: 35%; color: #202124;">비밀번호</div><div class="cate">••••••••</div><span class="arrow" aria-hidden="true">></span>
+                  </a>   
+                  
+               
+         </form>
+      </div>
+                  <br>
+                  <br>
+   
+   </div>
+
+   <!-- Footer -->
+         <jsp:include page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
+
+      <!-- Scripts -->
+         <script src="${pageContext.request.contextPath}/assets/js/visiblePw.js"></script>
+         <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+         <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+
+         <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
+         <script>var contextPath = "${pageContext.request.contextPath}";</script>
+      
+   </body>
 </html>

@@ -18,11 +18,11 @@
     <url-pattern>*.us</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>BoardFrontController</servlet-name>
-    <servlet-class>com.eventmoa.app.board.BoardFrontController</servlet-class>
+    <servlet-name>FreeBoardFrontController</servlet-name>
+    <servlet-class>com.eventmoa.app.freeboard.BoardFrontController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>BoardFrontController</servlet-name>
+    <servlet-name>FreeBoardFrontController</servlet-name>
     <url-pattern>*.bo</url-pattern>
   </servlet-mapping>
   <error-page>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--
  사이드바 
 -->
@@ -112,6 +114,13 @@
 	<body onload="InitializeStaticMenu();">
 
 	</body>
+		<c:set var="login" value="${login}"/>
+		<c:set var="session_id" value="${session_id}"/>
+		      
+		<c:set var = 'userStatus' value = "false"></c:set>
+		<c:if test="${session_id ne null }">
+			<c:set var = 'userStatus' value = 'true'/>
+		</c:if>
 	
 	<div id="STATICMENU" >
 <div class="container">
@@ -119,18 +128,29 @@
   <img src="${pageContext.request.contextPath}/images/sidebar/login.png" style="width: auto;
     display: block;
     margin-left: 25px;"> 
+ <c:if test="${userStatus eq false}">
   <a href="${pageContext.request.contextPath}/user/UserLogin.us">
-    　로그인
-    </a>
+    　로그인  </a>
+ </c:if>
+ <c:if test="${userStatus eq true}">
+	<a href="${pageContext.request.contextPath}/user/UserLogout.us">
+	${session_id}님 로그아웃</a>
+</c:if>
     </div>
     <hr style="margin: 1em 0;">
   <div class="link text" style="display: flex;">
   <img src="${pageContext.request.contextPath}/images/sidebar/add-user.png" style="width: auto;
     display: block;
     margin-left: 25px;"> 
+ <c:if test="${userStatus eq false}">
    <a href="${pageContext.request.contextPath}/user/UserJoin.us">
- 　회원가입
- 	</a>
+ 　회원가입 </a>
+ </c:if>
+ <c:if test="${userStatus eq true}">
+   <a href="${pageContext.request.contextPath}/mypage/myPage.us">
+ 　마이페이지 </a>
+ </c:if>
+ 
  </div>
     <hr style="margin: 1em 0;">
   <div class="link text" style="display: flex;">

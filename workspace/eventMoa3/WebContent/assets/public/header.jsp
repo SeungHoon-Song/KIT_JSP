@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>이벤트 모아 (Event Moa)</title>
@@ -18,7 +20,14 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/search.css">
 	</head>
 	<body class="is-preload">
-
+	
+	<c:set var="login" value="${login}"/>
+	<c:set var="session_id" value="${session_id}"/>
+	      
+	<c:set var = 'userStatus' value = "false"></c:set>
+	<c:if test="${session_id ne null }">
+		<c:set var = 'userStatus' value = 'true'/>
+	</c:if>
 		<!-- Header -->
 			<div id="header" class="alt">
 				<a class="logo" href="${pageContext.request.contextPath}/main.us"></a>
@@ -33,16 +42,23 @@
 								<li><a href="${pageContext.request.contextPath }/Event/pastEvent.jsp">종료 이벤트</a></li>
 							</ul>
 						</li>
-						<!-- 로그인을 안한 상태라면 로그인, 로그인을 한 상태라면 마이페이지 -->
+								<c:if test="${userStatus eq false}">
 						<li><a href="${pageContext.request.contextPath}/user/UserLogin.us">계정</a>
+								</c:if>
+								<c:if test="${userStatus eq true}">
+									<li><a href="${pageContext.request.contextPath}/mypage/myPage.us">마이페이지</a><li>
+								</c:if>
 							<ul>
-								<li><a href="${pageContext.request.contextPath}/user/UserLogin.us">로그인</a><li>
-								<li><a href="${pageContext.request.contextPath}/user/UserJoin.us">회원가입</a><li>
-								<li><a href="${pageContext.request.contextPath}/user/mypage/myPage_list.jsp">마이페이지</a><li>
+								<c:if test="${userStatus eq false}">
+									<li><a href="${pageContext.request.contextPath}/user/UserLogin.us">로그인</a><li>
+									<li><a href="${pageContext.request.contextPath}/user/UserJoin.us">회원가입</a><li>
+								</c:if>
+								<c:if test="${userStatus eq true}">
 								<li><a href="${pageContext.request.contextPath}/user/mypage/myPage_password.jsp">회원정보수정</a><li>
 								<li><a href="${pageContext.request.contextPath}/user/mypage/myWrite.jsp">내가 쓴 글</a><li>
 								<li><a href="${pageContext.request.contextPath}/user/mypage/myReply.jsp">내가 쓴 댓글</a><li>
 								<li><a href="${pageContext.request.contextPath}/user/mypage/pointReceipt.jsp">결제 내역</a><li>
+								</c:if>
 							</ul>
 						</li>
 						<li><a href="${pageContext.request.contextPath}/user/mypage/pointCharge.jsp">포인트💎</a>
@@ -56,14 +72,6 @@
 								<li><a href="${pageContext.request.contextPath}/community/reviews.jsp">인증후기</a><li>
 							</ul>
 						</li>
-						<%-- 	<li>
-								<a href="${pageContext.request.contextPath}/elements.jsp">관리</a>
-								<ul>
-									<li><a href="https://github.com/Eight-Corner/eventMoa/blob/master/CHANGELOG.md">빌드 로그</a></li>
-									<li><a href="${pageContext.request.contextPath}/generic.jsp">제네릭</a></li>
-									<li><a href="${pageContext.request.contextPath}/elements.jsp">요소</a></li>
-								</ul>
-							</li> --%>
 					</ul>
 				</nav>
 				<div class="navSearch" style="width: 50%;text-align: right;margin: 0 auto;padding-left: 0;margin-left: 0;padding-right: 20%;">

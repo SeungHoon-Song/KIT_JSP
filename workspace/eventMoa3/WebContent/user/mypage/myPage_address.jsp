@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<!--
-페이지 프레임 입니다.
-편하게 복사해서 작업하세요.
--->
+<% request.setCharacterEncoding("UTF-8"); %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<title>이벤트 모아 (Event Moa)</title>
@@ -36,8 +34,13 @@
 	</head>
 	
 	<body class="is-preload">
-	<!-- sideBar -->
-<jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
+	
+	<c:if test="${session_id eq null}">
+         <script>
+            alert("로그인 후 이용해주세요");
+            location.replace("${pageContext.request.contextPath}/main.us");
+         </script>
+      </c:if>
 		<!-- Header -->
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
 		
@@ -46,11 +49,16 @@
 		<!-- Logo -->
 		<header>
 		</header>
-		<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px; text-align: center;">주소</h1>
+		<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px; text-align: center;">${session_id} 님의 주소 변경</h1>
 
 				<!-- Content -->
 			<div class="contents2" id="myPage">
-			<form name="loginForm" action="" method="post">
+			<c:if test="${not empty param.update }">
+				<c:if test="${not param.update}">
+			<script>alert("누락된 항목은 없는지, 입력 사항을 다시 확인해주세요.");</script>
+				</c:if>
+			</c:if>
+			<form name="modifyAddressForm" action="${pageContext.request.contextPath}/user/UserModifyAddressOk.us" method="post">
 
 			
 			<div class="row gtr-uniform" id="findFrame">
@@ -83,7 +91,7 @@
 
 						<div class="col-12">
 							<ul class="actions stacked">
-								<li><a href="#" class="button primary fit">주소 변경</a></li>
+								<li><a href="javascript:modifySubmit();" class="button primary fit">주소 변경</a></li>
 							</ul>
 						</div>
 				</div>
@@ -100,6 +108,22 @@
 			<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 			<script>var contextPath = "${pageContext.request.contextPath}";</script>
 
+			<script>
+			var form = document.modifyAddressForm;
+			
+			function modifySubmit(){
+				var zipcode = $("#user_Zipcode").val();
+				var addr = $("#user_Address").val();
+				var addrD = $("#user_Address_DETAIL").val();
+				
+				if(zipcode != "" && addr != "" && addrD != ""){
+					form.submit();
+				}else{
+					alert('참고항목을 제외한 항목을 입력해주세요.');
+					return false;
+				}
+			}
+			</script>
 				
 	</body>
 </html>

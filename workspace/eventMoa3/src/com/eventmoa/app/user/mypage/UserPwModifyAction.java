@@ -16,32 +16,12 @@ public class UserPwModifyAction implements Action{
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html;charset=utf-8");
 		
+		UserDAO u_dao = new UserDAO();
 		
-		String user_Id = (String) req.getAttribute("user_Id");
-		String user_Pw = (String) req.getParameter("user_Pw");
+		String id = req.getParameter("user_id");
 		
-		UserDAO dao = new UserDAO();
-		
-		user_Pw = dao.decrypt(user_Pw);
-		
-		if(req.getParameter("user_Pw") != null ) {
-			user_Pw = req.getParameter("user_Pw");
-			if(dao.getUserPw(user_Id)) {
-				String temp = dao.modifyUserPw(user_Pw);
-				PrintWriter out = resp.getWriter();
-				out.println("<script>");
-				out.println("alert('성공적으로 비밀번호가 변경 되었습니다. ["+temp+"]  다시 로그인 해주세요.');");
-				out.println(" location.href = '/main.us'; ");
-				out.println("</script>");
-				out.close();
-			}
-		} else {
-			PrintWriter out = resp.getWriter();
-			out.println("<script>");
-			out.println("alert('비밀번호 변경이 실패 하였습니다. 잠시 후 다시 시도해주세요.');"
-					+ "history.back();");
-			out.println("</script>");
-			out.close();
+		if(u_dao.modifyUserPw(pw, id)) {
+			
 		}
 		
 	
