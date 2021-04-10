@@ -16,6 +16,8 @@ public class EventBoardVO {
 	private int board_View;
 	private String board_Date;
 	private String board_Location;
+	private String file_name;
+		
 	
 	public EventBoardVO() {;}
 
@@ -74,4 +76,13 @@ public class EventBoardVO {
 	public void setBoard_Location(String board_Location) {
 		this.board_Location = board_Location;
 	}
+
+	public String getFile_name() {
+		return file_name;
+	}
+
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
+	}
+	
 }

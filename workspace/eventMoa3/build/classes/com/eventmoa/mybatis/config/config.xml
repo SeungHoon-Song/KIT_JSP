@@ -11,6 +11,8 @@
 		<typeAlias type="com.eventmoa.app.eventboard.vo.EventBoardVO" alias="event_boardVO"/>
 		<typeAlias type="com.eventmoa.app.eventboard.vo.EventFilesVO" alias="event_filesVO"/>
 		<typeAlias type="com.eventmoa.app.eventboard.vo.EventReplyVO" alias="event_replyVO"/>
+		<typeAlias type="com.eventmoa.app.eventboard.vo.EventBoardVO" alias="eventboardVO"/>
+		
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -28,5 +30,7 @@
 		<mapper resource="com/eventmoa/mybatis/sql/user.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_board.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_files.xml"/>
+		<mapper resource="com/eventmoa/mybatis/sql/event_board.xml"/>
+		
 	</mappers>
 </configuration>

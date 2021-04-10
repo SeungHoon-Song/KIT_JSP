@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.eventmoa.action.ActionForward;
 import com.eventmoa.app.user.mypage.UserAddressModifyAction;
 import com.eventmoa.app.user.mypage.UserNameModifyAction;
+import com.eventmoa.app.user.mypage.UserPwModifyAction;
 
 public class UserFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -233,7 +234,7 @@ public class UserFrontController extends HttpServlet {
 		}
 		else if (command.equals("/user/UserModifyPwOk.us")) {
 			try {
-				 forward = new UserAddressModifyAction().execute(req, resp);
+				 forward = new UserPwModifyAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println(e);
 			}

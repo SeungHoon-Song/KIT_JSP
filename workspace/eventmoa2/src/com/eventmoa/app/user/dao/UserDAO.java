@@ -176,7 +176,7 @@ public class UserDAO {
 	public boolean modifyPw(String id, String pw) {
 		HashMap<String, String> user = new HashMap<>();
 		user.put("user_Id", id);
-		user.put("user_Pw", pw);
+		user.put("user_Pw", encrypt(pw));
 		
 		return (Integer)session.update("User.modifyPw", user) == 1;
 	}

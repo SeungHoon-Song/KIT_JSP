@@ -27,7 +27,7 @@
 						<a href="${pageContext.request.contextPath}/member/MemberLogout.me">로그아웃</a>
 					</td>
 				</tr>
-			</table>
+			</table>end
 			</c:otherwise>
 			</c:choose>
 			<br />

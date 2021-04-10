@@ -61,6 +61,19 @@
 	   border-radius:4px;
 	   box-shadow:0px 4px 5px rgba(0, 0, 0, 0.75);
 	}
+
+	.container a {
+		font-size: 13px;
+		margin: 0 auto;
+	}
+	.container img {
+		height: 65%;
+    	float: left;
+    	margin-top: 6px;
+    	margin-right: -12px;
+    	margin-left: 4px;
+	}
+
 	
 	.link{
 	   font-size:16px;
@@ -105,6 +118,20 @@
 	   transform:translateY(0%) translateZ(0) scale(1.1);
 	   font-weight:600;
 	}
+	.button.small.alpha { 
+		float: left;
+		text-align: left;
+		width: 49% !important;
+		padding: 0%;
+	}
+	.button.small.bravo { 
+		text-align: left;
+		width: 49% !important;
+		padding: 0%;
+	}
+	.user {
+		text-align: center;
+	}
 	
 	</style>
 
@@ -124,52 +151,62 @@
 	
 	<div id="STATICMENU" >
 <div class="container">
-  <div class="link text" style="display: flex;">
-  <img src="${pageContext.request.contextPath}/images/sidebar/login.png" style="width: auto;
-    display: block;
-    margin-left: 25px;"> 
- <c:if test="${userStatus eq false}">
-  <a href="${pageContext.request.contextPath}/user/UserLogin.us">
-    　로그인  </a>
- </c:if>
- <c:if test="${userStatus eq true}">
-	<a href="${pageContext.request.contextPath}/user/UserLogout.us">
-	${session_id}님 로그아웃</a>
-</c:if>
-    </div>
+	<div class="link text user">
+		<span style="text-align: center;">
+		 <c:if test="${userStatus eq true}">
+			 ${session_id}님 로그인
+			</c:if>
+		<c:if test="${userStatus eq false}">
+			어서오세요!
+		</c:if>
+		</span>
+	 </div>
+	<div class="button small main" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
+		<img src="${pageContext.request.contextPath}/images/sidebar/main.png" style="width: auto;
+		display: block;"> 
+		<a href="${pageContext.request.contextPath}/main.us">메인</a>
+	</div>
+	<hr style="margin: 1em 0;">
+	<div class="button small alpha" style="display: flex; margin-left: 3px; box-shadow: none;">
+		  <img src="${pageContext.request.contextPath}/images/sidebar/login.png" style="width: auto;
+		    display: block;"> 
+		 <c:if test="${userStatus eq false}">
+		  <a href="${pageContext.request.contextPath}/user/UserLogin.us">
+		    　로그인  </a>
+		 </c:if>
+		 <c:if test="${userStatus eq true}">
+			<a href="${pageContext.request.contextPath}/user/UserLogin.us">
+			 로그아웃</a>
+		</c:if>
+	</div>
+	<div class="button small bravo" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
+		<img src="${pageContext.request.contextPath}/images/sidebar/add-user.png" style="width: auto;
+		display: block;"> 
+		<c:if test="${userStatus eq false}">
+		<a href="${pageContext.request.contextPath}/user/UserJoin.us">
+		　회원가입 </a>
+		</c:if>
+		<c:if test="${userStatus eq true}">
+		<a href="${pageContext.request.contextPath}/mypage/myPage.us">
+		　마이페이지 </a>
+		</c:if>
+	</div>
     <hr style="margin: 1em 0;">
-  <div class="link text" style="display: flex;">
-  <img src="${pageContext.request.contextPath}/images/sidebar/add-user.png" style="width: auto;
-    display: block;
-    margin-left: 25px;"> 
- <c:if test="${userStatus eq false}">
-   <a href="${pageContext.request.contextPath}/user/UserJoin.us">
- 　회원가입 </a>
- </c:if>
- <c:if test="${userStatus eq true}">
-   <a href="${pageContext.request.contextPath}/mypage/myPage.us">
- 　마이페이지 </a>
- </c:if>
- 
- </div>
+	<div class="button small charlie" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
+		<img src="${pageContext.request.contextPath}/images/sidebar/event.png" style="width: auto;
+		display: block;"> 
+		<a href="${pageContext.request.contextPath}/Event/nowEvent.jsp">
+		　진행 이벤트
+		</a>
+	</div>
     <hr style="margin: 1em 0;">
-  <div class="link text" style="display: flex;">
-  <img src="${pageContext.request.contextPath}/images/sidebar/event.png" style="width: auto;
-    display: block;
-    margin-left: 25px;"> 
-    <a href="${pageContext.request.contextPath}/Event/nowEvent.jsp">
-    　진행 이벤트
-    </a>
-    </div>
-    <hr style="margin: 1em 0;">
-  <div class="link text" style="display: flex;">
-  <img src="${pageContext.request.contextPath}/images/sidebar/board.png" style="width: auto;
-    display: block;
-    margin-left: 25px;"> 
-    <a href="${pageContext.request.contextPath}/community/freeTalk.jsp">
-    　자유게시판
-    </a>
-    </div>
+	<div class="button small delta" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
+		<img src="${pageContext.request.contextPath}/images/sidebar/board.png" style="width: auto;
+		display: block;"> 
+		<a href="${pageContext.request.contextPath}/community/freeTalk.jsp">
+		　자유게시판
+		</a>
+	</div>
 </div>
 <br>
 <a href="#">

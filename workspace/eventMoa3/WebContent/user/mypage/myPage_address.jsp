@@ -34,6 +34,14 @@
 	</head>
 	
 	<body class="is-preload">
+		<c:set var="login" value="${login}"/>
+		<c:set var="session_id" value="${session_id}"/>
+		<c:set var="user_Address" value="${user_Address}"/>
+		
+		<c:set var = 'userStatus' value = "false"></c:set>
+		<c:if test="${session_id ne null }">
+			<c:set var = 'userStatus' value = 'true'/>
+		</c:if>
 	
 	<c:if test="${session_id eq null}">
          <script>
@@ -48,16 +56,11 @@
 		<div id="main">
 		<!-- Logo -->
 		<header>
-		</header>
 		<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px; text-align: center;">${session_id} 님의 주소 변경</h1>
+		</header>
 
 				<!-- Content -->
 			<div class="contents2" id="myPage">
-			<c:if test="${not empty param.update }">
-				<c:if test="${not param.update}">
-			<script>alert("누락된 항목은 없는지, 입력 사항을 다시 확인해주세요.");</script>
-				</c:if>
-			</c:if>
 			<form name="modifyAddressForm" action="${pageContext.request.contextPath}/user/UserModifyAddressOk.us" method="post">
 
 			
@@ -76,7 +79,7 @@
 						</p>
 						
 						<p>
-							<input type="text" name="user_Address_DETAIL" id="user_Address_DETAIL" class="postcodify_details" autocomplete="off" required/>
+							<input type="text" name="user_Address_DETAIL" id="user_Address_DETAIL" class="postcodify_details" autocomplete="off" onkeyup="enterkey();" required/>
 							<label for="user_Address_DETAIL" style="color: silver;"><span>상세주소</span></label>
 						</p>
 						
@@ -86,7 +89,7 @@
 						</p>					
 					</div>
 			</div>		
-					
+					<input type="hidden" name="session_id" value="${session_id}">
 				<div class="row gtr-uniform" id="loginFrame">
 
 						<div class="col-12">
@@ -111,10 +114,14 @@
 			<script>
 			var form = document.modifyAddressForm;
 			
+				console.log("대기");
 			function modifySubmit(){
 				var zipcode = $("#user_Zipcode").val();
+				console.log(zipcode);
 				var addr = $("#user_Address").val();
+				console.log(addr);
 				var addrD = $("#user_Address_DETAIL").val();
+				console.log(addrD);
 				
 				if(zipcode != "" && addr != "" && addrD != ""){
 					form.submit();
@@ -123,6 +130,12 @@
 					return false;
 				}
 			}
+			
+			function enterkey() {
+		        if (window.event.keyCode == 13) {
+		        	modifySubmit();
+		        }
+		    }
 			</script>
 				
 	</body>

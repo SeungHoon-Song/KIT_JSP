@@ -23,26 +23,21 @@ public class UserPwModifyAction implements Action{
 		
 		ActionForward forward = null;
 		
-		System.out.println("컨트롤러 진입전");
-		System.out.println(user_Id);
-		System.out.println(user_Pw);
+
 		if(user_Id != null ) {
-			System.out.println("아이디 일치");
 				if(u_dao.modifyPw(user_Id, user_Pw)) {
-					System.out.println("비밀번호 수정 진입");
 					forward = new ActionForward();
 					session.invalidate();
 					forward.setRedirect(true);
 					forward.setPath(req.getContextPath() + "/main.us");
 					return forward;
 				} else {
-					System.out.println("비밀번호 수정 실패");
 					forward = new ActionForward();
 					forward.setRedirect(false);
 					forward.setPath(req.getContextPath()+"/mypage/MyPageInfo.us");
 				}
 		}else {
-			System.out.println("아이디 불일치");
+
 		}
 		
 	

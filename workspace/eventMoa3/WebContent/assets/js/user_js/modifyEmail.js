@@ -1,24 +1,21 @@
  /* 이메일 인증번호 요청 */
  function EmailCheck(){
-    var email = $("input[name='user_Email").val();
-    alert('잠시만 기다려주세요. 인증번호 전송 요청중입니다.');
- 
-    email_Check = false;
+    var email = $("input[name='new_Email").val();
+    document.getElementById('email_verify').readOnly = false;   
     if(email == "" ) {
        alert('이메일을 입력하세요.');
-    } else {
-       console.log('들어옴');
+      } else {
+      alert('잠시만 기다려주세요. 인증번호 전송 요청중입니다.');
+      console.log('js ajax email = '+email);
        $.ajax({
           url: contextPath + "/user/verifyCheckEmail.us?email=" + email,
           type: "GET",
           dataType: "text",
           success: function(result){
              if(result.trim() == "ok") {
-                email_Check = true;
                 EmailCheck2();
              } else {
                 alert('이미 가입된 이메일 입니다.');
-                email_Check = false;
              }
           },
           error: function(){
@@ -30,8 +27,8 @@
     /* 인증번호 7자리 */
     var code = "";
     var verify ="";
-    function EmailCheck(){
-       var email = $("input[name='user_Email").val();
+    function EmailCheck2(){
+       var email = $("input[name='new_Email").val();
        var inputVerify = $("#email_verify");
       //  var inputVerifyBox = $(".mail_verify_input_box");
 
@@ -45,7 +42,6 @@
             inputVerify.attr("disabled", false);
             // inputVerifyBox.attr("id", "mail_verify_input_box_true");
             code = result;
-            email_Check = true;
             
          },
          error: function(){
@@ -65,7 +61,7 @@
        if(verify != code ) {
             verify_Check = false;
             alert('인증번호가 틀렸습니다!');
-            joinForm.email_verify.focus();
+            modifyEmailForm.email_verify.focus();
          } else {
             verify_Check = true;
             alert('인증에 성공 하였습니다.');

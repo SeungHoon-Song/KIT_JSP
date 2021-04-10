@@ -38,24 +38,19 @@ public class UserAddressModifyAction implements Action{
 		u_vo.setUser_Address_Etc(user_Address_Etc);
 		u_vo.setUser_Id(user_Id);
 		
-		System.out.println("컨트롤러 진입전");
 		if(user_Id != null) {
-			System.out.println("아이디 일치");
 			if(u_dao.modifyUserAddress(u_vo)) {
-				out.println("주소 수정 성공");
 				forward = new ActionForward();
 				session.invalidate();
 				forward.setRedirect(true);
 				forward.setPath(req.getContextPath() + "/main.us");
 				return forward;
 			}else {
-				out.println("주소 수정 실패");
 				forward = new ActionForward();
 				forward.setRedirect(false);
 				forward.setPath(req.getContextPath()+"/mypage/MyPageInfo.us");
 			}
 		}else {
-			System.out.println("아이디 불일치");
 		}
 		out.close();
 	

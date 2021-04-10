@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.eventmoa.action.Action;
 import com.eventmoa.action.ActionForward;
@@ -16,32 +17,31 @@ public class UserNameModifyAction implements Action{
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html;charset=utf-8");
 		
-		
-		String user_Id = (String) req.getAttribute("user_Id");
-		String user_Name = null;
-		
+		HttpSession session = req.getSession();
+		String new_Name = req.getParameter("user_Name");
+		String userId = req.getParameter("session_id");
 		UserDAO dao = new UserDAO();
-		
-		if(req.getParameter("user_Name") != null ) {
-			user_Name = req.getParameter("user_Name");
-			if(dao.getUserName(user_Id)) {
-				String temp = dao.modifyUserName(user_Name);
-				PrintWriter out = resp.getWriter();
-				out.println("<script>");
-				out.println("alert('성공적으로 이름 ["+temp+"] 으로 변경 하였습니다. 다시 로그인 해주세요.');");
-				out.println(" location.href = '/main.us'; ");
-				out.println("</script>");
-				out.close();
-			}
+		ActionForward forward = null;
+		PrintWriter out = resp.getWriter();
+		if(new_Name != null ) {
+				if(dao.modifyUserName(userId, new_Name)) {
+					forward = new ActionForward();
+					session.setAttribute("user_Name", new_Name);
+					forward.setRedirect(false);
+					out.println("<script>");
+					out.println("alert('이름 변경 성공하였습니다.'); "
+							+ "location.href = '/user/mypage/MyPageInfo.us'; ");
+					out.println("</script>");
+					out.close();
+				} 
 		} else {
-			PrintWriter out = resp.getWriter();
 			out.println("<script>");
-			out.println("alert('이름 변경이 실패 하였습니다. 잠시 후 다시 시도해주세요.');"
-					+ "history.back();");
+			out.println("alert('죄송합니다. 이름 변경에 실패하였습니다. \n"
+					+ "잠시 후 다시 시도해주세요.');"
+					+ "location.href = '/user/mypage/MyPageInfo.us'; ");
 			out.println("</script>");
 			out.close();
 		}
-		
 	
 		
 		

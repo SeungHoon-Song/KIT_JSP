@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.eventmoa.action.Action;
 import com.eventmoa.action.ActionForward;
@@ -24,7 +25,8 @@ public class UserAddressModifyAction implements Action{
 		UserDAO u_dao = new UserDAO();
 		ActionForward forward = new ActionForward();
 		
-		String user_Id = (String) req.getAttribute("user_Id");
+		HttpSession session = req.getSession();
+		String user_Id = req.getParameter("session_id");
 		String user_Zipcode = req.getParameter("user_Zipcode");
 		String user_Address = req.getParameter("user_Address");
 		String user_Address_DETAIL = req.getParameter("user_Address_DETAIL");
@@ -34,18 +36,30 @@ public class UserAddressModifyAction implements Action{
 		u_vo.setUser_Address(user_Address);
 		u_vo.setUser_Address_DETAIL(user_Address_DETAIL);
 		u_vo.setUser_Address_Etc(user_Address_Etc);
+		u_vo.setUser_Id(user_Id);
 		
-		
-		if(u_dao.getUserAddress(user_Id)) {
-			System.out.println("아이디 일치");
+		if(user_Id != null) {
 			if(u_dao.modifyUserAddress(u_vo)) {
-				out.println("주소 수정 성공");
-			}else {
-				out.println("주소 수정 실패");
-			}
-		}else {
-			System.out.println("아이디 불일치");
-		}
+				forward = new ActionForward();
+				session.setAttribute("user_Zipcode", user_Zipcode);
+				session.setAttribute("user_Address", user_Address);
+				session.setAttribute("user_AddressEtc", user_Address_Etc);
+				session.setAttribute("user_AddressDETAIL", user_Address_DETAIL);
+				forward.setRedirect(false);
+				out.println("<script>");
+				out.println("alert('주소 변경을 성공하였습니다.'); "
+						+ "location.href = '/user/mypage/MyPageInfo.us'; ");
+				out.println("</script>");
+				out.close();
+			} 
+	} else {
+		out.println("<script>");
+		out.println("alert('죄송합니다. 주소 변경에 실패하였습니다. \n"
+				+ "잠시 후 다시 시도해주세요.');"
+				+ "location.href = '/user/mypage/MyPageInfo.us'; ");
+		out.println("</script>");
+		out.close();
+	}
 		out.close();
 	
 		

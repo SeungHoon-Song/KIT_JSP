@@ -109,9 +109,11 @@
 							<input type="password" name="user_Pw2" id="user_Pw2" autocomplete="off" required/>
 							<label for="user_Pw2" style="color: silver;"><span>새 비밀번호 확인</span></label>
 							<i toggle="#user_Pw2" id="eyeIcon" class="fa fa-fw fa-eye field-icon toggle-password"></i>
+							<span id="pwCheck_text"><br></span>
 						</p>						
 					</div>
 			</div>		
+			<input type="hidden" name="session_id" value="${session_id}">
 					
 				<div class="row gtr-uniform" id="loginFrame">
 
@@ -159,7 +161,6 @@
 			<script>
 			var form = document.modifyPwForm;
 			
-			console.log("대기");
 			function modifySubmit(){
 				var password = $("#user_Pw").val();
 				console.log(password);
@@ -167,12 +168,102 @@
 				console.log(password2);
 				
 				if(password == password2){
-					form.submit();
+					if(pw_Check){
+						form.submit();
+					}
 				}else{
 					alert('새 비밀번호가 같지 않습니다.');
 					return false;
 				}
 			}
+			</script>
+			
+			<script>
+			   /* 비밀번호 유효성 검사 */
+		    function ValidationPw(pw) {
+		       var session_id = "${session_id}";
+				console.log(session_id);
+		       pw_Check = false;
+		       
+					if(pw == ""){
+		            $('#pwCheck_text').html('');
+		            $("input[id='user_Pw").css("margin-top", "0%");
+		         }
+		         else if ($('#user_Pw').val().length < 8) { 
+		            $('#pwCheck_text').attr('color', '#f82a2aa3');
+		            $('#pwCheck_text').html('❌비밀번호를 8자이상 입력해주세요.');
+		            modifyPwForm.user_Pw.focus();
+		         } 
+		         else if (pw == session_id) {
+		            $("input[id='user_Pw").css("margin-top", "12%");
+		            $('#pwCheck_text').attr('color', '#f82a2aa3');
+		            $('#pwCheck_text').html('❌ 아이디와 비밀번호가 동일 합니다.');
+		            modifyPwForm.user_Pw.focus();
+		         }  
+		         else {
+		            pw_Check = false;
+		            //8자리 이상, 대문자/소문자/숫자/특수문자 모두 포함되어 있는 지 검사
+		                  var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		                  var hangleCheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+		                  
+		               if(!reg.test(modifyPwForm.user_Pw.value)){
+		                     $("input[id='user_Pw").css("margin-top", "12%");
+		                    $('#pwCheck_text').html("❌ 비밀번호는 8자리 이상이어야 하며, 대문자/소문자/숫자/특수문자 모두 포함해야 합니다.");
+		                    modifyPwForm.user_Pw.focus();
+		                  return false;
+		               }
+		               
+		               //같은 문자를 4번 이상 사용할 수 없다.
+		               else if(/(\w)\1\1\1/.test(modifyPwForm.user_Pw.value)){
+		                  //같은 문자가 4개 이상 있다면 
+		                  $("input[id='user_Pw").css("margin-top", "5%");
+		                    $('#pwCheck_text').html("❌ 같은 문자를 4번 이상 사용할 수 없습니다.");
+		                    joinForm.user_Pw.focus();
+		                  return false;
+		               }
+		               
+		               //비밀번호에 아이디가 포함되어 있을 수 없다.
+		               else if(modifyPwForm.user_Pw.value.search(modifyPwForm.session_id.value) > -1){
+		                  //-1은 아이디가 비밀번호에 없는 뜻. 
+		                  //따라서 -1이 아닐때(아이디를 비밀번호에서 찾았을 때) 들어옴
+		                  
+		                  $("input[id='user_Pw").css("margin-top", "5%");
+		                    $('#pwCheck_text').html("❌ 비밀번호에 아이디를 포함할 수 없습니다.");
+		                    modifyPwForm.user_Pw.focus();
+		                  return false;
+		               }
+		               //한글
+		               else if(hangleCheck.test(modifyPwForm.user_Pw.value)){
+		                  //정규식 조건에 맞으면
+		                  $("input[id='user_Pw").css("margin-top", "5%");
+		                    $('#pwCheck_text').html("❌ 비밀번호에 한글을 사용할 수 없습니다.");
+		                    modifyPwForm.user_Pw.focus();
+		                  return false;
+		               }
+		               //비밀번호에 공백을 포함할 수 없다.
+		               else if(modifyPwForm.user_Pw.value.search(/\s/) != -1){
+		                  //비밀번호에서 공백을 찾았다면
+		                  $("input[id='user_Pw").css("margin-top", "5%");
+		                  $('#pwCheck_text').html("❌ 비밀번호에 공백 없이 입력해주세요.");
+		                  modifyPwForm.user_Pw.focus();
+		                  return false;
+		               }
+		            
+		               else {
+		                  $("input[id='user_Pw").css("margin-top", "10%");
+		                  $('#pwCheck_text').html('✔확인');
+		                  $('#pwCheck_text').attr('color', '#00CC00');
+		                  pw_Check = true;
+		               }
+		             
+		               
+		         }
+		      }	
+
+		   $("input[name='user_Pw']").keyup(function(event){
+		      var pw = $("input[name='user_Pw']").val();
+		      ValidationPw(pw);
+		   });
 			</script>
 			
 			

@@ -1,0 +1,355 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Brush+Script&display=swap');
+
+/*
+ KING KI HOON BOARD FORM CSS
+ */
+
+.tagManager {
+	height: 4rem;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(244, 244, 250);
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+}
+
+.tagNav {
+	width: 1024px;
+	display: flex;
+	height: 100%;
+	font-size: 13px;
+}
+
+.tagNav-div1 {
+	height: 100%;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	margin-right: 2rem;
+}
+
+.tagNav-div1::after {
+	content: "";
+	width: 1px;
+	height: 14px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: rgb(210, 210, 210);
+	margin-left: 2rem;
+	}
+.tagNav-div1 .tagNav-div-a {
+	color: rgb(255, 80, 88);
+}
+	
+.tagNav-div-a {
+	padding-top: 0.5rem;
+	font-size: 13px;
+}
+
+	
+a {
+	color: rgb(33, 33, 33);
+	text-decoration-line: none;
+	text-decoration-style: initial;
+	text-decoration-color: initial;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.tagNav-div2 {
+	height: 100%;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	margin-right: 2rem;
+}
+.tagNav-div2::after {
+	content: "";
+	width: 1px;
+	height: 14px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: rgb(210, 210, 210);
+	margin-left: 2rem;
+	}
+*, ::before, ::after {
+	box-sizing: border-box;
+	}
+
+/* mainManager */
+.mainManager {
+	background-image: initial;
+	background-position-x: initial;
+	background-position-y: initial;
+	background-size: initial;
+	background-attachment: initial;
+	background-origin: initial;
+	background-clip: initial;
+	background-color: rgb(255, 255, 255);
+	font-size: 16px;
+}
+
+.mainClass {
+	display: block;
+	margin-top: auto;
+}
+.mainManager section {
+	display: block;
+}
+.mainSection{
+	margin-bottom: 3rem;
+}
+
+.mainManager section h2 {
+	height: 100px;
+	font-size: 26px !important;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(30, 29, 41);
+	color: black;
+}
+.mainManager section h2 > span {
+	color: rgb(255, 80, 88);
+	font-size: 1rem;
+	margin-left: 2rem;
+}
+
+.ulSection {
+	padding-top: 0.5rem;
+	}
+.mainManager section ol, .mainManager section ul {
+	list-style-type: none;
+	list-style-position: initial;
+	list-style-image: initial;
+}
+
+.liSection {
+	width: 100%;
+	display: flex;
+	padding-top: 2rem;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-bottom: 5%;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(220, 219, 228);
+}
+
+.imgDiv{
+	font-size: 18px;
+}
+.imgDiv > small {
+	color: rgb(155, 153, 169);
+	margin-left: 0.25rem;
+	font-size: 12px;
+}
+.imgDiv > span {
+	color: rgb(255, 80, 88);
+}
+.sc-div {
+	flex-grow: 1 1 0%;
+	flex: 1 1 0%;
+}
+.imgDiv2-ul{
+	display: flex;
+	flex-wrap: wrap;
+	overflow-x: hidden;
+}
+.imgDiv2-li{
+	width: 202px;
+    height: 202px;
+    position: relative;
+    border: 1px solid rgb(230, 229, 239);
+    background: rgb(250, 250, 253);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-direction: column;
+    color: rgb(155, 153, 169);
+    font-size: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+/* .imgDiv2 input{
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 0px;
+} */
+
+.guideText {
+	margin-top: 1.5rem;
+    color: rgb(74, 164, 255);
+    line-height: 1.5;
+    font-size: 14px;
+}
+.sc-div img {
+	height: 200px;
+	width: 200px;
+}
+
+.leaderImg {
+	position: absolute;
+    height: 1.5rem;
+    padding: 0px 0.5rem;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    top: 0.5rem;
+    left: 0.5rem;
+    background-color: rgba(30, 29, 41, 0.32);
+    color: rgb(255, 255, 255);
+    border-radius: 12px;
+    font-size: 12px;
+	display:none;
+}
+.deleteImg {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDEyIDEyIj4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTYuODQ4IDZsMy43NzYtMy43NzZhLjYuNiAwIDEgMC0uODQ4LS44NDhMNiA1LjE1IDIuMjI0IDEuMzc2YS42LjYgMCAwIDAtLjg0OC44NDhMNS4xNTIgNiAxLjM3NiA5Ljc3NWEuNi42IDAgMSAwIC44NDguODQ5TDYgNi44NDhsMy43NzYgMy43NzZhLjU5OC41OTggMCAwIDAgMS4wMjQtLjQyNS42LjYgMCAwIDAtLjE3Ni0uNDI0TDYuODQ4IDZ6IiBvcGFjaXR5PSIuNjQiLz4KPC9zdmc+Cg==);
+    background-color: rgba(30, 29, 41, 0.32);
+    border-radius: 50%;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+	float:right;
+    cursor:pointer;
+
+
+
+}
+
+/* 
+.imgDiv2-li::before {
+	content: "";
+	background-position-x: center;
+	background-position-y: center;
+	background-size: cover;
+	width: 2rem;
+	height: 2rem;
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…A1IDAgMCAwLTQuOCA0LjhjMCAyLjY0NyAyLjE1MyA0LjggNC44IDQuOHoiLz4KPC9zdmc+Cg==");
+	margin-bottom: 1rem;
+} */
+
+.imgdiv2-li span {
+	font-size: small; color: red; font-family:sans-serif;
+}
+
+#image_container img {
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+
+.titleDiv {
+	font-size: 18px;
+	width: 10%;
+}
+div > span {
+	color: rgb(255, 80, 88);
+	font-size: 12px;
+	vertical-align: top;
+}
+
+.titleDiv2-a{
+	width: 100%;
+	-webkit-box-align: center;
+	align-items: center;
+}
+.titleDiv2-b {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	width: 80%;
+}
+ 
+
+/* #datepicker1, #datepicker2{
+	width: 30% ;
+	
+	cursor: pointer;
+} */
+
+
+.titleDiv2-c {
+	margin-left: 1.5rem;
+	font-size: 1rem;
+	text-align: right;
+}
+.contentDiv{
+	width: 10%;
+}
+.contentDiv2{
+	width: 80%;
+
+}
+
+.locationDiv {
+	width: 10%;
+	font-size: 18px;
+	padding-top: 14px;
+}
+.locationBtn {
+	width: 80%;
+}
+
+/* #dayText, #dayText2 {
+	margin-left: 10%;
+}
+#mola {
+	margin-left: 11%;
+} */
+/*datepicer 버튼 롤오버 시 손가락 모양 표시*/
+.ui-datepicker-trigger{cursor: pointer;}
+/*datepicer input 롤오버 시 손가락 모양 표시*/
+.hasDatepicker{cursor: pointer;}
+
+
+.double {
+	display: flex;
+	width: 30rem;
+}
+
+@media screen and (max-width: 660px){
+
+	.imgDiv {
+		width: 10%;
+	}
+
+	.titleDiv2-b {
+		width: 100%;
+	}
+	.contentDiv2 {
+		width: 100%;
+	}
+
+	.locationDiv {
+		width: 15%;
+	}
+	.locationBtn {
+		width: 100%;
+	}
+	
+	.double {
+		width: 100%;
+		display: block;
+	}
+	/* #datepicker1, #datepicker2{
+		width: 100%;
+	}	 */
+}
+ 
