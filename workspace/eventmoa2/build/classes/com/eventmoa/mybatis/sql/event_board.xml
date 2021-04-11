@@ -2,8 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- alias  freeTalk_boardVO -->
 <mapper namespace="EventBoard">
- 
-</mapper>
+<!-- 메인 페이지 -->
+  <select id="listAll" parameterType="map" resultType="eventBoardVO">
+ 	SELECT * FROM 
+			(SELECT ROWNUM R, D.* FROM 
+				(SELECT * FROM TABLE_BOARD_EVENT ORDER BY BOARD_NUM DESC) D) B
+		WHERE B.R BETWEEN #{startRow} AND #{endRow}
+	</select>
+ </mapper>
 
 
 

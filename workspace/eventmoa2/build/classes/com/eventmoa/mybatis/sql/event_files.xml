@@ -4,7 +4,7 @@
 <!-- alias freeTalk_filesVO-->
 
 <mapper namespace="EventFiles">
-	<insert id="insertFile" parameterType="event_filesVO">
+	<insert id="insertFile" parameterType="eventFilesVO">
 		INSERT INTO TABLE_FILES VALUES(#{fileName}, #{boardNum})
 	</insert>
  

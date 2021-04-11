@@ -63,14 +63,15 @@
 	}
 
 	.container a {
-		font-size: 11px;
+		font-size: 13px;
 		margin: 0 auto;
 	}
 	.container img {
-		margin-right: 5px;
-		height: 40%;
-		float: left;
-		margin-top: 10%;
+		height: 65%;
+    	float: left;
+    	margin-top: 6px;
+    	margin-right: -12px;
+    	margin-left: 4px;
 	}
 
 	
@@ -160,11 +161,13 @@
 		</c:if>
 		</span>
 	 </div>
-	<div class="button small main" style="display: flex;">
+	<div class="button small main" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
+		<img src="${pageContext.request.contextPath}/images/sidebar/main.png" style="width: auto;
+		display: block;"> 
 		<a href="${pageContext.request.contextPath}/main.us">메인</a>
 	</div>
 	<hr style="margin: 1em 0;">
-	<div class="button small alpha" style="display: flex;">
+	<div class="button small alpha" style="display: flex; margin-left: 3px; box-shadow: none;">
 		  <img src="${pageContext.request.contextPath}/images/sidebar/login.png" style="width: auto;
 		    display: block;"> 
 		 <c:if test="${userStatus eq false}">
@@ -176,7 +179,7 @@
 			 로그아웃</a>
 		</c:if>
 	</div>
-	<div class="button small bravo" style="display: flex;">
+	<div class="button small bravo" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
 		<img src="${pageContext.request.contextPath}/images/sidebar/add-user.png" style="width: auto;
 		display: block;"> 
 		<c:if test="${userStatus eq false}">
@@ -189,7 +192,7 @@
 		</c:if>
 	</div>
     <hr style="margin: 1em 0;">
-	<div class="button small charlie" style="display: flex;">
+	<div class="button small charlie" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
 		<img src="${pageContext.request.contextPath}/images/sidebar/event.png" style="width: auto;
 		display: block;"> 
 		<a href="${pageContext.request.contextPath}/Event/nowEvent.jsp">
@@ -197,10 +200,10 @@
 		</a>
 	</div>
     <hr style="margin: 1em 0;">
-	<div class="button small delta" style="display: flex;">
+	<div class="button small delta" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
 		<img src="${pageContext.request.contextPath}/images/sidebar/board.png" style="width: auto;
 		display: block;"> 
-		<a href="${pageContext.request.contextPath}/community/freeTalk.jsp">
+		<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo">
 		　자유게시판
 		</a>
 	</div>

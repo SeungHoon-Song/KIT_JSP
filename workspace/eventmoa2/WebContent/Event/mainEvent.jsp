@@ -27,26 +27,24 @@
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
 	
 <section id="" class="wrapper special">
-						<h2>메인 이벤트</h2>
+						<h1 style="font-family: 'Jua'; font-size: 22px;">메인 이벤트</h1>
+						<a href="${pageContext.request.contextPath}/eventboard/EventWriter.ev" class="button">이벤트 등록하러 가기!!</a>
 						<p></p>
 						<ul class="faces">
 							<li>
-							<a href="nowEvent.jsp" >
-								<span class="image"><img src="${pageContext.request.contextPath}/images/pic06.jpg" alt="" /></span>
-								<h3>진행 이벤트</h3> 
+							<a href="${pageContext.request.contextPath}/eventboard/EventBoardList.ev" >
+								<span class="image" style="width: 60%; margin: 0 auto;"><img src="${pageContext.request.contextPath}/images/present.jpg" alt="" style="border-radius: 0%;"/></span>
 							</a>
 							</li>
 							<li>
-							<a href="futureEvent.jsp">
-								<span class="image"><img src="${pageContext.request.contextPath}/images/pic07.jpg" alt=""/></span>
-								<h3>예정 이벤트</h3>
+							<a href="${pageContext.request.contextPath}/Event/futureEvent.jsp">
+								<span class="image" style="width: 60%; margin: 0 auto;"><img src="${pageContext.request.contextPath}/images/future.jpg" alt="" style="border-radius: 0%;"/></span>
 								
 							</a>
 							</li>
 							<li>
-							<a href="pastEvent.jsp">
-								<span class="image"><img src="${pageContext.request.contextPath}/images/pic05.jpg" alt="" /></span>
-								<h3>종료 이벤트</h3>
+							<a href="${pageContext.request.contextPath}/Event/pastEvent.jsp">
+								<span class="image" style="width: 60%; margin: 0 auto;"><img src="${pageContext.request.contextPath}/images/past.jpg" alt="" style="border-radius: 0%;"/></span>
 								
 							</a>
 							</li>
