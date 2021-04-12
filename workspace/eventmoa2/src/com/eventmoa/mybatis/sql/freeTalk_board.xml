@@ -26,24 +26,29 @@
 		WHERE BOARD_NUM = #{board_Num}
 	</update>
 	
+	<select id="getDetail" parameterType="_int" resultType="freeBoardVO">
+		SELECT * FROM TABLE_BOARD_freeTalk 
+		WHERE BOARD_NUM = #{board_Num}
+	</select>
+	
+	<update id="updateBoard" parameterType="freeBoardVO">
+		UPDATE TABLE_BOARD_freeTalk 
+		SET BOARD_TITLE = #{board_Title}, BOARD_CONTENT = #{board_Content} 
+		WHERE BOARD_NUM = #{board_Num}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="_int">
+		DELETE FROM TABLE_BOARD_freeTalk 
+		WHERE BOARD_NUM = #{board_Num}
+	</delete>
+	
+	
 	<!-- 보류 -->
 	<select id="getBoardNum" resultType="_int">
 		SELECT BOARD_SEQ_freeTalk.CURRVAL FROM DUAL
 	</select>
  
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

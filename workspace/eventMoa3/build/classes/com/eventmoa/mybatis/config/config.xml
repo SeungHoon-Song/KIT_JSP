@@ -5,13 +5,12 @@
 	<typeAliases>
 		<typeAlias type="com.eventmoa.app.user.vo.UserVO" alias="userVO"/>
 		<typeAlias type="com.eventmoa.app.user.vo.PointVO" alias="point_boardVO"/>
-		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeBoardVO" alias="freeTalk_boardVO"/>
-		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeFilesVO" alias="freeTalk_filesVO"/>
-		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeReplyVO" alias="freeTalk_replyVO"/>
-		<typeAlias type="com.eventmoa.app.eventboard.vo.EventBoardVO" alias="event_boardVO"/>
-		<typeAlias type="com.eventmoa.app.eventboard.vo.EventFilesVO" alias="event_filesVO"/>
-		<typeAlias type="com.eventmoa.app.eventboard.vo.EventReplyVO" alias="event_replyVO"/>
-		<typeAlias type="com.eventmoa.app.eventboard.vo.EventBoardVO" alias="eventboardVO"/>
+		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeBoardVO" alias="freeBoardVO"/>
+		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeFilesVO" alias="freeFilesVO"/>
+		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeReplyVO" alias="freeReplyVO"/>
+		<typeAlias type="com.eventmoa.app.eventboard.vo.EventBoardVO" alias="eventBoardVO"/>
+		<typeAlias type="com.eventmoa.app.eventboard.vo.EventFilesVO" alias="eventFilesVO"/>
+		<typeAlias type="com.eventmoa.app.eventboard.vo.EventReplyVO" alias="eventReplyVO"/>
 		
 	</typeAliases>
 	<environments default="development">
@@ -31,6 +30,7 @@
 		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_board.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_files.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/event_board.xml"/>
+		<mapper resource="com/eventmoa/mybatis/sql/event_files.xml"/>
 		
 	</mappers>
 </configuration>

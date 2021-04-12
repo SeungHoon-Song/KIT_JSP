@@ -1,15 +1,10 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic");
-@media screen and (max-width: 589px) {
-		#title { 
-			display: none;	
-		}
-		
-		}
+
 .pmobi_glist ul li {
     float: left;
-    width: 30%;
-     padding: 1%;
+    width: 49%;
+     /* padding: 1%; */
     margin: 0 0.5% 1% 0.5%;
     border: 1px solid #e6e6e6;
     background: #ffffff;
@@ -20,6 +15,7 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+	padding-left: 0;
 }
 		
 ul,ol,li{
@@ -110,4 +106,47 @@ dl{
 	text-align : center;
 	margin : auto;
 }
+ 
 
+/* 이미지 조정  */
+#eventList a > img {
+	height: 25rem;
+}
+.wrapper { 
+	padding: 0px !important;
+}
+@media screen and (max-width: 1280px) {
+	.wrapper {
+		padding: 0;
+		margin: 0%;
+	}
+}
+
+/* 아이폰 8 414px 사이즈  */
+/* 이미지 깨지기 전 사이즈  */
+@media screen and (max-width: 910px) {
+	.wrapper {
+		padding: 0;
+		margin: 0%;
+	}
+	#eventList a > img {
+		height: 100%;
+		padding: 0;
+	}
+	#title { 
+		display: none;
+		font-size: 20px;
+		font-family: 'jua';	
+	}
+	.pmobi_glist ul li {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	.pmobi_glist ul {
+		padding: 0;
+		margin: 0;
+		margin-left: 0px;
+	}
+	
+}

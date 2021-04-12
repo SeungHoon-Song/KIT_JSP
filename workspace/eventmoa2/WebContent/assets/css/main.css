@@ -4047,7 +4047,7 @@ input, select, textarea {
 				list-style: none;
 				padding: 0;
 				margin: 0;
-			    margin-left: 20%;
+				text-align: right;
 			}
 
 				#header > nav > ul > li {
@@ -4594,7 +4594,7 @@ input, select, textarea {
 				top: 0.5em;
 				width: 3.5em;
 			}
-
+/* navPanel */
 		@media screen and (max-width: 980px) {
 
 			#navButton {

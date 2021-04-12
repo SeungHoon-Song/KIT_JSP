@@ -5,7 +5,7 @@
 
 <mapper namespace="EventFiles">
 	<insert id="insertFile" parameterType="eventFilesVO">
-		INSERT INTO TABLE_FILES VALUES(#{fileName}, #{boardNum})
+		INSERT INTO TABLE_FILES_EVENT VALUES(#{file_Name}, #{board_Num})
 	</insert>
  
 </mapper>

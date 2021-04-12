@@ -16,9 +16,21 @@
 			inline-size: auto;
 		}
 		.fa-search {
-			width: 100%;	
+			width: 100%;
+			margin-top: 5%;	
+		}
+		#searchIcon{ 
+			display: none;
+		}
+		#searchIcon2{
+			display: block;
 		}
 		
+	}
+	@media screen and (min-width: 376px) {
+		#searchIcon2{
+			display: none;
+		}
 	}
 	</style>
 </head>
@@ -46,8 +58,11 @@
                 </select>
 				<input type="search" class="searchTerm" placeholder="검색어를 입력하세요"
 				style="border-radius: initial; height: 39px;">
-				<a href="${pageContext.request.contextPath}/searchViewPage.jsp" class="button primary icon solid fa-search"
+				<a href="${pageContext.request.contextPath}/searchViewPage.jsp" id="searchIcon" 
+				class="button primary icon solid fa-search"
 				style="border-radius: initial;"> Search</a>
+				<a href="${pageContext.request.contextPath}/searchViewPage.jsp" id="searchIcon2"
+				class="fas fa-search"></a>
 			</div>
 	</form>
 	<br>

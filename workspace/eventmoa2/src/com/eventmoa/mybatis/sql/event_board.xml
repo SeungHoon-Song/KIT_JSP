@@ -9,19 +9,22 @@
 				(SELECT * FROM TABLE_BOARD_EVENT ORDER BY BOARD_NUM DESC) D) B
 		WHERE B.R BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertEventBoard" parameterType="eventBoardVO">
+	INSERT INTO TABLE_BOARD_EVENT 
+	(BOARD_NUM, BOARD_TITLE, BOARD_CONTENT, BOARD_ID, BOARD_DATE, FILE_NAME, 
+	EVT_START_DT, EVT_END_DT, BOARD_ZIPCODE, BOARD_ADDRESS, BOARD_ADDRESS_DETAIL, 
+	BOARD_ADDRESS_ETC) 
+	VALUES (BOARD_SEQ_EVENT.NEXTVAL, #{board_Title}, #{board_Content}, #{board_Id}, 
+	SYSDATE, #{file_name}, to_date(#{EVT_START_DT}, 'yyyy-mm-dd hh24:mi'), 
+	to_date(#{EVT_END_DT}, 'yyyy-mm-dd hh24:mi'), #{board_Zipcode}, 
+	#{board_Address}, #{board_Address_Detail}, #{board_Address_etc})
+	</insert>
+	
+	<select id="getBoardNum" resultType="_int">
+	SELECT BOARD_SEQ_EVENT.CURRVAL FROM DUAL
+	</select>
+	
  </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

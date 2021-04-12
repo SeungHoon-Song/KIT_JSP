@@ -45,7 +45,7 @@ public class FreeBoardListOkAction implements Action{
 		req.setAttribute("boardList", f_dao.getBoardList(startRow, endRow));
 		
 		forward.setRedirect(false);
-		forward.setPath("/community/freeTalkView.jsp");
+		forward.setPath("/community/freeTalkList.jsp");
 		
 		return forward;
 	}

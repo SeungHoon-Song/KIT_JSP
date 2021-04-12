@@ -58,7 +58,7 @@
 	</update>
 	
 	<delete id="deleteBoard" parameterType="_int">
-		DELETE TABLE_BOARD 
+		DELETE FROM TABLE_BOARD 
 		WHERE BOARDNUM = #{boardNum}
 	</delete>
 	

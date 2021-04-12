@@ -30,6 +30,7 @@
 		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_board.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_files.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/event_board.xml"/>
+		<mapper resource="com/eventmoa/mybatis/sql/event_files.xml"/>
 		
 	</mappers>
 </configuration>

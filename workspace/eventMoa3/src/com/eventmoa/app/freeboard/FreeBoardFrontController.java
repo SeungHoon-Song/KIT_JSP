@@ -15,13 +15,12 @@ public class FreeBoardFrontController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doProcess(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		doProcess(req, resp);
 	}
 	
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,6 +41,41 @@ public class FreeBoardFrontController extends HttpServlet {
 		case "/freeboard/FreeBoardWriteOk.bo":
 			try {
 				forward = new FreeBoardWriteOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/freeboard/FreeBoardView.bo":
+			try {
+				forward = new FreeBoardViewAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/freeboard/FreeBoardModify.bo":
+			try {
+				forward = new FreeBoardModifyAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/freeboard/FreeBoardModifyOk.bo":
+			try {
+				forward = new FreeBoardModifyOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/freeboard/FreeBoardDeleteOk.bo":
+			try {
+				forward = new FreeBoardDeleteOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/FileDownload.bo":
+			try {
+				forward = new FileDownloadAction().execute(req, resp);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

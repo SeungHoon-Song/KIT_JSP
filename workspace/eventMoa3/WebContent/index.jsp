@@ -170,7 +170,7 @@
 
 		
 			
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014e09a77678170402c5f935f0a72af"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6cdc63540559ff9bbde7b39a1878ce94&libraries=services,clusterer,drawing"></script>
 <script>
    //이미지 슬라이더
    $(".slider").slick({
@@ -192,17 +192,52 @@
 </script>
 
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = { 
-	        center: new kakao.maps.LatLng(37.50006529736203, 127.03547036224), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };
-	
-	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	var userPosition = "";
+	var positions = new Array();
+	var pageContext = "${pageContext.request.contextPath}";
+	var geocoder = new kakao.maps.services.Geocoder();
 	
 	if(navigator.geolocation){
+	//회원정보 중 지도를 통해 위도경도 불러와서
+	//카카오맵에 마커 표시
+		$.ajax({
+			url : pageContext + "/map/getAddress.map",
+			dataType : "text",
+			success : function(address){
+				// 주소로 좌표를 검색합니다
+				geocoder.addressSearch(address, function(result, status) {
+
+				    // 정상적으로 검색이 완료됐으면 
+				     if (status === kakao.maps.services.Status.OK) {
+				        userPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
+				        console.log(userPosition.La);
+				        console.log(userPosition.Ma);
+						var mapContainer = document.getElementById('map')
+					    mapOption = { 
+					        center: new kakao.maps.LatLng(userPosition.Ma, userPosition.La), // 지도의 중심좌표
+					        level: 3 // 지도의 확대 레벨
+					    };
+						var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+						// 마커가 표시될 위치입니다 
+
+ 						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+						    position: userPosition
+						});
+
+						// 마커가 지도 위에 표시되도록 설정합니다
+						marker.setMap(map);
+				     } 
+				});
+			}
+		});
+	}else {
+ 		var locPosition = new kakao.maps.LatLng(37.50006529736203, 127.03547036224),
+		message = 'geolocation을 사용할 수 없습니다..'
 		
-	    navigator.geolocation.getCurrentPosition(function(position) {
+		displayMaker(locPosition, message);
+	}
+/* 	    navigator.geolocation.getCurrentPosition(function(position) {
 
 	        var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
@@ -212,19 +247,13 @@
         
         // 마커와 인포윈도우를 표시합니다
         displayMarker(locPosition, message);
-		});
-	} else {
-		var locPosition = new kakao.maps.LatLng(37.50006529736203, 127.03547036224),
-		message = 'geolocation을 사용할 수 없습니다..'
-		
-		displayMaker(locPosition, message);
-	}
+		}); */
 	
-	function displayMaker(locPosition, message) {
+/* 	function displayMaker(locPosition, message) {
 		
 		var marker = new kakao.maps.Marker({
 			map: map,
-			position: locPosition
+			position: coords
 		});
 		
 		var iwContent = message, 
@@ -239,8 +268,8 @@
 	
 		map.setCenter(locPosition);
 		
-	}
-	var positions = [
+	} */
+/* 	var positions = [
     {
         content: '<div>코리아IT학원 강남점</div>', 
         latlng: new kakao.maps.LatLng(37.50006529736203, 127.03547036224)
@@ -257,9 +286,9 @@
         content: '<div>코리아IT학원 부산점</div>',
         latlng: new kakao.maps.LatLng(35.35733616857707, 128.98044293168113)
     }
-];
+]; */
 
-for (var i = 0; i < positions.length; i ++) {
+/* for (var i = 0; i < positions.length; i ++) {
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
@@ -273,10 +302,10 @@ for (var i = 0; i < positions.length; i ++) {
 
     kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
     kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-}
+} */
 
 // 인포윈도우를 표시하는 클로저를 만드는 함수
-function makeOverListener(map, marker, infowindow) {
+/* function makeOverListener(map, marker, infowindow) {
     return function() {
         infowindow.open(map, marker);
     };
@@ -286,7 +315,7 @@ function makeOutListener(infowindow) {
     return function() {
         infowindow.close();
     };
-}
+} */
 </script>
 	</body>
 </html>

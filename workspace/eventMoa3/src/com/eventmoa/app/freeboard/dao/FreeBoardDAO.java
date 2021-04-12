@@ -27,15 +27,34 @@ public class FreeBoardDAO {
 		return session.selectList("FreeBoard.listAll", pageMap);
 	}
 	
-	//게시물 갯수
+	//게시글 갯수
 	public int getBoardCnt() {
 		return session.selectOne("FreeBoard.getBoardCnt");
 	}
 	
+	//게시글 조회수
+	public void updateBoardView(int board_Num){
+		session.update("FreeBoard.updateBoardView", board_Num);
+	}
 	
 	//게시글 작성
-	public boolean insertFreeBoard(FreeBoardVO f_vo) {
-		return session.insert("FreeBoard.insertFreeBoard", f_vo) == 1;
+	public boolean insertBoard(FreeBoardVO f_vo) {
+		return session.insert("FreeBoard.insertBoard", f_vo) == 1;
+	}
+	
+	//게시글 가져오기
+	public FreeBoardVO getDetail(int board_Num) {
+		return session.selectOne("FreeBoard.getDetail", board_Num);
+	}
+	
+	//게시글 수정
+	public void updateBoard(FreeBoardVO f_vo) {
+		session.update("FreeBoard.updateBoard", f_vo);
+	}
+		
+	//게시글 삭제
+	public void deleteBoard(int board_Num) {
+		session.delete("FreeBoard.deleteBoard", board_Num);
 	}
 	
 	//번호 가져오기 (시퀀스)

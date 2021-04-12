@@ -148,5 +148,14 @@
 		function addBoard(){
 			freeBoardform.submit();
 		}
+		
+		function cancleFile(fileTagName){
+			if($.browser.msie){//ie일 때
+				//첨부파일 업로드 전의 태그를 복사해 놓고, 초기화 시 복사된 태그를 덮어 씌워준다.
+				$("input[name='" + fileTagName + "']").replaceWith($("input[name='" + fileTagName + "']").clone(true));
+			}else{//그 외 브라우저
+				$("input[name='" + fileTagName + "']").val("");
+			}
+		}
 	</script>
 </html>

@@ -46,7 +46,7 @@
 	
 	}
 	
-		@media screen and (max-width: 1240px) {
+		@media screen and (max-width: 1300px) {
 			#STATICMENU {
 			display:none;
 			}
@@ -132,6 +132,7 @@
 	.user {
 		text-align: center;
 	}
+ 
 	
 	</style>
 
@@ -203,7 +204,7 @@
 	<div class="button small delta" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
 		<img src="${pageContext.request.contextPath}/images/sidebar/board.png" style="width: auto;
 		display: block;"> 
-		<a href="${pageContext.request.contextPath}/community/freeTalk.jsp">
+		<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo">
 		　자유게시판
 		</a>
 	</div>

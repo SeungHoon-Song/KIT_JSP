@@ -23,7 +23,6 @@ public class BoardViewOKAction implements Action{
 		ActionForward forward =null;
 		int boardNum =Integer.parseInt(req.getParameter("boardNum"));
 		int page = Integer.parseInt(req.getParameter("page"));
-		e_vo= e_dao.getDetail(boardNum);
 		
 		
 		
