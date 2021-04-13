@@ -73,9 +73,43 @@ public class FreeBoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
-		case "/board/FileDownload.bo":
+		case "/freeboard/FileDownload.bo":
 			try {
 				forward = new FileDownloadAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/freeboard/FreeBoardWrite.bo":
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			req.setAttribute("page", req.getParameter("page"));
+			forward.setPath("/community/freeTalkWrite.jsp");
+			break;
+		case "/freeboard/FreeBoardReplyOk.bo":
+			try {
+				forward = new FreeBoardReplyOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/freeboard/FreeBoardReplyList.bo":
+			try {
+				forward = new FreeBoardReplyListAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/freeboard/FreeBoardReplyDeleteOk.bo":
+			try {
+				forward = new FreeBoardReplyDeleteOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/freeboard/FreeBoardReplyModifyOk.bo":
+			try {
+				forward = new FreeBoardReplyModifyOkAction().execute(req, resp);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

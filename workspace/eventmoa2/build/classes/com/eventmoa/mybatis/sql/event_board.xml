@@ -27,4 +27,15 @@
 	SELECT BOARD_SEQ_EVENT.CURRVAL FROM DUAL
 	</select>
 	
+	<select id="getDetail" parameterType="_int" resultType="eventBoardVO">
+	SELECT * FROM TABLE_BOARD_EVENT 
+	WHERE BOARD_NUM = #{board_Num}
+	</select>
+	
+	<update id="updateReadCount" parameterType="_int">
+		UPDATE TABLE_BOARD_EVENT 
+		SET BOARD_VIEW = BOARD_VIEW + 1 
+		WHERE BOARD_NUM = #{board_Num}
+	</update>
+	
  </mapper>

@@ -11,6 +11,7 @@ import com.eventmoa.app.freeboard.dao.FreeBoardDAO;
 import com.eventmoa.app.freeboard.dao.FreeboardFilesDAO;
 import com.eventmoa.app.freeboard.vo.FreeBoardVO;
 import com.eventmoa.app.freeboard.vo.FreeFilesVO;
+import com.eventmoa.app.freeboard.vo.FreeReplyVO;
 
 public class FreeBoardViewAction implements Action {
 	@Override
@@ -29,11 +30,11 @@ public class FreeBoardViewAction implements Action {
 		f_vo = f_dao.getDetail(board_Num);
 		
 		List<FreeFilesVO> fileList = ff_dao.getFileList(board_Num);
-		//List<BoardReplyVO> replyList = r_dao.getReplyList(boardNum); 댓글 수정
+		List<FreeReplyVO> replyList = r_dao.getReplyList(board_Num);
 		
 		if(f_vo != null) {
 			f_dao.updateBoardView(board_Num);
-			//req.setAttribute("replies", replyList); 댓글 수정
+			req.setAttribute("replies", replyList);
 			req.setAttribute("f_vo", f_vo);
 			req.setAttribute("page", page);
 			if(fileList != null) {

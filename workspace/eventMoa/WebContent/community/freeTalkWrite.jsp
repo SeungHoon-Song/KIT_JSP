@@ -46,7 +46,7 @@
 	<c:if test="${session_id eq null}">
 			<script>
 			   alert("로그인 후 이용해주세요");
-			   location.replace("${pageContext.request.contextPath}/main.us");
+			   location.replace("${pageContext.request.contextPath}/user/UserLogin.us");
 			</script>
 	</c:if>
 		<!-- Header -->
@@ -62,7 +62,7 @@
 		<!-- FreeTalk -->
 		<section id="banner">
 			<article class="column col4">
-				<h2 class="col_tit" style="text-align: left; color: black;">자유게시판 글쓰기</h2>
+				<h2 class="col_tit" style="text-align: left; color: black;">인증후기 글쓰기</h2>
 				<p class="col_desc"> </p>
 		
 						<form method="post" action="${pageContext.request.contextPath}/freeboard/FreeBoardWriteOk.bo" class="combined" name="freeBoardform" enctype="multipart/form-data" style="margin-bottom: 0;">
