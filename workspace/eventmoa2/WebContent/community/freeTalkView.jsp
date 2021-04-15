@@ -79,7 +79,7 @@
 					</tr>
 				</c:if>
 			</table>
-			<a href="/community/freeTalkWrite.jsp"><div class="button primary small" id="recommand" style="float: right;">👍추천</div></a>
+				<a href="/community/freeTalkWrite.jsp"><div class="button primary small" id="recommand" style="float: right;">👍추천</div></a>
 			<form name="boardForm" method="post" style="margin-bottom: 20px;" action="${pageContext.request.contextPath}/freeboard/FreeBoardDeleteOk.bo">
 				<input type="hidden" name="board_Num" value="${f_vo.getBoard_Num()}">
 				<input type="hidden" name="page" value="${page}">
@@ -218,11 +218,6 @@
 					getList();
 				}
 			});
-		}
-		
-		//추천
-		function updateBoardLikes(board_Num){
-			
 		}
 		
 		</script>

@@ -37,6 +37,7 @@
    <select id="findName" parameterType="string" resultType="string">
       SELECT USER_NAME FROM TABLE_USER WHERE USER_ID = #{user_Id}
    </select>
+   
    <select id="findEmail" parameterType="string" resultType="string">
       SELECT USER_EMAIL FROM TABLE_USER WHERE USER_ID = #{user_Id}
    </select>
@@ -44,18 +45,24 @@
    <select id="findZipcode" parameterType="string" resultType="string">
    	SELECT USER_ZIPCODE FROM TABLE_USER WHERE USER_ID = #{user_Id}
    </select>
+   
    <select id="findAddress" parameterType="string" resultType="string">
    	SELECT USER_ADDRESS FROM TABLE_USER WHERE USER_ID = #{user_Id}
    </select>
+   
    <select id="findAddressEtc" parameterType="string" resultType="string">
    	SELECT USER_ADDRESS_ETC FROM TABLE_USER WHERE USER_ID = #{user_Id}
    </select>
+   
    <select id="findAddressDETAIL" parameterType="string" resultType="string">
    	SELECT USER_ADDRESS_DETAIL FROM TABLE_USER WHERE USER_ID = #{user_Id}
    </select>
+   
    <select id="findAddressAll" parameterType="string" resultType="string">
    	SELECT USER_ZIPCODE, USER_ADDRESS, USER_ADDRESS_DETAIL, USER_ADDRESS_ETC FROM TABLE_USER WHERE USER_ID = #{user_Id}
    </select>
+   
+   
    
    <!-- 유저 이름 변경 -->
    <update id="modifyName" parameterType="map">
@@ -77,9 +84,24 @@
    <update id="modifyPw" parameterType="map">
    	UPDATE TABLE_USER SET USER_PW = #{user_Pw} WHERE USER_ID = #{user_Id}
    </update>
-      <!-- 이메일 변경 -->
+   
+    <!-- 이메일 변경 -->
    <update id="modifyEmail" parameterType="map">
       UPDATE TABLE_USER SET USER_EMAIL = #{new_Email} 
       WHERE USER_ID = #{user_Id} AND USER_EMAIL = #{user_Email}
    </update>
+   
+   <!-- 내가 쓴 글 -->
+	<select id="listAll" parameterType="map" resultType="freeBoardVO">
+		SELECT * FROM 
+			(SELECT ROWNUM R, D.* FROM 
+				(SELECT * FROM TABLE_BOARD_freeTalk ORDER BY BOARD_NUM DESC) D) B 
+		WHERE B.R BETWEEN #{startRow} AND #{endRow} AND BOARD_ID = #{board_Id}
+	</select>
+	
+	<select id="getBoardCnt" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM TABLE_BOARD_freeTalk WHERE BOARD_ID = #{board_Id}
+	</select>
+
+   <!-- 내가 쓴 댓글 -->
 </mapper>

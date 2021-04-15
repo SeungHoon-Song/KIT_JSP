@@ -63,7 +63,7 @@
 				<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
 				
 						<div class="login_message">
-							<h1>둘둘 치킨</h1>
+							<h1>${titleName}</h1>
 							<br>
 						</div>
 					<!-- 이미지 슬라이드 -->
@@ -71,25 +71,25 @@
 						<div>
 							<figure>
 								<!-- 파일 네임  -->
-								<img src="${pageContext.request.contextPath}/app/eventFilesUpload/파일네임받아오기" alt="이미지1">
+								<img src="${pageContext.request.contextPath}/app/eventFilesUpload/이미지이름받아오기" alt="이미지1">
 								<figcaption><em> SNS • 배너 광고 디자인 </em><span> #페이스북 #인스타그램 </span></figcaption>
 							</figure>
 						</div>
 						<div>
 							<figure>
-								<img src="${pageContext.request.contextPath}/images/ad/ad2.jpg" alt="이미지2">
+								<img src="${pageContext.request.contextPath}/app/eventFilesUpload/ad2.jpg" alt="이미지2">
 								<figcaption><em> 카울리 인사이트 </em><span> 광고 소재 제작 Tip</span></figcaption>
 							</figure>
 						</div>
 						<div>
 							<figure>
-								<img src="${pageContext.request.contextPath}/images/ad/ad3.jpg" alt="이미지3">
+								<img src="${pageContext.request.contextPath}/app/eventFilesUpload/ad3.jpg" alt="이미지3">
 								<figcaption><em> CROLO </em><span>  배너 디자인 이제 AI에게 맡기세요. </span></figcaption>
 							</figure>
 						</div>
 						<div>
 							<figure>
-								<img src="${pageContext.request.contextPath}/images/ad/ad4.jpg" alt="이미지4">
+								<img src="${pageContext.request.contextPath}/app/eventFilesUpload/ad4.jpg" alt="이미지4">
 								<figcaption><em> Banner Template </em><span> Plan Your ...</span></figcaption>
 							</figure>
 						</div>

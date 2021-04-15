@@ -32,10 +32,44 @@
 	WHERE BOARD_NUM = #{board_Num}
 	</select>
 	
+	<select id="getBoardCnt" resultType="_int">
+		SELECT COUNT(*) FROM TABLE_BOARD_EVENT
+	</select>
+	
+	
 	<update id="updateReadCount" parameterType="_int">
 		UPDATE TABLE_BOARD_EVENT 
 		SET BOARD_VIEW = BOARD_VIEW + 1 
 		WHERE BOARD_NUM = #{board_Num}
 	</update>
 	
+	<update id="updateLikeCount" parameterType="_int">
+		UPDATE TABLE_BOARD_EVENT 
+		SET BOARD_LIKE = BOARD_LIKE + 1 
+		WHERE BOARD_NUM = #{board_Num}
+	</update>
+	
+	
+	<!-- SELECT AREA -->
+	<select id="searchList" resultType="eventBoardVO">
+		SELECT * FROM TABLE_BOARD_EVENT WHERE 1 = 1
+		<if test="areaType != null and areaType != ''">
+			AND BOARD_ADDRESS LIKE '#{col}'
+		</if>
+		<if test="searchType != null and searchType != ''">
+			AND BOARD_CONTENT LIKE '#{keyword}%' 
+			OR BOARD_TITLE LIKE '#{keyword}%' 
+			OR BOARD_ADDRESS LIKE '#{keyword}%'
+		</if>
+	</select>
+	
+	<!-- 댓글-->
+	<select id="getReplyList" parameterType="_int" resultType="eventReplyVO">
+		SELECT * FROM TABLE_REPLY_EVENT WHERE BOARD_NUM = #{board_Num} ORDER BY REPLY_NUM DESC
+	</select>
+	
+	<insert id="insertReply" parameterType="eventReplyVO">
+		INSERT INTO TABLE_REPLY_EVENT 
+		VALUES (REPLY_SEQ_EVENT.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content})
+	</insert>
  </mapper>

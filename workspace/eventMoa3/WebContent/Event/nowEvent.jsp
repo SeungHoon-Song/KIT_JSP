@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 	<head>
@@ -53,24 +55,26 @@
 		<jsp:include page="${pageContext.request.contextPath}/searchBar.jsp"></jsp:include>
 	
 
-	<section id="" class="wrapper special">
+	<section class="wrapper special">
 		<div class="pmobi_glist">
 			<div class="detailnfo,showstep1">
 				<div class= ""> 
 		 			<div class="content">
 						<ul id="eventList">
+							
 						</ul>	
 					</div>
 				</div>
 			</div>
 		</div>
 		<a href="#" class="btn_open">더보기</a>
-		<!-- <a href="#" class="btn_close hide">감추기</a> -->
-</section>
+		
+	</section>
 </div>
 	<!-- Footer -->
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
 	</body>
+	
 	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script>
 		var page=1;
@@ -93,8 +97,9 @@
 		 				check=true;
 		 			}
 		 			for(let i=0; i<eventArray.length;i++){
-		 				content+="<li><a href=''><img src='${pageContext.request.contextPath}/app/eventFilesUpload/"+eventArray[i].file_name+"'onerror='noimage(this)'>";
-		 				content+="<dl><dd class='#'>"+eventArray[i].board_Title+"</dd></dl><dl><dd class='#'>"+eventArray[i].board_Address+"</dd></dl></a></li>";
+		 				content+="<li><a href='${pageContext.request.contextPath}/eventboard/EventBoardView.ev?boardNum='"+eventArray[i].board_Num+"'><img src='${pageContext.request.contextPath}/app/eventFilesUpload/"+eventArray[i].file_name+"'onerror='noimage(this)'>";
+		 				/* content+="<dl><dd class='#'>"+eventArray[i].board_Title+"</dd></dl><dl><dd class='#'>"+eventArray[i].board_Address+"</dd></dl></a></li>"; */
+		 				content+="</a></li>";
 		 			}
 		 			
 		 			ul.append(content);

@@ -26,10 +26,12 @@ public class EventBoardVO {
 	private String board_Address;
 	private String board_Address_Detail;
 	private String board_Address_etc;
+	private int board_Like;
 	private String EVT_START_DT; 
 	private String EVT_END_DT;
 	private String file_name;
-		
+	private String board_CallNumber;
+	private String board_PhoneNumber;
 	
 	public EventBoardVO() {;}
 
@@ -112,6 +114,14 @@ public class EventBoardVO {
 	public void setBoard_Address_etc(String board_Address_etc) {
 		this.board_Address_etc = board_Address_etc;
 	}
+	
+	public int getBoard_Like() {
+		return board_Like;
+	}
+
+	public void setBoard_Like(int board_Like) {
+		this.board_Like = board_Like;
+	}
 
 	public String getEVT_START_DT() {
 		return EVT_START_DT;
@@ -136,16 +146,22 @@ public class EventBoardVO {
 	public void setFile_name(String file_name) {
 		this.file_name = file_name;
 	}
+	
 
-	@Override
-	public String toString() {
-		return "EventBoardVO [board_Num=" + board_Num + ", board_Title=" + board_Title + ", board_Content="
-				+ board_Content + ", board_Id=" + board_Id + ", board_View=" + board_View + ", board_Date=" + board_Date
-				+ ", board_Zipcode=" + board_Zipcode + ", board_Address=" + board_Address + ", board_Address_Detail="
-				+ board_Address_Detail + ", board_Address_etc=" + board_Address_etc + ", EVT_START_DT=" + EVT_START_DT
-				+ ", EVT_END_DT=" + EVT_END_DT + ", file_name=" + file_name + "]";
+	public String getBoard_CallNumber() {
+		return board_CallNumber;
 	}
-	
-	
+
+	public void setBoard_CallNumber(String board_CallNumber) {
+		this.board_CallNumber = board_CallNumber;
+	}
+
+	public String getBoard_PhoneNumber() {
+		return board_PhoneNumber;
+	}
+
+	public void setBoard_PhoneNumber(String board_PhoneNumber) {
+		this.board_PhoneNumber = board_PhoneNumber;
+	}
 	
 }

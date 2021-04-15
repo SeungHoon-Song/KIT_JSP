@@ -10,7 +10,19 @@
 		<meta name="author" content="corner3499">
 		<!-- title Icon -->
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
-		
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/writeForm.css">
+		<style>
+		@media screen and (max-width: 980px){
+		ul.faces li:first-child {
+			width: 60% !important;
+   			margin: 0 auto !important;
+			}
+		ul.faces li {
+			width: 60% !important;
+   			margin: 0 auto !important;
+			}
+		}
+		</style>
 	</head>
 	
 	<body class="is-preload">
@@ -25,10 +37,20 @@
 			
 		<!-- Logo -->
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
-	
+		
+		<div class="tagManager">
+			<nav class="tagNav">
+				<div class="tagNav-div1">
+					<a class="tagNav-div-a" href="${pageContext.request.contextPath}/eventboard/EventWriter.ev">이벤트등록</a>
+				</div>
+				<div class="tagNav-div2">
+					<a class="tagNav-div-a" href="${pageContext.request.contextPath}/eventboard/EventWriter.ev">이벤트관리</a>
+				</div>
+			</nav>
+		</div>
+		
 <section id="" class="wrapper special">
 						<h1 style="font-family: 'Jua'; font-size: 22px;">메인 이벤트</h1>
-						<a href="${pageContext.request.contextPath}/eventboard/EventWriter.ev" class="button">이벤트 등록하러 가기!!</a>
 						<p></p>
 						<ul class="faces">
 							<li>

@@ -38,7 +38,7 @@ public class EventBoardListOKAction implements Action {
 		List<EventBoardVO> events= e_dao.getBoardList(startRow, endRow);
 		for(EventBoardVO board:events) {
 			JSONObject jsonObj=new JSONObject();
-			
+			 
 //			jsonObj.put("board_Num", board.getBoard_Num());
 			jsonObj.put("board_Title",board.getBoard_Title());
 //			jsonObj.put("board_Content", board.getBoard_Content());

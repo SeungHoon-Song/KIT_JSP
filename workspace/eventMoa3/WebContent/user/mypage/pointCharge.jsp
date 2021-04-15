@@ -81,12 +81,11 @@
 							<ul class="zpayGBlist">
 								<li class="zpayGBarotest">
 									<span class="zGDpoint">- 이용가능한 콘텐츠</span>
-										 : 이벤트 등록 가능 / 추가 예정 / <br>
-										 <span style="display: block; padding-left:114px;"> 이벤트 등록 / 기간 연장 / 상단 노출</span>	
+										 : 이벤트 등록 / 기간 연장 / 상단 <br>
 								</li>
 								<li class="zpayGVD">
 									<span class="zGDpoint">- 포인트 이용 유의사항</span>
-										 : 수정 예정 / <br>			
+										 : 수정 예정/ <br>			
 								</li>
 								<li class="zpayGVD">
 									<span class="zGDpoint">- 포인트 가격 할인 및 적립</span>

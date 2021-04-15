@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.eventmoa.app.freeboard.vo.FreeBoardVO;
+import com.eventmoa.app.freeboard.vo.FreeReplyVO;
 import com.eventmoa.mybatis.config.SqlMapConfig;
 
 public class FreeBoardDAO {
@@ -25,6 +26,26 @@ public class FreeBoardDAO {
 		pageMap.put("endRow", endRow);
 		
 		return session.selectList("FreeBoard.listAll", pageMap);
+	}
+	
+	//게시글 목록 조회순
+	public List<FreeBoardVO> getBoardListView(int startRow, int endRow) {
+		HashMap<String, Integer> pageMap = new HashMap<>();
+		
+		pageMap.put("startRow", startRow);
+		pageMap.put("endRow", endRow);
+		
+		return session.selectList("FreeBoard.listView", pageMap);
+	}
+	
+	//게시글 목록 추천순
+	public List<FreeBoardVO> getBoardListLikes(int startRow, int endRow) {
+		HashMap<String, Integer> pageMap = new HashMap<>();
+		
+		pageMap.put("startRow", startRow);
+		pageMap.put("endRow", endRow);
+		
+		return session.selectList("FreeBoard.listLikes", pageMap);
 	}
 	
 	//게시글 갯수
@@ -60,5 +81,28 @@ public class FreeBoardDAO {
 	//번호 가져오기 (시퀀스)
 	public int getBoardNum() {
 		return session.selectOne("FreeBoard.getBoardNum");
+	}
+	
+	//댓글
+	
+	//댓글 추가
+	public boolean insertReply(FreeReplyVO r_vo) {
+		return session.insert("FreeBoard.insertReply", r_vo) == 1;
+	}
+	
+	//댓글 목록
+	public List<FreeReplyVO> getReplyList(int board_Num){
+		return session.selectList("FreeBoard.getReplyList", board_Num);
+	}
+	
+	//댓글 삭제
+	public boolean deleteReply(int reply_Num) {
+		return session.delete("FreeBoard.deleteReply", reply_Num) == 1;
+	}
+	
+	//댓글 수정
+	public boolean updateReply(FreeReplyVO r_vo) {
+		System.out.println("수정 다오");
+		return session.update("FreeBoard.updateReply", r_vo) == 1;
 	}
 }

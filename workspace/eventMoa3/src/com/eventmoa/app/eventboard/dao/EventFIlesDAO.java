@@ -3,6 +3,7 @@ package com.eventmoa.app.eventboard.dao;
 
 
 import java.util.Enumeration;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -43,6 +44,10 @@ public class EventFIlesDAO {
 		}
 		
 		return check;
+	}
+	
+	public List<EventFilesVO> getFileList(int board_Num) {
+		return session.selectList("EventFiles.getFileList", board_Num);
 	}
 	
 	

@@ -28,6 +28,26 @@ public class FreeBoardDAO {
 		return session.selectList("FreeBoard.listAll", pageMap);
 	}
 	
+	//게시글 목록 조회순
+	public List<FreeBoardVO> getBoardListView(int startRow, int endRow) {
+		HashMap<String, Integer> pageMap = new HashMap<>();
+		
+		pageMap.put("startRow", startRow);
+		pageMap.put("endRow", endRow);
+		
+		return session.selectList("FreeBoard.listView", pageMap);
+	}
+	
+	//게시글 목록 추천순
+	public List<FreeBoardVO> getBoardListLikes(int startRow, int endRow) {
+		HashMap<String, Integer> pageMap = new HashMap<>();
+		
+		pageMap.put("startRow", startRow);
+		pageMap.put("endRow", endRow);
+		
+		return session.selectList("FreeBoard.listLikes", pageMap);
+	}
+	
 	//게시글 갯수
 	public int getBoardCnt() {
 		return session.selectOne("FreeBoard.getBoardCnt");
@@ -63,12 +83,8 @@ public class FreeBoardDAO {
 		return session.selectOne("FreeBoard.getBoardNum");
 	}
 	
-	//추천
-	public void updateBoardLikes(int board_Num) {
-		session.update("FreeBoard.updateBoardLikes", board_Num);
-	}
-	
 	//댓글
+	
 	//댓글 추가
 	public boolean insertReply(FreeReplyVO r_vo) {
 		return session.insert("FreeBoard.insertReply", r_vo) == 1;

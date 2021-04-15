@@ -32,6 +32,7 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
+	background-color: white !important;
 }
 
 ol, ul {
@@ -4079,8 +4080,8 @@ input, select, textarea {
 					#header > nav > ul > li.active a {
 					
 						/* color: #5e5e5e; */
-						color: black;
-						font-weight: 600;
+						/* color: black; */
+						/* font-weight: 600; */
 						position: relative;
 					}
 
@@ -4123,6 +4124,7 @@ input, select, textarea {
 			box-shadow: none;
 			height: 8em;
 			position: absolute;
+			/* background-color: #97c8e5; */
 		}
 
 			#header.alt > .logo {

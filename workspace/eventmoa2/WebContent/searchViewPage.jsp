@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--
 전체 검색 view 페이지 입니다. 
 
 -->
 <html>
 	<head>
-		<title>"검색키워드" | 이벤트 모아 (Event Moa)</title>
+		<title>이벤트 모아 (Event Moa)</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
 		<meta name="author" content="corner3499">
@@ -17,6 +19,15 @@
 	
 	<body class="is-preload">
 
+ 	  <c:set var="eventList" value="${EventBoardList}"/>
+ 	  <c:set var="freeList" value="${FreeBoardList}"/>
+      <c:set var="totalCnt" value="${totalCnt}"/>
+      <c:set var="startPage" value="${startPage}"/>
+      <c:set var="endPage" value="${endPage}"/>
+      <c:set var="nowPage" value="${nowPage}"/>
+      <c:set var="realEndPage" value="${realEndPage}"/>
+      <c:set var="keyword" value="${keyword}"/>
+	  <c:set var="category" value="${cateogry}"/>
 		<!-- Header -->
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
 		<p></p>
@@ -30,73 +41,107 @@
 			<section id="banner">
 				<article class="column col4">
 					<article class="column col5">
-						<h4 class="col_tit"> "키워드" 전체 검색 결과</h4>
-						<p class="col_desc"> "키워드"에 대한 내용 결과 입니다.</p>
+						<h4 class="col_tit"> 
+						지역 - 
+						<c:if test="${category ne null}">
+							"${category}" 
+						</c:if>
+						전체 검색 결과
+						</h4>
+						<p class="col_desc"> "${keyword}"에 대한 내용 결과 입니다.</p>
 					</article>
 									<table>
 										<tbody>
 											<tr>
 												<td height="30" bgcolor="#f8f8fd" style="padding-left:20px" class="black_b_s">
 													검색하신 "
-													<b><font color="f75151">키워드</font></b>
-													"에 대한 검색 결과가 없습니다.  </td>
+													<b><font color="f75151">${keyword}</font></b>
+													"에 대한 검색 결과가
 													<!-- if 있으면 "결과 입니다." -->
-												</tr>
-											</tbody>
-										</table>
-										<form method="post" action="#" style="margin-bottom: 30%;">
-											<select name="category" class="button primary icon solid fa-search" id="category" 
-											style="font-size: 10px; width: 10%; padding: 0;">
-													<option value="recent">등록일순</option>
-													<option value="view">조회순</option>
-													<option value="likes">추천순</option>
-												</select>
-										 
-												<div class="table-wrapper">
-													<table class="alt">
+													<%-- <choose>
+														<c:when test="searchType != null and searchType != ''">
+														있습니다.
+														</c:when>
+														<otherwise>
+														없습니다.
+														</otherwise>
+													</choose> --%>
+													 </td>
+													 <table class="alt">
 														<thead>
 															<tr>
-																<th>추천</th>
+																<th>글 번호</th>
 																<th style="text-align: center;">제목</th>
 																<th>닉네임</th>
 																<th>조회수</th>
 																<th>날짜</th>
 															</tr>
 														</thead>
-														<tbody>
+														<tbody id="boardList">
+															<c:choose>
+															<c:when test="${freeList != null and fn:length(freeList) > 0}">
+	               												<c:forEach var="f_bean" items="${freeList}">
 															<tr>
-																<td>0</td>
-																<td>안녕하세요</td>
-																<td>corner </td>
-																<td>1</td>
-																<td>17:43</td>
+															<td>
+															${f_bean.getBoard_Num()}
+															</td>
+																	<td>
+																<a href="${pageContext.request.contextPath}/freeboard/FreeBoardView.bo?board_Num=${f_bean.getBoard_Num()}&page=${nowPage}">
+																	${f_bean.getBoard_Title()}
+																</a>
+																	
+																	</td>
+																<td>${f_bean.getBoard_Id()}</td>
+																<td>${f_bean.getBoard_View()}</td>
+																<td>${f_bean.getBoard_Date()}</td>
 															</tr>
-															<tr>
-																<td>0</td>
-																<td>안녕하세요</td>
-																<td>corner </td>
-																<td>1</td>
-																<td>03-26</td>
-															</tr>
-														</tbody>
-													</table>
+																</c:forEach>
+															</c:when>
+															<c:otherwise>
+													           	<tr>
+													           		<td colspan="6" align="center">등록된 게시물이 없습니다.</td>
+													           	</tr>
+												           </c:otherwise>
+															</c:choose>
+												</tr>
+												
+											</tbody>
+										</table>
+										<div style="margin-bottom: 20%;"> 
+											<select name="category" class="button primary icon solid fa-search" id="category" 
+											style="font-size: 10px; width: 15%;">
+													<option value="recent">등록일순</option>
+													<option value="view">조회순</option>
+													<option value="likes">추천순</option>
+												</select>
+										 
+												<div class="table-wrapper">
 													
-													
-													 
-												</div>
-								</form>
-										<div id="two" style="text-align: center; vertical-align: middle; ">
-												  <div class="button primary small" style="width: 15%;">
-													 <a href="${pageContext.request.contextPath}/">이전</a>
-													 </div>
-												  <div class="button primary small" style="width: 5%;">
-															 <!-- 페이지 수 --> 
-															 <a href="${pageContext.request.contextPath}/">1</a>
-												   </div>
-												   <div class="button primary small" style="width: 15%;">
-													 <a href="${pageContext.request.contextPath}/">다음</a>
-												   </div>
+										<div id="two" style="text-align: center; vertical-align: middle; margin-bottom: 20%;">
+											<c:if test="${nowPage >1}">
+												<a href="${pageContext.request.contextPath}/search/search.us?page=${nowPage - 1}">&lt;이전</a>
+											</c:if>
+											<c:forEach var="i" begin="${startPage}" end="${endPage}">
+												<c:choose>
+													<c:when test="${i eq nowPage}">
+													<a style="border: solid 1px;border-color: darkgray; background-color: #fff; color: #72bee1; margin: 0 2px; padding-left: 4px;">${i}&nbsp;</a>
+													</c:when>
+													<c:otherwise>
+														<a href="${pageContext.request.contextPath}/search/search.us?page=${i}" style="margin: 0 2px;">${i}&nbsp;</a>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+												<c:if test="${realEndPage != nowPage}">
+													<a href="${pageContext.request.contextPath}/search/search.us?page=${nowPage + 1}">다음&gt;</a>
+												</c:if>
+											<br>
+										  <a href="${pageContext.request.contextPath}/community/freeTalkWrite.jsp"><div class="button primary small" style="float: right;">글쓰기✍</div></a>								         
 										</div>
+											<hr>
+													</table>
+												</div>			
+										</div>	 
+										
 							</article>
 						</section>
 				
@@ -133,4 +178,10 @@
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
 			
 	</body>
+	<script>var contextPath = "${pageContext.request.contextPath}";</script>
+	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script>
+		 
+
+	</script>
 </html>

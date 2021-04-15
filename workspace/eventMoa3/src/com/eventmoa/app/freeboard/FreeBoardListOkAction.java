@@ -43,6 +43,9 @@ public class FreeBoardListOkAction implements Action{
 		req.setAttribute("nowPage", page);
 		req.setAttribute("realEndPage", realEndPage);
 		req.setAttribute("boardList", f_dao.getBoardList(startRow, endRow));
+		req.setAttribute("boardListView", f_dao.getBoardListView(startRow, endRow));
+		req.setAttribute("boardListLikes", f_dao.getBoardListLikes(startRow, endRow));
+		
 		
 		forward.setRedirect(false);
 		forward.setPath("/community/freeTalkList.jsp");
