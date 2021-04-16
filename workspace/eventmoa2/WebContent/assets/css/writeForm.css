@@ -44,7 +44,6 @@
 }
 	
 .tagNav-div-a {
-	padding-top: 0.5rem;
 	font-size: 13px;
 }
 
@@ -184,7 +183,7 @@ a {
     font-size: 1rem;
     margin-right: 1rem;
     margin-bottom: 1rem;
-	cursor: pointer;
+	/* cursor: pointer; */
 }
 /* 이미지  */
 .sc-div img {

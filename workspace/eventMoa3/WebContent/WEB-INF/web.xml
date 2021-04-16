@@ -9,8 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <!-- Map -->
-    <servlet>
+  <servlet>
     <servlet-name>EventMapFrontController</servlet-name>
     <servlet-class>com.eventmoa.app.map.EventMapFrontController</servlet-class>
   </servlet>
@@ -18,7 +17,6 @@
     <servlet-name>EventMapFrontController</servlet-name>
     <url-pattern>*.map</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>UserFrontController</servlet-name>
     <servlet-class>com.eventmoa.app.user.UserFrontController</servlet-class>

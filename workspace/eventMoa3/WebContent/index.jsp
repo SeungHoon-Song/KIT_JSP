@@ -231,81 +231,83 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014e09a77678170402c5f935f0a72af&libraries=services,clusterer,drawing"></script>
 	<script>
-		//이미지 슬라이더
-		$(".slider").slick({
-			dots : true,
-			autoplay : true,
-			autoplaySpeed : 3000,
-			arrows : true,
-			responsive : [ {
-				breakpoint : 768,
-				settings : {
-					autoplay : false,
-				}
-			} ]
-		});
-	</script>
+	 <script type="text/javascript"
+	      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6cdc63540559ff9bbde7b39a1878ce94&libraries=services,clusterer,drawing"></script>
+	   <script>
+	      //이미지 슬라이더
+	      $(".slider").slick({
+	         dots : true,
+	         autoplay : true,
+	         autoplaySpeed : 3000,
+	         arrows : true,
+	         responsive : [ {
+	            breakpoint : 768,
+	            settings : {
+	               autoplay : false,
+	            }
+	         } ]
+	      });
+	   </script>
 
-	<script>
-		var mapContainer = document.getElementById('map'); // 지도를 표시할 div
-		var eventAddressesJSON = "";
-		var pageContext = "${pageContext.request.contextPath}";
-		var geocoder = new kakao.maps.services.Geocoder();
-		var myHouse = "테스트";
-		$.ajax({
-			url : pageContext + "/map/getEventAddress.map",
-			dataType : "text",
-			success : function(addresses){
-				eventAddressesJSON = JSON.parse(addresses);
-				geocoder.addressSearch(eventAddressesJSON[0].eventAddress, function(result, status) {
-					coords = new kakao.maps.LatLng(result[0].x, result[0].y);
-					mapOption = {
-						center : new kakao.maps.LatLng(coords.La, coords.Ma), // 지도의 중심좌표
-						level : 3
-					};
-					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-					
-					var cnt = 0;
-					for(let i=0; i<eventAddressesJSON.length; i++){
-						geocoder.addressSearch(eventAddressesJSON[i].eventAddress, function(result, status) {
-							var mapObject = new Object();
-							 // 정상적으로 검색이 완료됐으면 
-							 if (status === kakao.maps.services.Status.OK) {
-								coords = new kakao.maps.LatLng(result[0].x, result[0].y);
-								//마커를 표시할 위치와 title 객체 배열입니다 
-									mapObject.title = eventAddressesJSON[cnt].eventTitle;
-									mapObject.latlng = new kakao.maps.LatLng(coords.La, coords.Ma);
-									cnt += 1;
-		
-									//마커 이미지의 이미지 주소입니다
-									var imageSrc = "";
-									if(cnt == 1){//회원의 주소일 때
-										imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-									}else{//이벤트 주소일 때
-										imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-									}
-		
-										// 마커 이미지의 이미지 크기 입니다
-										var imageSize = new kakao.maps.Size(24, 35);
-		
-										// 마커 이미지를 생성합니다    
-										
-										var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-		
-										// 마커를 생성합니다
-										var marker = new kakao.maps.Marker({
-											map : map, // 마커를 표시할 지도
-											position : mapObject.latlng, // 마커를 표시할 위치
-											title : mapObject.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-											image : markerImage
-										// 마커 이미지 
-										});
-								 }
-						});
-					}
-				});
-			}
-		});
+	   <script>
+	      var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+	      var eventAddressesJSON = "";
+	      var pageContext = "${pageContext.request.contextPath}";
+	      var geocoder = new kakao.maps.services.Geocoder();
+	      var myHouse = "테스트";
+	      $.ajax({
+	         url : pageContext + "/map/getEventAddress.map",
+	         dataType : "text",
+	         success : function(addresses){
+	            eventAddressesJSON = JSON.parse(addresses);
+	            geocoder.addressSearch(eventAddressesJSON[0].eventAddress, function(result, status) {
+	               coords = new kakao.maps.LatLng(result[0].x, result[0].y);
+	               mapOption = {
+	                  center : new kakao.maps.LatLng(coords.La, coords.Ma), // 지도의 중심좌표
+	                  level : 3
+	               };
+	               var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	               
+	               var cnt = 0;
+	               for(let i=0; i<eventAddressesJSON.length; i++){
+	                  geocoder.addressSearch(eventAddressesJSON[i].eventAddress, function(result, status) {
+	                     var mapObject = new Object();
+	                      // 정상적으로 검색이 완료됐으면 
+	                      if (status === kakao.maps.services.Status.OK) {
+	                        coords = new kakao.maps.LatLng(result[0].x, result[0].y);
+	                        //마커를 표시할 위치와 title 객체 배열입니다 
+	                           mapObject.title = eventAddressesJSON[cnt].eventTitle;
+	                           mapObject.latlng = new kakao.maps.LatLng(coords.La, coords.Ma);
+	                           cnt += 1;
+	      
+	                           //마커 이미지의 이미지 주소입니다
+	                           var imageSrc = "";
+	                           if(cnt == 1){//회원의 주소일 때
+	                              imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	                           }else{//이벤트 주소일 때
+	                              imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	                           }
+	      
+	                              // 마커 이미지의 이미지 크기 입니다
+	                              var imageSize = new kakao.maps.Size(24, 35);
+	      
+	                              // 마커 이미지를 생성합니다    
+	                              var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+	      
+	                              // 마커를 생성합니다
+	                              var marker = new kakao.maps.Marker({
+	                                 map : map, // 마커를 표시할 지도
+	                                 position : mapObject.latlng, // 마커를 표시할 위치
+	                                 title : mapObject.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+	                                 image : markerImage
+	                              // 마커 이미지 
+	                              });
+	                         }
+	                  });
+	               }
+	            });
+	         }
+	      });
 		
 	</script>
 </body>

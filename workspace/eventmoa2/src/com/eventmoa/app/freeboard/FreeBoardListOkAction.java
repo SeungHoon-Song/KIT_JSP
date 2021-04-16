@@ -19,7 +19,6 @@ public class FreeBoardListOkAction implements Action{
 		String temp = req.getParameter("page");
 		
 		int page = temp == null ? 1 : Integer.parseInt(temp);
-		System.out.println(temp);
 		
 		int boardSize = 10;
 		int pageSize = 10;

@@ -87,9 +87,13 @@ public class EventBoardFrontController extends HttpServlet{
 //				}
 //				break;
 			default:
-				forward = new ActionForward();
-				forward.setRedirect(false);
-				forward.setPath("/app/error/404.jsp");
+				try {
+					forward = new ActionForward();
+					forward.setRedirect(false);
+					forward.setPath("/app/error/404.jsp");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			
 			if(forward != null) {

@@ -32,7 +32,9 @@
 		SELECT COUNT(*) FROM TABLE_USER 
 		WHERE USER_ID = #{id} AND USER_PW = #{pw}
 	</select>
-	
+	 <select id="getFindId" parameterType="string" resultType="string">
+      SELECT USER_ID FROM TABLE_USER WHERE USER_ID = #{id}
+   </select>
   <!-- 유저 MYPAGE INFO -->
    <select id="findName" parameterType="string" resultType="string">
       SELECT USER_NAME FROM TABLE_USER WHERE USER_ID = #{user_Id}
@@ -95,7 +97,7 @@
 	<select id="listAll" parameterType="map" resultType="freeBoardVO">
 		SELECT * FROM 
 			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_freeTalk ORDER BY BOARD_NUM DESC) D) B 
+				(SELECT * FROM TABLE_BOARD_freeTalk WHERE BOARD_ID = #{board_Id} ORDER BY BOARD_NUM DESC) D) B 
 		WHERE B.R BETWEEN #{startRow} AND #{endRow} AND BOARD_ID = #{board_Id}
 	</select>
 	

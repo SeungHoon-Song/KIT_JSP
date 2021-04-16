@@ -57,6 +57,14 @@
 		<c:set var="e_vo" value="${e_vo}"/>
 		<c:set var="replies" value="${replies}"/>
 		<c:set var="files" value="${files}"/>
+		
+		<c:set var="session_id" value="${session_id}" />
+		
+		<c:set var='userStatus' value="false"></c:set>
+		<c:if test="${session_id ne null }">
+			<c:set var='userStatus' value='true' />
+		</c:if>
+	
 		<!-- sideBar -->
 <jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 		<!-- Header -->
@@ -67,6 +75,7 @@
 
 				<!-- Header -->
 				<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
+				<table>
 					<div style="margin-right: 3%;">
 						<c:if test="${e_vo.getBoard_Id() eq session_id}">
 							<a href="${pageContext.request.contextPath}/eventboard/EventBoardModify.ev?board_Num=${e_vo.getBoard_Num()}&page=${page}"><div class="button small" style="float: right;  margin-top: 2%;">수정</div></a>
@@ -74,25 +83,55 @@
 						</c:if>
 						<a href="${pageContext.request.contextPath}/eventboard/EventBoardList.ev?page=${page}"><div class="button small" style="float: right; margin-top: 2%;">목록</div></a>
 					</div>
-				
+				</table>
+				<form name="boardForm" method="post" action="${pageContext.request.contextPath}/eventboard/EventDeleteOk.ev">
+					<input type="hidden" name="board_Num" value="${e_vo.getBoard_Num()}">
+					<input type="hidden" name="page" value="${page}">
+				</form>
 
 						<div class="login_message">
 							<h1>${e_vo.getBoard_Title()}</h1>
 							<br>
+							<p style="text-align: left;">
+								DATE : <span style="color:#2f7fa6">
+									${e_vo.getBoard_Date()}
+										</span>
+								<br>
+								Writer : 
+									<span style="color: #2f7fa6;">
+										${e_vo.getBoard_Id()} 
+									</span>
+								<br>
+								
+							</p>
+							
 						</div>
 					<!-- 이미지 슬라이드 -->
-					<div class="slider" style="width:70%; margin:0 auto;">
+					<div class="slider" style="width:100%; height: 100%; margin:0 auto; margin-top: 10%;">
 						<div>
 							<figure>
 								<!-- 이미지 뿌려주기  -->
-
+								<img src='${pageContext.request.contextPath}/app/eventFilesUpload/${e_vo.getFile_name()}'>
 							</figure>
 						</div>
 					 
 					</div>
 					<p style="text-align:center">
 						<font style="font-family: 'jua'; font-size: 16px;">
-						${e_vo.getBoard_Content()}
+							<div style="margin-bottom: 10%; margin-top: 10%;">
+									<textarea name="content" id="content" class="content" onkeyup="xSize(this)" rows="30"
+											style="resize:inherit;width:100%;overflow-y:hidden" readonly>
+											${e_vo.getBoard_Content()}
+									</textarea>
+									<script>
+										function xSize(e)
+										{
+											e.style.height = '1px';
+											e.style.height = (e.scrollHeight + 12) + 'px';
+										}
+									</script>
+							</textarea>
+							</div>
 						</font>
 						<p style="text-align: center;">
 						<span style="color:#2f7fa6; font-size: 15px;">이벤트 시작 :</span><span style="color:red">${e_vo.getEVT_START_DT()}</span> ~ 
@@ -110,7 +149,11 @@
 					</div>
 					<div class="intro">
 						<article class="column col6" style="display:inline">
-							<span style="font-size:25px; display:block;">1588-8282</span>
+							<span style="font-size:25px; display:block;">
+								${e_vo.getBoard_CallNumber()} 
+							<br>
+								${e_vo.getBoard_PhoneNumber()}
+							</span>
 							<h4 class="intro-h4" style="display:inline">
 								연락처
 							</h4>
@@ -118,20 +161,25 @@
 					</div>
 					<div class="intro">
 						<article class="column col6" style="display:inline">
-							<span style="font-size:15px; display:block;">${e_vo.getBoard_Zipcode()} ${e_vo.getBoard_Address()} ${e_vo.getBoard_Address_Detail()} ${e_vo.getBoard_Address_etc()}</span>
+							<span style="font-size:15px; display:block;">${e_vo.getBoard_Zipcode()} 
+								<br>${e_vo.getBoard_Address()} 
+								<br>${e_vo.getBoard_Address_Detail()} ${e_vo.getBoard_Address_etc()}</span>
 							<h4 class="intro-h4" style="display:inline">
 								주소
 							</h4>
 						</article>
 					</div>
 				</div>
-							<!-- KAKAO MAP -->
+
+			<!-- KAKAO MAP -->
+			<c:if test="${userStatus eq true}">
 				<article class="column col4">
-					<h2 class="col_tit" style="text-align: center;"> MAP</h2>
+					<h2 class="col_tit" style="text-align: center;">MAP</h2>
 					<div id="map" style="border-radius: 10px;"></div>
 				</article>
-					 
+			</c:if>
 					 <br>
+					 
 					 <div style="margin-right: 3%;">
 						<c:if test="${e_vo.getBoard_Id() eq session_id}">
 							<a href="${pageContext.request.contextPath}/eventboard/EventBoardModify.ev?board_Num=${e_vo.getBoard_Num()}&page=${page}"><div class="button small" style="float: right;  margin-top: 2%;">수정</div></a>
@@ -139,6 +187,7 @@
 						</c:if>
 						<a href="${pageContext.request.contextPath}/eventboard/EventBoardList.ev?page=${page}"><div class="button small" style="float: right; margin-top: 2%;">목록</div></a>
 						</div>
+
 				<section style="padding:3%;">
 					<form method="post" action="#">
 						<div class="col-12">
@@ -222,35 +271,97 @@
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
 
 		
-			
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014e09a77678170402c5f935f0a72af"></script>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014e09a77678170402c5f935f0a72af&libraries=services,clusterer,drawing"></script>
 <script>
+	function deleteBoard(){
+		boardForm.submit();
+	}
 	//평점
 	$( ".star_rating a" ).click(function() {
 	    $(this).parent().children("a").removeClass("on");
 	    $(this).addClass("on").prevAll("a").addClass("on");
 	    return false;
 	});
+	</script>
 
-   //이미지 슬라이더
-   $(".slider").slick({
-       dots: true,
-       autoplay: true,
-       autoplaySpeed: 3000,
-       arrows: true,
-       responsive: [
-           {
-               breakpoint: 768,
-               settings: {
-                   autoplay: false,
-                   }
-           }
-       ]
-   });
-</script>
+	   <script>
+	      //이미지 슬라이더
+	      $(".slider").slick({
+	         dots : true,
+	         autoplay : true,
+	         autoplaySpeed : 3000,
+	         arrows : true,
+	         responsive : [ {
+	            breakpoint : 768,
+	            settings : {
+	               autoplay : false,
+	            }
+	         } ]
+	      });
+	   </script>
 
-<script>
-
-</script>
+	   <script>
+	      var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+	      var eventAddressesJSON = "";
+	      var pageContext = "${pageContext.request.contextPath}";
+	      var geocoder = new kakao.maps.services.Geocoder();
+		//   var boardNum = ${e_vo.getBoard_Num()} + "";
+	      $.ajax({
+	         url : pageContext + "/map/getEventAddress.map",
+	        //  url : pageContext + "/map/getEventMap.map",
+			// data : boardNum,
+	         dataType : "text",
+	         success : function(addresses){
+	            eventAddressesJSON = JSON.parse(addresses);
+	            geocoder.addressSearch(eventAddressesJSON[0].eventAddress, function(result, status) {
+	               coords = new kakao.maps.LatLng(result[0].x, result[0].y);
+	               mapOption = {
+	                  center : new kakao.maps.LatLng(coords.La, coords.Ma), // 지도의 중심좌표
+	                  level : 3
+	               };
+	               var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	               
+	               var cnt = 0;
+	               for(let i=0; i<eventAddressesJSON.length; i++){
+	                  geocoder.addressSearch(eventAddressesJSON[i].eventAddress, function(result, status) {
+	                     var mapObject = new Object();
+	                      // 정상적으로 검색이 완료됐으면 
+	                      if (status === kakao.maps.services.Status.OK) {
+	                        coords = new kakao.maps.LatLng(result[0].x, result[0].y);
+	                        //마커를 표시할 위치와 title 객체 배열입니다 
+	                           mapObject.title = eventAddressesJSON[cnt].eventTitle;
+	                           mapObject.latlng = new kakao.maps.LatLng(coords.La, coords.Ma);
+	                           cnt += 1;
+	      
+	                           //마커 이미지의 이미지 주소입니다
+	                           var imageSrc = "";
+	                           if(cnt == 1){//회원의 주소일 때
+	                              imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	                           }else{//이벤트 주소일 때
+	                              imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	                           }
+	      
+	                              // 마커 이미지의 이미지 크기 입니다
+	                              var imageSize = new kakao.maps.Size(24, 35);
+	      
+	                              // 마커 이미지를 생성합니다    
+	                              var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+	      
+	                              // 마커를 생성합니다
+	                              var marker = new kakao.maps.Marker({
+	                                 map : map, // 마커를 표시할 지도
+	                                 position : mapObject.latlng, // 마커를 표시할 위치
+	                                 title : mapObject.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+	                                 image : markerImage
+	                              // 마커 이미지 
+	                              });
+	                         }
+	                  });
+	               }
+	            });
+	         }
+	      });
+		
+	</script>
 </body>
 </html>

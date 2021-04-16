@@ -1,5 +1,7 @@
 package com.eventmoa.app.user;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,15 +24,29 @@ public class UserLoginOKAction implements Action{
 		
 		String id = req.getParameter("user_Id");
 		String pw = req.getParameter("user_Pw");
-		String name = u_dao.getUserName(id);
-		String email = u_dao.getUserEmail(id);
-		String zipcode = u_dao.getUserZipcode(id);
-		String address = u_dao.getUserAddress(id);
-		String etc = u_dao.getUserAddressEtc(id);
-		String detail = u_dao.getUserAddressDETAIL(id);
-		String currentPw = u_dao.getUserPw(id);
+		
+		// id먼저 확인 메소드
+		String findGetId = u_dao.getFindId(id);
+		System.out.println(findGetId);
+		if(findGetId == null || findGetId == "") {
+			PrintWriter out = resp.getWriter();
+			out.println("<script> "
+					+ "alert('없는 ID 입니다.');"
+					+ "location.href = '/user/UserLogin.us';");
+			out.println("</script>");
+			out.close();
+		}
+		
 		
 		if(u_dao.login(id, pw)) {
+			String name = u_dao.getUserName(id);
+			String email = u_dao.getUserEmail(id);
+			String zipcode = u_dao.getUserZipcode(id);
+			String address = u_dao.getUserAddress(id);
+			String etc = u_dao.getUserAddressEtc(id);
+			String detail = u_dao.getUserAddressDETAIL(id);
+			String currentPw = u_dao.getUserPw(id);
+			
 			session.setAttribute("login", "1");
 			session.setAttribute("session_id", id);
 			session.setAttribute("user_Name", name);
@@ -42,13 +58,18 @@ public class UserLoginOKAction implements Action{
 			session.setAttribute("currentPw", currentPw);
 			forward.setRedirect(true);
 			forward.setPath(req.getContextPath()+"/main.us");
+			return forward;
 		}else {
-			session.setAttribute("login", "0");
-			forward.setRedirect(false);
-			forward.setPath(req.getContextPath()+"/user/UserLogin.us?login=0");
+			PrintWriter out = resp.getWriter();
+			out.println("<script> "
+					+ "alert('로그인에 실패하셨습니다. ID와 PW를 다시 확인해주세요.');"
+					+ "location.href = '/user/UserLogin.us';");
+			out.println("</script>");
+			out.close();
 		}
 		
-		return forward;
+		return null;
+	
 		
 	}
 

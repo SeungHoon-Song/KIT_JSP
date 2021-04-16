@@ -81,7 +81,9 @@ public class EventDAO {
 		session.update("EventBoard.updateLikeCount", board_Num);
 	}
 	
-	
+	public void deleteBoard(int board_Num) {
+		session.delete("EventBoard.deleteBoard", board_Num);
+	}
 	// --------------------- 댓글 -----------------------
 	
 	// 댓글 넣기 

@@ -17,6 +17,7 @@ public class FreeBoardListOkAction implements Action{
 		ActionForward forward = new ActionForward();
 		
 		String temp = req.getParameter("page");
+		String select = req.getParameter("category"); 
 		
 		int page = temp == null ? 1 : Integer.parseInt(temp);
 		
@@ -42,9 +43,20 @@ public class FreeBoardListOkAction implements Action{
 		req.setAttribute("endPage", endPage);
 		req.setAttribute("nowPage", page);
 		req.setAttribute("realEndPage", realEndPage);
-		req.setAttribute("boardList", f_dao.getBoardList(startRow, endRow));
+		req.setAttribute("selectOption", select);
+		if(select.equals("view")) {
+			req.setAttribute("boardListView", f_dao.getBoardListView(startRow, endRow));
+		} else if(select.equals("likes")) {
+			req.setAttribute("boardListLikes", f_dao.getBoardListLikes(startRow, endRow));
+		} else {
+			req.setAttribute("boardList", f_dao.getBoardList(startRow, endRow));
+		}
+		
+		/*req.setAttribute("boardList", f_dao.getBoardList(startRow, endRow));
 		req.setAttribute("boardListView", f_dao.getBoardListView(startRow, endRow));
-		req.setAttribute("boardListLikes", f_dao.getBoardListLikes(startRow, endRow));
+		req.setAttribute("boardListLikes", f_dao.getBoardListLikes(startRow, endRow));*/
+		
+		
 		
 		
 		forward.setRedirect(false);

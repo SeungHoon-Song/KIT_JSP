@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.eventmoa.app.eventboard.vo.EventBoardVO;
+import com.eventmoa.app.eventboard.vo.EventReplyVO;
 import com.eventmoa.mybatis.config.SqlMapConfig;
 public class EventDAO {
 	public static int moreCnt= 1;
@@ -79,6 +80,21 @@ public class EventDAO {
 	public void updateLikeCount(int board_Num) {
 		session.update("EventBoard.updateLikeCount", board_Num);
 	}
+	
+	
+	// --------------------- 댓글 -----------------------
+	
+	// 댓글 넣기 
+	public boolean insertReply(EventReplyVO er_vo) {
+		return session.insert("EventBoard.insertReply", er_vo) == 1;
+	}
+	
+	// 댓글 뽑아오기
+	public List<EventReplyVO> getReplyList(int board_Num){
+		return session.selectList("EventBoard.getReplyList", board_Num);
+	}
+	
+	
 	
 }
 

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--
  
 -->
@@ -12,6 +14,7 @@
 		<meta name="author" content="corner3499">
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/map.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/writeForm.css">
 		<style>
 		.star_rating {font-size:0; letter-spacing:-4px; margin-right:5%;}
 		.star_rating a {
@@ -51,6 +54,9 @@
 	</head>
 	
 	<body class="is-preload">
+		<c:set var="e_vo" value="${e_vo}"/>
+		<c:set var="replies" value="${replies}"/>
+		<c:set var="files" value="${files}"/>
 		<!-- sideBar -->
 <jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 		<!-- Header -->
@@ -61,41 +67,37 @@
 
 				<!-- Header -->
 				<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
+					<div style="margin-right: 3%;">
+						<c:if test="${e_vo.getBoard_Id() eq session_id}">
+							<a href="${pageContext.request.contextPath}/eventboard/EventBoardModify.ev?board_Num=${e_vo.getBoard_Num()}&page=${page}"><div class="button small" style="float: right;  margin-top: 2%;">수정</div></a>
+							<a href="javascript:deleteBoard()"><div class="button small" style="float: right; margin-top: 2%;">삭제</div></a>
+						</c:if>
+						<a href="${pageContext.request.contextPath}/eventboard/EventBoardList.ev?page=${page}"><div class="button small" style="float: right; margin-top: 2%;">목록</div></a>
+					</div>
 				
+
 						<div class="login_message">
-							<h1>${titleName}</h1>
+							<h1>${e_vo.getBoard_Title()}</h1>
 							<br>
 						</div>
 					<!-- 이미지 슬라이드 -->
 					<div class="slider" style="width:70%; margin:0 auto;">
 						<div>
 							<figure>
-								<!-- 파일 네임  -->
-								<img src="${pageContext.request.contextPath}/app/eventFilesUpload/이미지이름받아오기" alt="이미지1">
-								<figcaption><em> SNS • 배너 광고 디자인 </em><span> #페이스북 #인스타그램 </span></figcaption>
+								<!-- 이미지 뿌려주기  -->
+
 							</figure>
 						</div>
-						<div>
-							<figure>
-								<img src="${pageContext.request.contextPath}/app/eventFilesUpload/ad2.jpg" alt="이미지2">
-								<figcaption><em> 카울리 인사이트 </em><span> 광고 소재 제작 Tip</span></figcaption>
-							</figure>
-						</div>
-						<div>
-							<figure>
-								<img src="${pageContext.request.contextPath}/app/eventFilesUpload/ad3.jpg" alt="이미지3">
-								<figcaption><em> CROLO </em><span>  배너 디자인 이제 AI에게 맡기세요. </span></figcaption>
-							</figure>
-						</div>
-						<div>
-							<figure>
-								<img src="${pageContext.request.contextPath}/app/eventFilesUpload/ad4.jpg" alt="이미지4">
-								<figcaption><em> Banner Template </em><span> Plan Your ...</span></figcaption>
-							</figure>
-						</div>
+					 
 					</div>
 					<p style="text-align:center">
-						기름에 튀기지 않고 오븐에 구운 닭!<br><span style="color:red">오늘만 반 값!</span> 
+						<font style="font-family: 'jua'; font-size: 16px;">
+						${e_vo.getBoard_Content()}
+						</font>
+						<p style="text-align: center;">
+						<span style="color:#2f7fa6; font-size: 15px;">이벤트 시작 :</span><span style="color:red">${e_vo.getEVT_START_DT()}</span> ~ 
+						<span style="color:#2f7fa6; font-size: 15px;">이벤트 종료 :</span><span style="color: red;">${e_vo.getEVT_END_DT()}</span> 
+						</p>
 					</p>
 				<div style="border-bottom: 2px solid #dbdbdb; text-align:center; padding-bottom:5%">
 					<div class="intro">
@@ -116,7 +118,7 @@
 					</div>
 					<div class="intro">
 						<article class="column col6" style="display:inline">
-							<span style="font-size:15px; display:block;">서울시 강남구 역삼동</span>
+							<span style="font-size:15px; display:block;">${e_vo.getBoard_Zipcode()} ${e_vo.getBoard_Address()} ${e_vo.getBoard_Address_Detail()} ${e_vo.getBoard_Address_etc()}</span>
 							<h4 class="intro-h4" style="display:inline">
 								주소
 							</h4>
@@ -130,6 +132,13 @@
 				</article>
 					 
 					 <br>
+					 <div style="margin-right: 3%;">
+						<c:if test="${e_vo.getBoard_Id() eq session_id}">
+							<a href="${pageContext.request.contextPath}/eventboard/EventBoardModify.ev?board_Num=${e_vo.getBoard_Num()}&page=${page}"><div class="button small" style="float: right;  margin-top: 2%;">수정</div></a>
+							<a href="javascript:deleteBoard()"><div class="button small" style="float: right; margin-top: 2%;">삭제</div></a>
+						</c:if>
+						<a href="${pageContext.request.contextPath}/eventboard/EventBoardList.ev?page=${page}"><div class="button small" style="float: right; margin-top: 2%;">목록</div></a>
+						</div>
 				<section style="padding:3%;">
 					<form method="post" action="#">
 						<div class="col-12">
@@ -238,6 +247,10 @@
            }
        ]
    });
+</script>
+
+<script>
+
 </script>
 </body>
 </html>

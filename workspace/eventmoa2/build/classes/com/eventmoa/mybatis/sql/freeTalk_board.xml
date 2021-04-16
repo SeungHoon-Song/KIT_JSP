@@ -63,7 +63,7 @@
 	<!-- 댓글  -->
 	<insert id="insertReply" parameterType="freeReplyVO">
 		INSERT INTO TABLE_REPLY_freeTalk 
-		VALUES(REPLY_SEQ_freeTalk.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content})
+		VALUES(REPLY_SEQ_freeTalk.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content}, current_date)
 	</insert>
 	
 	<select id="getReplyList" parameterType="_int" resultType="freeReplyVO">

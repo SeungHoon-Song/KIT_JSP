@@ -29,7 +29,7 @@ public class UserJoinOkAction implements Action{
 		u_vo.setUser_Address(req.getParameter("user_Address"));
 		u_vo.setUser_Address_DETAIL(req.getParameter("user_Address_DETAIL"));
 		u_vo.setUser_Address_Etc(req.getParameter("user_Address_Etc"));
-		u_vo.setUser_Point(0);
+		u_vo.setUser_Point(300);
 
 		//DB에서 INSERT 실패 시 
 		if(!u_dao.join(u_vo)) {
@@ -39,6 +39,8 @@ public class UserJoinOkAction implements Action{
 			out.close();
 		}else {
 			//DB에서 INSERT 성공 시
+			// 포인트 결제내역 insert문 추가 
+			
 			forword = new ActionForward();
 			
 			//이동할 페이지 정보를 담아서 리턴

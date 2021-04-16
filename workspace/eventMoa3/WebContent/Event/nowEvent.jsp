@@ -13,7 +13,7 @@
 		<!-- title Icon -->
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
 		<link rel="stylesheet" href="${pagetext.request.contextPath}/assets/css/event.css">
-		
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/writeForm.css">
 		<style>
 		
 		@media screen and (max-width: 589px) {
@@ -45,15 +45,26 @@
 	<body class="is-preload">
 		<!-- Header -->
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
+		
 		<p></p>
 		<!-- Main -->
 		<div id="main">
-			
+	
+			<div class="tagManager">
+				<nav class="tagNav">
+					<div class="tagNav-div1">
+						<a class="tagNav-div-a" href="${pageContext.request.contextPath}/eventboard/EventWriter.ev">이벤트등록</a>
+					</div>
+					<div class="tagNav-div2">
+						<a class="tagNav-div-a" href="${pageContext.request.contextPath}/eventboard/EventWriter.ev">이벤트관리</a>
+					</div>
+				</nav>
+			</div>
 			<!-- sideBar -->
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 				<!-- Header -->		<!-- search-bar -->
 		<jsp:include page="${pageContext.request.contextPath}/searchBar.jsp"></jsp:include>
-	
+
 
 	<section class="wrapper special">
 		<div class="pmobi_glist">
@@ -97,7 +108,7 @@
 		 				check=true;
 		 			}
 		 			for(let i=0; i<eventArray.length;i++){
-		 				content+="<li><a href='${pageContext.request.contextPath}/eventboard/EventBoardView.ev?boardNum='"+eventArray[i].board_Num+"'><img src='${pageContext.request.contextPath}/app/eventFilesUpload/"+eventArray[i].file_name+"'onerror='noimage(this)'>";
+		 				content+="<li><a href='${pageContext.request.contextPath}/eventboard/EventView.ev?board_Num="+eventArray[i].board_Num+"&page="+page+"'><img src='${pageContext.request.contextPath}/app/eventFilesUpload/"+eventArray[i].file_name+"'onerror='noimage(this)'>";
 		 				/* content+="<dl><dd class='#'>"+eventArray[i].board_Title+"</dd></dl><dl><dd class='#'>"+eventArray[i].board_Address+"</dd></dl></a></li>"; */
 		 				content+="</a></li>";
 		 			}

@@ -46,6 +46,7 @@
 				<div class="tagNav-div2">
 					<a class="tagNav-div-a" href="${pageContext.request.contextPath}/eventboard/EventWriter.ev">이벤트관리</a>
 				</div>
+
 			</nav>
 		</div>
 		

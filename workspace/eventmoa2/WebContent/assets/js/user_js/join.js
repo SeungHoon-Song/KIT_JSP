@@ -87,7 +87,11 @@
        var email = $("input[name='user_Email").val();
        var inputVerify = $("#email_verify");
       //  var inputVerifyBox = $(".mail_verify_input_box");
-
+      if(!email) {
+         alert("이메일을 다시 확인하세요.");
+         joinForm.user_Email.focus();
+         return;
+      } 
        $.ajax({
           url: contextPath +"/user/verifyEmail.us?email="+email,
          type: "GET",
@@ -135,8 +139,9 @@
     }
 	 function checkId(id){
        id_Check = false;
-	 	if(id == ""){
+	 	if(id == '' || joinForm.user_Id.value.length < 5){
 	 		$("#idCheck_text").text("아이디를 작성해주세요.");
+          return;
 	 	} else {
 	 		$.ajax({
 	 			url:contextPath + "/user/UserCheckIdOk.us?id=" + id,	

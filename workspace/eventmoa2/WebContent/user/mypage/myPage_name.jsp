@@ -84,8 +84,6 @@
 							<ul class="actions stacked">
 								<li><a href="javascript:modifySubmit();" type="submit" class="button primary fit">
 								이름 변경</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/mypage/MyPageInfo.us" type="submit" class="button primary fit">
-								뒤로가기</a></li>
 							</ul>
 						</div>
 				</div>

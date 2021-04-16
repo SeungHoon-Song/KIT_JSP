@@ -24,12 +24,12 @@
 		p input { box-sizing:border-box; padding:20px 0 0; width:100%; height:100%; border:0 none; color:#595f63; outline:none; }
 		p label { position:absolute; left:3%; bottom:10%; width:100%; height:100%; text-align:left; pointer-events:none; }
 		p label span { position:absolute; left:0; bottom:5px; transition:all .3s ease; }
-		p input:focus + label span, 
-		p input:valid + label span { transform:translateY(-150%); font-size:14px; color:#5fa8d3; }  
+		#effect input:focus + label span, 
+		#effect input:valid + label span { transform:translateY(-150%); font-size:14px; color:#5fa8d3; }  
 		/* input에 글을 입력하고 포커스가 지나간 상태에서 제어하려면 valid 선택자를 써야한다. */
 		/* 포커스 될 때 label span(name)이 위로 올라감 */
-		p input:focus + label::after,
-		p input:valid + label::after { width:100%; transform:translateX(0); }
+		#effect input:focus + label::after,S
+		#effect input:valid + label::after { width:100%; transform:translateX(0); }
 		</style>
 		<!-- signup_terms 약관 동의 css  -->
 		<style>
@@ -323,27 +323,27 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
 					<div class="col-12">
 						<ul class="actions" style="display: flex; margin-left: auto; margin-right: auto; margin-bottom: auto;">
 							<p>
-								<input type="text" name="user_Id" id="user_Id" autocomplete="off" required/>
-								<label for="user_Id" style="color: silver;"><span>아이디</span></label>
+								<input type="text" name="user_Id" id="user_Id" required/>
+								<label for="user_Id" style="color: #5fa8d3; font-size:14px; margin-bottom: 15%; margin-left: 1%;"><span>아이디</span></label>
 								<span id="idCheck_text"><br></span>
 								<br>
 							</p>
-							<a href="javascript:checkId();" type="submit" id="idCheckBtn" class="button" style="height: 35px;">중복확인</a>
+							<a href="javascript:checkId();" type="submit" id="idCheckBtn" class="button" style="height: 35px; margin-bottom: 5%;">중복확인</a>
 							<a href="javascript:modifyId();" type="submit" id="idModifyBtn" class="button" style="height: 35px;">수정하기</a>
 						</ul>
-						<p>
-							<input type="password" name="user_Pw" id="user_Pw" autocomplete="off" required/>
+						<p id="effect">
+							<input type="password" name="user_Pw" id="user_Pw" autocomplete="off" style="width:100%; transform:translateX(0);" required/>
 							<label for="user_Pw" style="color: silver;"><span>비밀번호</span></label>
 							<i toggle="#user_Pw" id="eyeIcon" class="fa fa-fw fa-eye field-icon toggle-password"></i>
 							<span id="pwCheck_text"><br></span>
 						</p>
-						<p>
-							<input type="text" name="user_Name" id="user_Name" autocomplete="off" required/>
+						<p id="effect">
+							<input type="text" name="user_Name" id="user_Name" style="margin-top: 10%;" autocomplete="off" required/>
 							<label for="user_Name" style="color: silver;"><span>이름</span></label>
 						</p>
 					
 						<ul class="actions" style="display: flex; margin-left: auto; margin-right: auto; margin-bottom: auto;">
-							<p>
+							<p id="effect">
 								<input type="email" name="user_Email" id="user_Email" autocomplete="off" required/>
 								<label for="user_Email" style="color: silver;"><span>이메일</span></label>
 							</p>
@@ -369,7 +369,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
 							<input type="text" name="user_Address" id="user_Address" class="postcodify_address" value="" placeholder="주소" readonly/>
 						</p>
 						
-						<p>
+						<p id="effect">
 							<input type="text" name="user_Address_DETAIL" id="user_Address_DETAIL" class="postcodify_details" autocomplete="off" required/>
 							<label for="user_Address_DETAIL" style="color: silver;"><span>상세주소</span></label>
 						</p>

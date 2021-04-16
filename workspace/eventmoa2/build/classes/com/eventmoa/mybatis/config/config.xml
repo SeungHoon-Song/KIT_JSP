@@ -13,6 +13,7 @@
 		<typeAlias type="com.eventmoa.app.eventboard.vo.EventReplyVO" alias="eventReplyVO"/>
 		<typeAlias type="com.eventmoa.app.map.vo.MapVO" alias="mapVO"/>
 		<typeAlias type="com.eventmoa.app.map.vo.MapBoardVO" alias="mapBoardVO"/>
+		<typeAlias type="com.eventmoa.app.user.vo.PointVO" alias="pointVO"/>
 		
 		
 	</typeAliases>
@@ -35,6 +36,6 @@
 		<mapper resource="com/eventmoa/mybatis/sql/event_board.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/event_files.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/map.xml"/>
-		
+		<mapper resource="com/eventmoa/mybatis/sql/point_board.xml"/>
 	</mappers>
 </configuration>

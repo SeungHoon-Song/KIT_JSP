@@ -350,6 +350,9 @@ div > span {
 	width: 30rem;
 }
 
+.callDiv {
+	width: 80%;
+}
 /* ------------------- 아이폰 미니 사이즈 --------------------- */
 @media screen and (max-width: 667px){ 
 
@@ -375,6 +378,9 @@ div > span {
 		width: 15%;
 	}
 	.locationBtn {
+		width: 100%;
+	}
+	.callDiv {
 		width: 100%;
 	}
 	
@@ -410,7 +416,7 @@ div > span {
 	.locationDiv {
 		width: 15%;
 	}
-	.locationBtn {
+	.locationBtn, .callDiv {
 		width: 100%;
 	}
 	

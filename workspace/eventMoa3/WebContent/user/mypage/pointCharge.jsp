@@ -76,8 +76,7 @@
 						</ul>
 						</section>
 						
-						<!-- 이용권 가이드 -->
-						<div class="zpayGBox">
+						<div class="zpayGBox" style="font-family: 'jua';">
 							<ul class="zpayGBlist">
 								<li class="zpayGBarotest">
 									<span class="zGDpoint">- 이용가능한 콘텐츠</span>
@@ -94,7 +93,6 @@
 							</ul>
 						</div>
 				
-				<!-- 결제수단 -->		
 				  <table>
 					  <tbody>
 				  

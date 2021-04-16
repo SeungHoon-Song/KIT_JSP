@@ -54,9 +54,9 @@
    text-align: center;
    -ms-text-align-last: center;
    -moz-text-align-last: center;">
-			         				<option value="recent">등록일순　</option>
-			         				<option value="view">조회순　</option>
-			         				<option value="likes">추천순　</option>
+			         				<option value="recent" id="selectRecent">등록일순　</option>
+			         				<option value="view" id="selectView" selected="selected">조회순　</option>
+			         				<option value="likes" id="selectLikes">추천순　</option>
 			         			</select>
 			         			<div style="float:right; font-size: 11px;">
 				         			<p>등록된 글 개수 : <c:out value="${totalCnt}"/>개</p>
@@ -66,7 +66,8 @@
 	         			</form>
 	         			<p></p>
 	         			<!-- 최근순 -->
-	         			<table border="1" cellpadding="0" cellspacing="0" width="900px" id="listOrderRecent">
+	         			<div id="listOrderRecent">
+	         			<table border="1" cellpadding="0" cellspacing="0" width="900px">
 	         			<thead>
 										<tr>
 											<th style="text-align: center;">게시글 번호</th>
@@ -121,9 +122,31 @@
 	           </c:otherwise>
                </c:choose>
          </table>
+         <div id="two" style="text-align: center; vertical-align: middle; ">
+         			<c:if test="${nowPage >1}">
+         				<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo?page=${nowPage - 1}">&lt;이전</a>
+         			</c:if>
+	         		<c:forEach var="i" begin="${startPage}" end="${endPage}">
+	         			<c:choose>
+	         				<c:when test="${i eq nowPage}">
+	         				<a style="border: solid 1px;border-color: darkgray; background-color: #fff; color: #72bee1; margin: 0 2px; padding-left: 4px;">${i}&nbsp;</a>
+	         				</c:when>
+	         				<c:otherwise>
+	         					<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo?page=${i}" style="margin: 0 2px;">${i}&nbsp;</a>
+	         				</c:otherwise>
+	         			</c:choose>
+	         		</c:forEach>
+         			<c:if test="${realEndPage != nowPage}">
+         				<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo?page=${nowPage + 1}">다음&gt;</a>
+         			</c:if>
+         			<br>
+               <a href="${pageContext.request.contextPath}/community/freeTalkWrite.jsp"><div class="button primary small" style="float: right;">글쓰기✍</div></a>								         
+		</div>
+		</div>
          
          	<!-- 조회순 -->
-			<table border="1" cellpadding="0" cellspacing="0" width="900px" id="listOrderView">
+         	<div id="listOrderView">
+			<table border="1" cellpadding="0" cellspacing="0" width="900px">
 	         			<thead>
 										<tr>
 											<th style="text-align: center;">게시글 번호</th>
@@ -178,9 +201,31 @@
 	           </c:otherwise>
                </c:choose>
          </table>
+         <div id="two" style="text-align: center; vertical-align: middle; ">
+         			<c:if test="${nowPage >1}">
+         				<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo?page=${nowPage - 1}">&lt;이전</a>
+         			</c:if>
+	         		<c:forEach var="i" begin="${startPage}" end="${endPage}">
+	         			<c:choose>
+	         				<c:when test="${i eq nowPage}">
+	         				<a style="border: solid 1px;border-color: darkgray; background-color: #fff; color: #72bee1; margin: 0 2px; padding-left: 4px;">${i}&nbsp;</a>
+	         				</c:when>
+	         				<c:otherwise>
+	         					<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo?page=${i}" style="margin: 0 2px;">${i}&nbsp;</a>
+	         				</c:otherwise>
+	         			</c:choose>
+	         		</c:forEach>
+         			<c:if test="${realEndPage != nowPage}">
+         				<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo?page=${nowPage + 1}">다음&gt;</a>
+         			</c:if>
+         			<br>
+               <a href="${pageContext.request.contextPath}/community/freeTalkWrite.jsp"><div class="button primary small" style="float: right;">글쓰기✍</div></a>								         
+		</div>
+		</div>
 
-			<!-- 추천순 -->         
-         	<table border="1" cellpadding="0" cellspacing="0" width="900px" id="listOrderLikes">
+			<!-- 추천순 -->        
+			<div id="listOrderLikes">
+         	<table border="1" cellpadding="0" cellspacing="0" width="900px">
 	         			<thead>
 										<tr>
 											<th style="text-align: center;">게시글 번호</th>
@@ -256,6 +301,7 @@
          			<br>
                <a href="${pageContext.request.contextPath}/community/freeTalkWrite.jsp"><div class="button primary small" style="float: right;">글쓰기✍</div></a>								         
 				</div>
+		</div>
 							
 							</article>
 						</section>
@@ -267,33 +313,57 @@
 			<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 			<script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
 			<script>
-			var tableRecent = document.getElementById("listOrderRecent");
+				var category = document.getElementById('category');
+				category.onchange = function(category){
+					$.ajax({
+						url : pageContext + "/freeboard/FreeBoardListOk.bo",
+						type : "post",
+						data : {"category" : category},
+						dataType : "text",
+						success : function(result){
+							alert(result);
+							getList();
+						}
+					});
+				}
+			</script>
+			<script>
+			/* $('#category').on('change', function() {
+    			location.href= this.value;
+			});
+			$('#category').val(location.href); */
+			</script>
+			<script>
+			/*var tableRecent = document.getElementById("listOrderRecent");
 			var tableView = document.getElementById("listOrderView");
 			var tableLikes = document.getElementById("listOrderLikes");
 			
-			tableRecent.style.display = 'inline-table';
+			tableRecent.style.display = 'block';
 			tableView.style.display = 'none';
-			tableLikes.style.display = 'none';
+			tableLikes.style.display = 'none'; 
 			
 			$(function(){
 				$('#category').change(function(){
-					if(this.value == "view"){
+					if(this.value == "recent"){
+						tableRecent.style.display = 'block';
+						tableView.style.display = 'none';
+						tableLikes.style.display = 'none';
+					}
+					else if(this.value == "view"){
 						tableRecent.style.display = 'none';
-						tableView.style.display = 'inline-table';
+						tableView.style.display = 'block';
 						tableLikes.style.display = 'none';
 					}
 					else if(this.value == "likes"){
 						tableRecent.style.display = 'none';
 						tableView.style.display = 'none';
-						tableLikes.style.display = 'inline-table';
+						tableLikes.style.display = 'block';
 					}
 					else{
-						tableRecent.style.display = 'inline-table';
-						tableView.style.display = 'none';
-						tableLikes.style.display = 'none';
+						alert("오류 발생");
 					}
 				});
-			});
+			});*/
 			</script>
 	</body>
 </html>

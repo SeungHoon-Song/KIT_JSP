@@ -63,4 +63,13 @@
 		</if>
 	</select>
 	
+	<!-- 댓글-->
+	<select id="getReplyList" parameterType="_int" resultType="eventReplyVO">
+		SELECT * FROM TABLE_REPLY_EVENT WHERE BOARD_NUM = #{board_Num} ORDER BY REPLY_NUM DESC
+	</select>
+	
+	<insert id="insertReply" parameterType="eventReplyVO">
+		INSERT INTO TABLE_REPLY_EVENT 
+		VALUES (REPLY_SEQ_EVENT.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content})
+	</insert>
  </mapper>

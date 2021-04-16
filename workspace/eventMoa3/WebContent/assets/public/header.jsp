@@ -60,7 +60,7 @@
 								<li><a href="${pageContext.request.contextPath}/user/mypage/myWrite.jsp">내가 쓴 글</a><li>
 								<li><a href="${pageContext.request.contextPath}/user/mypage/myReply.jsp">내가 쓴 댓글</a><li>
 								<li><a href="${pageContext.request.contextPath}/user/mypage/pointReceipt.jsp">결제 내역</a><li>
-								<li><a href="${pageContext.request.contextPath}/user/UserLogin.us" class="button small">로그아웃</a><li>
+								<li><a href="${pageContext.request.contextPath}/user/UserLogin.us">로그아웃</a><li>
 							</ul>
 						</li>
 					</c:if>

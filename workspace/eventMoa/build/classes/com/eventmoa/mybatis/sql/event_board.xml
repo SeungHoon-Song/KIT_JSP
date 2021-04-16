@@ -49,6 +49,9 @@
 		WHERE BOARD_NUM = #{board_Num}
 	</update>
 	
+	<delete id="deleteBoard" parameterType="_int">
+		DELETE FROM TABLE_BOARD_EVENT WHERE BOARD_NUM = #{board_Num}
+	</delete>
 	
 	<!-- SELECT AREA -->
 	<select id="searchList" resultType="eventBoardVO">

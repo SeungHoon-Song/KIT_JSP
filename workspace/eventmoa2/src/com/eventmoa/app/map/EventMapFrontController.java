@@ -37,6 +37,13 @@ public class EventMapFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+		case "/map/getEventMap.map":
+			try {
+				new EventPositionMapAction().execute(req, resp);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 		}
 	}
 }

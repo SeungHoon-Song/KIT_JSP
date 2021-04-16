@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.eventmoa.action.Action;
 import com.eventmoa.action.ActionForward;
 import com.eventmoa.app.eventboard.dao.EventDAO;
-import com.eventmoa.app.eventboard.dao.EventFIlesDAO;
+import com.eventmoa.app.eventboard.dao.EventFilesDAO;
 import com.eventmoa.app.eventboard.vo.EventBoardVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -21,7 +21,7 @@ public class EventBoardWriterOkAction implements Action {
 		
 		EventBoardVO ev_vo = new EventBoardVO();
 		EventDAO ev_dao = new EventDAO();
-		EventFIlesDAO evf_dao = new EventFIlesDAO();
+		EventFilesDAO evf_dao = new EventFilesDAO();
 		ActionForward forward = null;
 		
 		// 업로드
@@ -49,7 +49,19 @@ public class EventBoardWriterOkAction implements Action {
 		ev_vo.setBoard_Address_etc(multi.getParameter("address_etc"));
 		ev_vo.setEVT_START_DT(multi.getParameter("datepicker1"));
 		ev_vo.setEVT_END_DT(multi.getParameter("datepicker2"));
-		ev_vo.setFile_name(multi.getFilesystemName("input_imgs"));
+		
+		if(multi.getParameter("callNumber") != null ) {
+			ev_vo.setBoard_CallNumber(multi.getParameter("callNumber"));
+		} else {
+			ev_vo.setBoard_CallNumber("고객 전용 서비스 연락망 없음");
+		}
+		if(multi.getParameter("phoneNumber") != null ) {
+			ev_vo.setBoard_PhoneNumber(multi.getParameter("phoneNumber"));
+		} else {
+			ev_vo.setBoard_PhoneNumber("업체 휴대폰 번호 없음");
+		}
+		
+		ev_vo.setFile_name(multi.getFilesystemName("input_imgs_0"));
 		
 		if(ev_dao.insertBoard(ev_vo)) {
 			if(evf_dao.insertFiles(ev_dao.getBoardNum(), multi)) {

@@ -30,9 +30,9 @@ public class EventMapFrontController extends HttpServlet {
 		String command = requestURI.substring(contextPath.length());
 	
 		switch(command) {
-		case "/map/getAddress.map":
+		case "/map/getEventAddress.map":
 			try {
-				new UserPositionAction().execute(req, resp);
+				new EventPositionAction().execute(req, resp);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

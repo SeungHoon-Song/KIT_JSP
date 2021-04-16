@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.eventmoa.app.freeboard.vo.FreeBoardVO;
+import com.eventmoa.app.freeboard.vo.FreeReplyVO;
 import com.eventmoa.app.user.vo.UserVO;
 import com.eventmoa.mybatis.config.SqlMapConfig;
 import com.eventmoa.util.SHA256;
@@ -110,6 +111,16 @@ public class UserDAO {
      
 		return (Integer)session.selectOne("Login", user) == 1;
 	
+	}
+	public String getFindId(String id) {
+		String user_id = null;
+		user_id = session.selectOne("getFindId", id);
+		if(user_id != null || user_id != "") {
+			return user_id;
+		} else {
+			user_id = null;
+			return user_id;
+		}
 	}
 	
 
@@ -214,4 +225,19 @@ public class UserDAO {
 		return session.selectOne("User.getBoardCnt", board_Id);
 	}
 	
+	//내가 쓴 댓글
+	public List<FreeReplyVO> getReplyList(int startRow, int endRow, String user_Id){
+		HashMap<String, Object> pageMap = new HashMap<>();
+		
+		pageMap.put("startRow", startRow);
+		pageMap.put("endRow", endRow);
+		pageMap.put("user_Id", user_Id);
+		
+		return session.selectList("User.getReplyList", pageMap);
+	}
+	
+	//내가 쓴 댓글수
+	public int getReplyCnt(String user_Id) {
+		return session.selectOne("User.getReplyCnt", user_Id);
+	}
 }

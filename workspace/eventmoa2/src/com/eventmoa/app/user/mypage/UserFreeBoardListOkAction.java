@@ -49,7 +49,7 @@ public class UserFreeBoardListOkAction implements Action {
 		req.setAttribute("nowPage", page);
 		req.setAttribute("realEndPage", realEndPage);
 		req.setAttribute("boardList", u_dao.getBoardList(startRow, endRow, board_Id));
-	
+		
 		forward.setRedirect(false);
 		forward.setPath("/user/mypage/myWrite.jsp");
 		

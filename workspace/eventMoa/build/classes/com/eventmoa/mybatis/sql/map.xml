@@ -10,4 +10,9 @@
 	<select id="getAddressList" resultType="mapBoardVO">
 		SELECT BOARD_ADDRESS, BOARD_ADDRESS_DETAIL, BOARD_ADDRESS_ETC, BOARD_TITLE FROM TABLE_BOARD_EVENT
 	</select>
+
+	<select id="getEventboardAddress" parameterType="string" resultType="string">
+		SELECT BOARD_ADDRESS, BOARD_ADDRESS_ETC FROM TABLE_BOARD_EVENT 
+		WHERE BOARD_NUM =  #{board_Num}
+	</select>
 </mapper>

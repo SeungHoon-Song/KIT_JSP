@@ -34,6 +34,7 @@ public class FreeBoardReplyListAction implements Action{
 			reply.put("reply_Num", r_vo.getReply_Num());
 			reply.put("user_Id", r_vo.getUser_Id());
 			reply.put("reply_Content", r_vo.getReply_Content());
+			reply.put("reply_Date", r_vo.getReply_Date());
 			arReply.add(reply);
 		}
 		

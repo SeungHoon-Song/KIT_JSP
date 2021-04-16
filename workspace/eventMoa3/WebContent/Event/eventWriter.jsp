@@ -80,7 +80,7 @@
 									<ul class="imgDiv2-ul" id="imgDiv2-ul">
 										<li class="imgDiv2-li asd" id="addImg-li">
 											<a href="javascript:" onclick="fileUploadAction();" id="fileText"><i class="fas fa-camera" style="margin-left: 40%;"></i><br />이미지 등록</a>
-          									<input type="file" name="input_imgs" id="input_imgs" multiple/>
+          									<input type="file" name="input_imgs[]" id="input_imgs" multiple="multiple"/>
 										</li>
 										<ul class="imgs_wrap">
 
@@ -145,14 +145,12 @@
 
 							<li class="liSection">
 								<div class="locationDiv">
-									이벤트 <br> 지역
+									이벤트 <br> 지역 <span>*</span>
 								</div>
 								<div class="sc-div">
 									<span>
 										<p>
 										이벤트 장소의 위치를 입력 해주세요.
-										<br>
-										이벤트 위치는 필수 사항은 아니지만, 사용자 위치 안내에 불리할 수 있습니다.
 										</p>
 									</span>
 									<div class="locationBtn">
@@ -201,7 +199,22 @@
 									<br>
 								</div>
 							</li>
-									
+							<li class="liSection">
+								<div class="locationDiv">
+									연락망<br>
+									<span>(선택)</span>
+								</div>
+								<div class="sc-div">
+									<div class="callDiv">
+										<label for="phoneNumber">휴대폰 연락처</label>
+										<input type="text" id="phoneNumber" name="phoneNumber" placeholder="010-xxxx-xxxx">
+
+										<label for="callNumber" style="margin-top: 5%;">업체 연락처</label>
+										<input type="text" id="callNumber" name="callNumber" placeholder="1111-xxxx OR 02-xxx-xxxx">
+
+									</div>
+								</div>
+							</li>
 								<div class="col-12">
 									<br>
 									<ul class="actions">
@@ -270,6 +283,9 @@
 			//--------------------------------------------------------------------------
 			var form = document.writeEventForm;
 			function addBoard(){
+				var regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+				var telNum = form.phoneNumber.value; //"010-111-1111"
+				var calNum = form.callNumber.value; // "1111-1111"
 
 				//    유효성 검사  
 				if(form.titleName.value.length > 40 ) {
@@ -317,6 +333,16 @@
 					alert("상세주소를 정확히 입력하지 않으면 정확한 위치 확인이 불가능합니다.");
 					return;
 				}
+				else if (form.phoneNumber.value.length < 7 && form.callNumber.value.length < 7){
+					alert("서비스 연락망은 둘 중에 하나는 입력하셔야 합니다.");
+					return;
+				}
+				else if(!regExp.test(telNum) && !regExp.test(calNum)) {
+					alert("연락처 양식에 맞게 작성해주세요.");
+					return;
+				}
+				
+				
 
 			var x = confirm("정말 이대로 글을 등록하시겠습니까?");
 				if(x) {
@@ -371,6 +397,7 @@
 				var filesArr = Array.prototype.slice.call(files);
 				
 				var index = 0;
+				var fileCnt = 1;
 		
 				filesArr.forEach(function(f){
 					if(!f.type.match("image.*")) {
@@ -383,6 +410,7 @@
 					reader.onload = function(e) {
 						var html = "<a href=\"javascript:void(0);\" id=\"img_id_"+index+"\">"
 							+" <li id='imageList_"+index+"' class='imgDiv2-li'><div id='leaderImg_"+index+"' class='leaderImg'></div>"
+							+" <input type=\"file\" name='input_imgs_"+fileCnt+"'>"
 							+" <button type='button' class=\"deleteImg\" onclick=\"deleteImageAction("+index+")\"></button>"
 							+" <img src=\"" + e.target.result +"\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'>"
 							+" </li></a>";

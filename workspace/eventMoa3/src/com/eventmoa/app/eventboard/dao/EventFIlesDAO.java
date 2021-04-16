@@ -12,11 +12,11 @@ import com.eventmoa.app.eventboard.vo.EventFilesVO;
 import com.eventmoa.mybatis.config.SqlMapConfig;
 import com.oreilly.servlet.MultipartRequest;
 
-public class EventFIlesDAO {
+public class EventFilesDAO {
 	SqlSessionFactory sessionf = SqlMapConfig.getSqlMapInstance();
 	SqlSession session;
 	
-	public EventFIlesDAO() {
+	public EventFilesDAO() {
 		session = sessionf.openSession(true);
 	}
 	
