@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
+<% request.setCharacterEncoding("UTF-8"); %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--
 페이지 프레임 입니다.
 편하게 복사해서 작업하세요.
@@ -36,8 +38,21 @@
 	</head>
 	
 	<body class="is-preload">
-	<!-- sideBar -->
-<jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
+	<c:set var="session_id" value="${session_id}"/>
+		<c:set var="currentPw" value="${currentPw}"/>
+		
+		<c:set var = 'userStatus' value = "false"></c:set>
+		<c:if test="${session_id ne null }">
+			<c:set var = 'userStatus' value = 'true'/>
+		</c:if>
+		
+		<c:if test="${session_id eq null}">
+         <script>
+            alert("로그인 후 이용해주세요");
+            location.replace("${pageContext.request.contextPath}/main.us");
+         </script>
+      </c:if>
+      
 		<!-- Header -->
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
 		
@@ -50,8 +65,8 @@
 			<div style="text-align: center;">					
 				<div class="row gtr-uniform" id="loginFrame">
 					<div class="col-12">
-						<label for="memberPw">비밀번호</label> <input type="password"
-								name="memberPw" id="usingmemberPw" value="" />
+						<label for="currentPw2" style="text-align: initial;">비밀번호</label> <input type="password"
+								name="currentPw2" id="currentPw2" value=""/>
 					</div>
 				</div>
         		<br>
@@ -74,7 +89,7 @@
 
 				<!-- Content -->
 			<div class="contents2" id="myPage">
-			<form name="loginForm" action="" method="post">
+			<form name="deleteAccountForm" action="${pageContext.request.contextPath}/user/UserDeleteAccountOk.us" method="post">
 
 			<div class="unregister_info" style="text-align:center; margin: 0 auto; padding: 15px 15px 15px 15px; color: #717171; border: 1px solid #dadada; width: 60%">
                         이벤트모아 탈퇴안내<br>
@@ -85,15 +100,16 @@
                     </div>	
                     <div class="row gtr-uniform" id="loginFrame">
 					<div class="col-12">
-						<label for="memberPw">비밀번호</label> <input type="password"
-								name="memberPw" id="usingmemberPw" value="" />
+						<label for="user_Pw">비밀번호</label> <input type="password"
+								name="user_Pw" id="user_Pw" onkeyup="enterkey();" value="" required/>
 					</div>
 				</div>
+				<input type="hidden" name="user_Id" value="${session_id}">
 					
 				<div class="row gtr-uniform" id="loginFrame">
 						<div class="col-12">
 							<ul class="actions stacked">
-								<li><a href="#" class="button primary fit">회원 탈퇴</a></li>
+								<li><a href="javascript:deleteSubmit();" class="button primary fit">회원 탈퇴</a></li>
 							</ul>
 						</div>
 				</div>
@@ -108,10 +124,9 @@
 			<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 			<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 			<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
+			<script>var contextPath = "${pageContext.request.contextPath}";</script>
+			<!-- 컨텐츠 보이기/숨기기 -->
 			<script>
-	
-		
-			
 			const divPassword = document.getElementById("mypagePassword");
 			const divmyPage = document.getElementById("myPage");
 			
@@ -119,16 +134,41 @@
 			divmyPage.style.display = 'none';
 			
 			function formSubmit(){
-				
-				
+				var currentPw = "${currentPw}";
+				var currentPw2 = $("#currentPw2").val();
+
+				if(currentPw == currentPw2){
 					divPassword.style.display = 'none';
-					divmyPage.style.display = 'block';
-				
-				
+					divmyPage.style.display = 'block';		
+				}else{
+					alert('비밀번호가 틀립니다.');
+					return false;
+				}
+			}
+			</script>
+			
+			<!-- 회원 탈퇴 -->
+			<script>
+			var form = document.deleteAccountForm;
+
+			
+			function deleteSubmit(){
+				var currentPw = "${currentPw}";
+				var user_Pw = $("#user_Pw").val();
+
+				if(currentPw == user_Pw){
+					form.submit();	
+				}else{
+					alert('비밀번호가 맞지 않습니다.');
+					return false;
+				}
 			}
 			
-			
-			
+			function enterkey() {
+		        if (window.event.keyCode == 13) {
+		        	deleteSubmit();
+		        }
+		    }
 			
 			</script>
 			

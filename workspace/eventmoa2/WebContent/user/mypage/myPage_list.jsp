@@ -54,7 +54,7 @@
         			<ul class="actions" style="display: inline-flex;">
 						<li><a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardListOk.us" class="button" style="display: flex; margin: 0 auto;">
 						<img src="${pageContext.request.contextPath}/images/user/board.png" style="width: auto;">　내가 쓴 글　　</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardReplyOk.us" class="button" style="display: flex; margin: 0 auto;">
+						<li><a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardReplyListOk.us" class="button" style="display: flex; margin: 0 auto;">
 						<img src="${pageContext.request.contextPath}/images/user/comment.png" style="width: auto;">　내가 쓴 댓글　</a></li>
 					</ul>
 				</div>
@@ -65,7 +65,7 @@
         			<ul class="actions" style="display: inline-flex;">
 						<li><a href="${pageContext.request.contextPath}/user/mypage/MyPageInfo.us" class="button primary fit" style="display: flex; margin: 0 auto;">
 						<img src="${pageContext.request.contextPath}/images/user/edit2.png" style="width: auto;">　회원정보 수정</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/mypage/myPage_unregister.jsp" class="button primary fit" style="display: flex; margin: 0 auto;">
+						<li><a href="${pageContext.request.contextPath}/user/mypage/UserDeleteAccountOk.us" class="button primary fit" style="display: flex; margin: 0 auto;">
 						<img src="${pageContext.request.contextPath}/images/user/remove2.png" style="width: auto;">　회원 탈퇴　　　</a></li>
 					</ul>
 				</div>							

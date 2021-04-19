@@ -12,6 +12,7 @@ import com.eventmoa.action.ActionForward;
 import com.eventmoa.app.user.mypage.PointChargeAction;
 import com.eventmoa.app.user.mypage.PointReceiptAction;
 import com.eventmoa.app.user.mypage.UserAddressModifyAction;
+import com.eventmoa.app.user.mypage.UserDeleteAccountOkAction;
 import com.eventmoa.app.user.mypage.UserEmailModifyAction;
 import com.eventmoa.app.user.mypage.UserFreeBoardListOkAction;
 import com.eventmoa.app.user.mypage.UserFreeBoardReplyListOkAction;
@@ -240,6 +241,23 @@ public class UserFrontController extends HttpServlet {
 		else if (command.equals("/user/UserModifyPwOk.us")) {
 			try {
 				 forward = new UserPwModifyAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		/* 회원 탈퇴*/
+		else if (command.equals("/user/mypage/UserDeleteAccountOk.us")) {
+			try {
+				 forward = new ActionForward();
+				 forward.setRedirect(false);
+				 forward.setPath("/user/mypage/myPage_deleteAccount.jsp");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/user/UserDeleteAccountOk.us")) {
+			try {
+				 forward = new UserDeleteAccountOkAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println(e);
 			}

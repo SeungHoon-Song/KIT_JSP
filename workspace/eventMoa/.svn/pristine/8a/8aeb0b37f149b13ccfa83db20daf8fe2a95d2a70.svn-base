@@ -93,11 +93,6 @@
       WHERE USER_ID = #{user_Id} AND USER_EMAIL = #{user_Email}
    </update>
    
-   <!-- 회원 탈퇴 -->
-   <delete id="deleteAccount" parameterType="string">
-   		DELETE FROM TABLE_USER WHERE USER_ID = #{user_Id}
-   </delete>
-   
    <!-- 내가 쓴 글 -->
 	<select id="listAll" parameterType="map" resultType="freeBoardVO">
 		SELECT * FROM 

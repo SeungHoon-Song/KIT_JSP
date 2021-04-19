@@ -64,7 +64,7 @@
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
 		<section id="banner">
 			<article class="column col4">
-				<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px; text-align: center;">내가 쓴 글</h1>
+				<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px; text-align: center;">내가 쓴 댓글</h1>
 				<p class="col_desc"> </p>
 		
 						<form method="post" action="#" class="combined" style="margin-bottom: 0;">
@@ -79,7 +79,6 @@
 										<tr>
 											<th style="text-align: center;">게시글 번호</th>
 											<th style="text-align: center;">댓글</th>
-											<th style="text-align: center;">닉네임</th>
 											<th style="text-align: center;">날짜</th>
 										</tr>
 									</thead>
@@ -87,24 +86,19 @@
                <c:when test="${list != null and fn:length(list) > 0}">
 	               <c:forEach var="b_bean" items="${list}">
 	               	<tr align="center" valign="middle" onmouseover="this.style.backgroudColor='F8F8F8'" onmouseout="this.style.backgroundColor='FFFFFF'">
-	               		<td height="23" style="font-family:Tahoma; font-size:10pt;">
+	               		<td height="23" style="font-family:Tahoma; font-size:10pt; width: 12%;">
 	               			${b_bean.getBoard_Num()}
 	               		</td>
 	               		<td style="font-family:Tahoma; font-size:10pt;">
 	               			<div align="left">
 	               				<a href="${pageContext.request.contextPath}/freeboard/FreeBoardView.bo?board_Num=${b_bean.getBoard_Num()}&page=${nowPage}">
-	               					${b_bean.getBoard_Title()}
+	               					${b_bean.getReply_Content()}
 	               				</a>
 	               			</div>
 	               		</td>
 	               		<td>
 	               			<div align="center">
-	               				${b_bean.getUser_Id()}
-	               			</div>
-	               		</td>
-	               		<td>
-	               			<div align="center">
-	               				${b_bean.getBoard_Date()}
+	               				${b_bean.getReply_Date()}
 	               			</div>
 	               		</td>
 	               	</tr>
@@ -112,7 +106,7 @@
 	           </c:when>
 	           <c:otherwise>
 	           	<tr>
-	           		<td colspan="4" align="center">등록된 댓글이 없습니다.</td>
+	           		<td colspan="3" align="center">등록된 댓글이 없습니다.</td>
 	           	</tr>
 	           </c:otherwise>
                </c:choose>

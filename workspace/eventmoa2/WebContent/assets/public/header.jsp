@@ -58,7 +58,7 @@
 							<ul>
 								<li><a href="${pageContext.request.contextPath}/user/mypage/MyPageInfo.us">회원정보수정</a><li>
 								<li><a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardListOk.us">내가 쓴 글</a><li>
-								<li><a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardReply.us">내가 쓴 댓글</a><li>
+								<li><a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardReplyListOk.us">내가 쓴 댓글</a><li>
 								<li><a href="${pageContext.request.contextPath}/user/mypage/pointReceipt.us">결제 내역</a><li>
 								<li><a href="${pageContext.request.contextPath}/user/UserLogin.us">로그아웃</a><li>
 							</ul>

@@ -199,7 +199,7 @@ public class UserDAO {
 		return session.update("User.modifyPw", user) == 1;
 	}
 	
-	// 이메일 수정 
+	//이메일 수정 
 	public boolean modifyEmail(String id, String user_email, String new_email) {
 		HashMap<String, String> user = new HashMap<>();
 		user.put("user_Id", id);
@@ -207,6 +207,11 @@ public class UserDAO {
 		user.put("new_Email", new_email);
 		
 		return session.update("User.modifyEmail", user) == 1;
+	}
+	
+	//회원 탈퇴
+	public boolean deleteAccount(String id) {
+		return session.delete("User.deleteAccount", id) == 1;
 	}
 	
 	//내가 쓴 글

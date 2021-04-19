@@ -93,6 +93,11 @@
       WHERE USER_ID = #{user_Id} AND USER_EMAIL = #{user_Email}
    </update>
    
+   <!-- 회원 탈퇴 -->
+   <delete id="deleteAccount" parameterType="string">
+   		DELETE FROM TABLE_USER WHERE USER_ID = #{user_Id}
+   </delete>
+   
    <!-- 내가 쓴 글 -->
 	<select id="listAll" parameterType="map" resultType="freeBoardVO">
 		SELECT * FROM 
@@ -106,4 +111,14 @@
 	</select>
 
    <!-- 내가 쓴 댓글 -->
+   <select id="getReplyList" parameterType="map" resultType="freeReplyVO">
+		SELECT * FROM 
+			(SELECT ROWNUM R, D.* FROM 
+				(SELECT * FROM TABLE_REPLY_freeTalk WHERE USER_ID = #{user_Id} ORDER BY REPLY_NUM DESC) D) B 
+		WHERE B.R BETWEEN #{startRow} AND #{endRow} AND USER_ID = #{user_Id}
+	</select>
+	
+	<select id="getReplyCnt" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM TABLE_REPLY_freeTalk WHERE USER_ID = #{user_Id}
+	</select>
 </mapper>
