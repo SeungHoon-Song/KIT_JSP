@@ -39,7 +39,8 @@
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
 			<form name="myPage" action="" method="post">
 			<div style="text-align: center;">
-				<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px;">포인트 결제</h1>
+				<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px;">포인트 결제</h1><span style="color: black; font-size: 18px;">💎현재 잔여 포인트 :</span> 
+					<span style="font-family: 'jua'; font-size: 15px;">${user_Point}p</span>
 				<div class="col-6 col-12-medium" style="margin: 0 0 -2em 0;">
         			<ul class="actions" style="display: inline-flex;">
 						<li><a href="${pageContext.request.contextPath}/pointCharge.us" class="button" style="display: flex; margin: 0 auto;">

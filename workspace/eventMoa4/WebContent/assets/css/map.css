@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+#map {
+	width: inherit;
+	height: 400px;
+}
+
+@media screen and (max-width: 800px){
+	#map {
+		width: inherit;
+		height: 300px;
+	}
+}
+@media screen and (max-width: 600px){
+	#map {
+		width: inherit;
+		height: 300px;
+	}
+}

@@ -154,13 +154,19 @@
 	<div class="link text user">
 		<span style="text-align: center;">
 		 <c:if test="${userStatus eq true}">
-			 ${session_id}님 로그인
+			 ${session_id}
 			</c:if>
-		<c:if test="${userStatus eq false}">
-			어서오세요!
-		</c:if>
+			<c:if test="${userStatus eq false}">
+				어서오세요!
+			</c:if>
 		</span>
-	 </div>
+	</div>
+	<c:if test="${userStatus eq true}">
+		<div class="button small main" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
+			<a href="${pageContext.request.contextPath}/pointCharge.us">
+				<span style="width: auto;">💎</span>내 포인트 : ${user_Point}p</a>
+		</div>
+	</c:if>
 	<div class="button small main" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
 		<a href="${pageContext.request.contextPath}/main.us"><img src="${pageContext.request.contextPath}/images/sidebar/main.png" style="width: auto;
 		display: block;"> 메인</a>
@@ -207,7 +213,15 @@
 		<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo">
 		<img src="${pageContext.request.contextPath}/images/sidebar/board.png" style="width: auto;
 		display: block;"> 
-		　자유게시판
+		　자유 게시판
+		</a>
+	</div>
+	<hr style="margin: 1em 0;">
+	<div class="button small delta" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
+		<a href="${pageContext.request.contextPath}/reviewboard/ReviewBoardList.rb">
+		<img src="${pageContext.request.contextPath}/images/sidebar/review.png" style="width: auto;
+		display: block;"> 
+		　후기 게시판
 		</a>
 	</div>
 </div>

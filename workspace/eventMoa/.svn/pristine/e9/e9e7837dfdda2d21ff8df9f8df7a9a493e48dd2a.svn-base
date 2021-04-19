@@ -1,0 +1,48 @@
+package com.eventmoa.app.reviewboard;
+
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.eventmoa.action.Action;
+import com.eventmoa.action.ActionForward;
+import com.eventmoa.app.freeboard.dao.FreeBoardDAO;
+import com.eventmoa.app.freeboard.vo.FreeReplyVO;
+import com.eventmoa.app.reviewboard.dao.ReviewBoardDAO;
+import com.eventmoa.app.reviewboard.vo.ReviewReplyVO;
+
+public class ReviewBoardReplyListAction implements Action{
+	@Override
+	public ActionForward execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		
+		int board_Num = Integer.parseInt(req.getParameter("board_Num"));
+		
+		PrintWriter out = resp.getWriter();
+		ReviewBoardDAO r_dao = new ReviewBoardDAO();
+		
+		JSONArray arReply = new JSONArray();
+		
+		List<ReviewReplyVO> replys = r_dao.getReplyList(board_Num);
+		
+		for(ReviewReplyVO r_vo : replys) {
+			JSONObject reply = new JSONObject();
+			reply.put("reply_Num", r_vo.getReply_Num());
+			reply.put("user_Id", r_vo.getUser_Id());
+			reply.put("reply_Content", r_vo.getReply_Content());
+			reply.put("reply_Date", r_vo.getReply_Date());
+			arReply.add(reply);
+		}
+		
+		out.println(arReply.toJSONString());
+		out.close();
+		
+		return null;
+	}
+}

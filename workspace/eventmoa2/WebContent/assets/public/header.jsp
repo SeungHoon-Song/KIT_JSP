@@ -72,6 +72,7 @@
 						<li><a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo">커뮤니티</a>
 							<ul>
 								<li><a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo">자유게시판</a><li>
+								<li><a href="${pageContext.request.contextPath}/reviewboard/ReviewBoardList.rb">인증후기</a><li>
 							</ul>
 						</li>
 					</ul>

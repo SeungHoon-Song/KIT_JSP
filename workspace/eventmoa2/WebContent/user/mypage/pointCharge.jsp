@@ -31,6 +31,12 @@
 	</head>
 	
 	<body class="is-preload">
+				      
+		<c:set var = 'userStatus' value = "false"></c:set>
+		<c:if test="${session_id ne null }">
+			<c:set var = 'userStatus' value = 'true'/>
+		</c:if>
+	
 	<!-- sideBar -->
 <jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 		<!-- Header -->
@@ -43,8 +49,12 @@
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
 		
 			<section id="five" class="wrapper special">
-			<%-- <div class="col-12"><span class="image fit"><img src="${pageContext.request.contextPath}/images/banner/ADbanner1.jpg" height="200px;" alt="" /></span></div> --%>
+				<div class="col-12"><span class="image fit"><img src="${pageContext.request.contextPath}/images/banner/ADbanner1.jpg" height="200px;" alt="" /></span></div> 
 				<h3 style="font-family: jua; font-size: 50px;"> 포인트 충전소 </h3>
+				<c:if test="${userStatus eq true}">
+					<h3><span style="color: black; font-size: 18px;">💎현재 잔여 포인트 :</span> 
+						<span style="font-family: 'jua'; font-size: 15px;">${user_Point}p</span></h3>
+				</c:if>
 						<ul class="faces">
 							<li>
 								<a id="charge" href="5000">
@@ -176,7 +186,7 @@
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : '결제테스트',
 				amount : point,
-				buyer_email : 'eventmoa1515@gmail.com',
+				buyer_email : 's10269@naver.com',
 				buyer_name : '이벤트모아(주)',
 				buyer_tel : '010-1234-5678',
 				buyer_addr : '서울특별시 강남구 삼성동',

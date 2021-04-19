@@ -1,0 +1,52 @@
+package com.eventmoa.app.reviewboard;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.eventmoa.action.Action;
+import com.eventmoa.action.ActionForward;
+import com.eventmoa.app.reviewboard.dao.ReviewBoardDAO;
+import com.eventmoa.app.reviewboard.dao.ReviewFilesDAO;
+import com.eventmoa.app.reviewboard.vo.ReviewBoardVO;
+import com.eventmoa.app.reviewboard.vo.ReviewFilesVO;
+import com.eventmoa.app.reviewboard.vo.ReviewReplyVO;
+
+public class ReviewBoardViewAction implements Action{
+	@Override
+	public ActionForward execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		
+		ReviewBoardDAO r_dao = new ReviewBoardDAO();
+		ReviewBoardDAO rr_dao = new ReviewBoardDAO();
+		ReviewBoardVO r_vo = null;
+		ReviewFilesDAO f_dao = new ReviewFilesDAO();
+		
+		ActionForward forward = null;
+		int board_Num = Integer.parseInt(req.getParameter("board_Num").trim());
+		int page = Integer.parseInt(req.getParameter("page"));
+		r_vo = r_dao.getDetail(board_Num);
+
+		List<ReviewFilesVO> fileList = f_dao.getFileList(board_Num);
+		List<ReviewReplyVO> replyList = rr_dao.getReplyList(board_Num);
+		
+		if(r_vo != null) {
+			r_dao.updateBoardView(board_Num);
+			req.setAttribute("replies", replyList);
+			req.setAttribute("r_vo", r_vo);
+			req.setAttribute("page", page);
+			if(fileList != null) {
+				req.setAttribute("files", fileList);
+			}
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/community/reviewView.jsp");
+		}
+		
+		
+		
+		return forward;
+	}
+}

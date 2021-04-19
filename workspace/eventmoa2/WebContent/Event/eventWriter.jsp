@@ -129,9 +129,7 @@
 									</span>
 									<div class="contentDiv2">
 										<!-- <textarea name="textarea" id="textarea" onkeyup="xSize(this)" rows="10" -->
-										<textarea name="content" id="content" class="content" onkeyup="xSize(this)" rows="10"
-												style="resize:inherit;width:100%;height:200px;overflow-y:hidden" 
-												placeholder="내용은 비우지 마시고, 1 ~ 3000자 이내로 입력해주시길 바랍니다."></textarea>
+										<textarea name="content" id="content" class="content" onkeyup="xSize(this)" rows="10" style="resize:inherit;width:100%;height:200px;overflow-y:hidden" placeholder="내용은 비우지 마시고, 1 ~ 3000자 이내로 입력해주시길 바랍니다."></textarea>
 										<script>
 											function xSize(e)
 											{

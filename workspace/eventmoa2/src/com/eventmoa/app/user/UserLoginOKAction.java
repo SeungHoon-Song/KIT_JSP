@@ -27,7 +27,6 @@ public class UserLoginOKAction implements Action{
 		
 		// id먼저 확인 메소드
 		String findGetId = u_dao.getFindId(id);
-		System.out.println(findGetId);
 		if(findGetId == null || findGetId == "") {
 			PrintWriter out = resp.getWriter();
 			out.println("<script> "
@@ -37,7 +36,6 @@ public class UserLoginOKAction implements Action{
 			out.close();
 		}
 		
-		
 		if(u_dao.login(id, pw)) {
 			String name = u_dao.getUserName(id);
 			String email = u_dao.getUserEmail(id);
@@ -46,6 +44,7 @@ public class UserLoginOKAction implements Action{
 			String etc = u_dao.getUserAddressEtc(id);
 			String detail = u_dao.getUserAddressDETAIL(id);
 			String currentPw = u_dao.getUserPw(id);
+			String point = u_dao.getUserPoint(id);
 			
 			session.setAttribute("login", "1");
 			session.setAttribute("session_id", id);
@@ -55,10 +54,13 @@ public class UserLoginOKAction implements Action{
 			session.setAttribute("user_Address", address);
 			session.setAttribute("user_AddressEtc", etc);
 			session.setAttribute("user_AddressDETAIL", detail);
+			session.setAttribute("user_Point", point);
 			session.setAttribute("currentPw", currentPw);
 			forward.setRedirect(true);
 			forward.setPath(req.getContextPath()+"/main.us");
+			
 			return forward;
+			
 		}else {
 			PrintWriter out = resp.getWriter();
 			out.println("<script> "

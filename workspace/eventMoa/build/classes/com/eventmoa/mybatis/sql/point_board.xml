@@ -11,14 +11,14 @@
 <!-- 포인트 적립 -->
 	<insert id="insertPoint" parameterType="pointVO">
 		INSERT INTO TABLE_BOARD_POINT 
-		VALUES (BOARD_SEQ_POINT.NEXTVAL, SYSDATE, #{point}, #{content}, #{user_Id})
+		VALUES (BOARD_SEQ_POINT.NEXTVAL, SYSDATE, #{point_Amount}, #{point_Content}, #{user_Id})
 	</insert>
 	
 	<!-- 결제내역 리스트 -->
 	<select id="getReceiptList" parameterType="map" resultType="pointVO">
  	SELECT * FROM 
 			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_POINT ORDER BY POINT_NUM DESC) D) B
+				(SELECT * FROM TABLE_BOARD_POINT WHERE USER_ID = #{user_Id} ORDER BY POINT_NUM DESC) D) B
 		WHERE B.R BETWEEN #{startRow} AND #{endRow}
 	</select>
 

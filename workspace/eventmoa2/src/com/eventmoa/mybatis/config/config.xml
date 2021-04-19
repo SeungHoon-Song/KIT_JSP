@@ -4,16 +4,18 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.eventmoa.app.user.vo.UserVO" alias="userVO"/>
-		<typeAlias type="com.eventmoa.app.user.vo.PointVO" alias="point_boardVO"/>
+		<typeAlias type="com.eventmoa.app.user.vo.PointVO" alias="pointVO"/>
 		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeBoardVO" alias="freeBoardVO"/>
 		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeFilesVO" alias="freeFilesVO"/>
 		<typeAlias type="com.eventmoa.app.freeboard.vo.FreeReplyVO" alias="freeReplyVO"/>
 		<typeAlias type="com.eventmoa.app.eventboard.vo.EventBoardVO" alias="eventBoardVO"/>
 		<typeAlias type="com.eventmoa.app.eventboard.vo.EventFilesVO" alias="eventFilesVO"/>
 		<typeAlias type="com.eventmoa.app.eventboard.vo.EventReplyVO" alias="eventReplyVO"/>
+		<typeAlias type="com.eventmoa.app.reviewboard.vo.ReviewBoardVO" alias="reviewBoardVO"/>
+		<typeAlias type="com.eventmoa.app.reviewboard.vo.ReviewReplyVO" alias="reviewReplyVO"/>
+		<typeAlias type="com.eventmoa.app.reviewboard.vo.ReviewFilesVO" alias="reviewFilesVO"/>
 		<typeAlias type="com.eventmoa.app.map.vo.MapVO" alias="mapVO"/>
 		<typeAlias type="com.eventmoa.app.map.vo.MapBoardVO" alias="mapBoardVO"/>
-		<typeAlias type="com.eventmoa.app.user.vo.PointVO" alias="pointVO"/>
 		
 		
 	</typeAliases>
@@ -35,6 +37,8 @@
 		<mapper resource="com/eventmoa/mybatis/sql/freeTalk_files.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/event_board.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/event_files.xml"/>
+		<mapper resource="com/eventmoa/mybatis/sql/review_board.xml"/>
+		<mapper resource="com/eventmoa/mybatis/sql/review_files.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/map.xml"/>
 		<mapper resource="com/eventmoa/mybatis/sql/point_board.xml"/>
 	</mappers>

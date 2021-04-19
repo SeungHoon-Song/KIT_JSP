@@ -152,6 +152,11 @@ public class UserDAO {
 		user.put("user_Name", name);
 		return (Integer) session.update("User.modifyName", user) == 1;
 	}
+	public String getUserPoint(String id) {
+		String point = "";
+		point = Integer.toString(session.selectOne("User.findPoint", id));
+		return point;
+	}
 	
 //	유저 MYPAGE INFO
 	

@@ -73,6 +73,16 @@
 	
 	<insert id="insertReply" parameterType="eventReplyVO">
 		INSERT INTO TABLE_REPLY_EVENT 
-		VALUES (REPLY_SEQ_EVENT.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content})
+		VALUES (REPLY_SEQ_EVENT.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content}, sysdate, #{reply_Star})
 	</insert>
+	
+	<delete id="deleteReply" parameterType="_int">
+		DELETE FROM TABLE_REPLY_EVENT WHERE REPLY_NUM = #{reply_Num}
+	</delete>
+	
+	<update id="updateReply" parameterType="eventReplyVO">
+		UPDATE TABLE_REPLY_EVENT
+		SET REPLY_CONTENT = #{reply_Content}
+		WHERE REPLY_NUM = #{reply_Num}
+	</update>
  </mapper>
