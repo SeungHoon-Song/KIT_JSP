@@ -19,7 +19,7 @@ public class ReviewBoardModifyAction implements Action{
 		int board_Num = Integer.parseInt(req.getParameter("board_Num"));
 		int page = Integer.parseInt(req.getParameter("page"));
 		
-		req.setAttribute("f_vo", r_dao.getDetail(board_Num));
+		req.setAttribute("r_vo", r_dao.getDetail(board_Num));
 		req.setAttribute("page", page);
 		forward.setRedirect(false);
 		forward.setPath("/community/reviewModify.jsp");

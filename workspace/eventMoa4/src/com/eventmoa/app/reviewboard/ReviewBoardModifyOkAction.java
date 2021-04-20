@@ -27,6 +27,7 @@ public class ReviewBoardModifyOkAction implements Action{
 		
 		ReviewBoardDAO r_dao = new ReviewBoardDAO();
 		ReviewFilesDAO f_dao = new ReviewFilesDAO();
+		ReviewFilesVO rf_vo = new ReviewFilesVO();
 		
 		MultipartRequest multi = null;
 		
@@ -34,29 +35,25 @@ public class ReviewBoardModifyOkAction implements Action{
 		ServletContext context= req.getSession().getServletContext();
 		String realPath= context.getRealPath(uploadFolder);
 		
-		int fileSize = 5 * 1024 * 1024;
+		int fileSize = 1024 * 1024 * 50; // 10M
 		
 		try {
 			ReviewBoardVO r_vo = new ReviewBoardVO();
 			multi = new MultipartRequest(req, realPath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
-			
 			int page = Integer.parseInt(multi.getParameter("page"));
 			int board_Num = Integer.parseInt(multi.getParameter("board_Num"));
 			
-			for(ReviewFilesVO file : f_dao.getFileList(board_Num)) {
-				File f = new File(realPath, file.getFile_Name());
+				File f = new File(realPath, f_dao.getFileList(board_Num));
 				if(f.exists()) {
 					f.delete();
 				}
-			}
 			
 			f_dao.deleteFile(board_Num);
-			
 			f_dao.insertFiles(board_Num, multi);
-			
 			r_vo.setBoard_Num(board_Num);
 			r_vo.setBoard_Title(multi.getParameter("board_Title"));
 			r_vo.setBoard_Content(multi.getParameter("board_Content"));
+			rf_vo.setFile_Name(multi.getFilesystemName("input_imgs_0"));
 			
 			r_dao.updateBoard(r_vo);
 			

@@ -41,6 +41,7 @@
 		<c:set var="replies" value="${replies}"/>
 		<c:set var="files" value="${files}"/>
 		<c:set var="rr_vo" value="${rr_vo}"/>
+		<c:set var="rf_vo" value="${rf_vo}"/>
 
 		<!-- Header -->
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
@@ -52,7 +53,7 @@
 		<jsp:include page="${pageCofntext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
 		
 		
-		<!-- FreeTalk -->
+		<!-- Review -->
 		<section id="banner">
 			<article class="column col4" style="border: 1px solid #e3e3e3; border-radius: 6px; width: 95%; margin: 0 auto;">
 				<h2 class="col_tit" style="text-align: left; color: black; margin: auto;">${r_vo.getBoard_Title()}</h2>
@@ -69,17 +70,18 @@
 					<td valign="top" style="padding-top:10px; padding-left:10px;">${r_vo.getBoard_Content()}</td>
 				</tr>
 				
-				<c:if test="${files != null}">
-					<tr height="30px">
-						<td align="center" id="td1">첨부파일</td>
-						<td>
-							<c:forEach var="file" items="${files}">
-								<a href="${pageContext.request.contextPath}/reviewboard/FileDownload.rb?fileName=${file.getFile_Name()}">${file.getFile_Name()}</a>
-							</c:forEach>
-						</td>
-					</tr>
-				</c:if>
 			</table>
+				<c:if test="${files != null}">
+					<div class="slider" style="width:100%; height: 100%; margin:0 auto; margin-top: 10%;">
+						<div>
+							<figure>
+								<!-- 이미지 뿌려주기  -->
+								<img src='${pageContext.request.contextPath}/app/reviewFilesUpload/${files}'>
+							</figure>
+						</div>
+					</div>
+				</c:if>
+				<br>
 				<a href="/community/reviewWrite.jsp"><div class="button primary small" id="recommand" style="float: right;">👍추천</div></a>
 			<form name="boardForm" method="post" style="margin-bottom: 20px;" action="${pageContext.request.contextPath}/reviewboard/ReviewBoardDeleteOk.rb">
 				<input type="hidden" name="board_Num" value="${r_vo.getBoard_Num()}">

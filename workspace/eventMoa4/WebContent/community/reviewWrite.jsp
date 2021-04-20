@@ -151,16 +151,15 @@
 						</td>
 					</tr>
 				</table>
+				<ul class="ulSection">
 				<li class="liSection"> 
 								<div class="imgDiv">
 										 이미지
-										<span>*</span>
-										<small>(<font id="imgCount"></font>/1)</small>
 								</div>
 								<div class="sc-div">
 									<ul class="imgDiv2-ul" id="imgDiv2-ul">
 											<a href="javascript:" onclick="fileUploadAction();" id="fileText" style="cursor: pointer;">
-										<li class="imgDiv2-li asd" id="addImg-li">
+										<li class="imgDiv2-li asd" id="addImg-li" style="float: left;">
 												<i class="fas fa-camera"></i><br />이미지 등록</li></a>
           									<input type="file" name="input_imgs_0" id="input_imgs_0"/>
 										<ul class="imgs_wrap">
@@ -171,7 +170,7 @@
 									<div class="imgDiv2-Btn">
 										<!-- <a href="javascript:" class="button" onclick="submitAction();">사진 등록</a> -->
 									</div>
-									<div class="imgDiv2 guideText">
+									<div class="imgDiv2 guideText" style="display: inline-block;">
 										<br>
 										<b> * 게시글에 올릴 사진을 올려주세요.</b>
 										<br>❗️ 용량이 큰 이미지를 올리실 경우 업로드가 안될 수도 있습니다. (용량 제한: 50M)
@@ -179,10 +178,10 @@
 									</div>
 									</div>
 							</li>
-				
+				</ul>
 				<div class="col-12">
 									<br>
-									<ul class="actions">
+									<ul class="actions" style="margin-top: 13%;">
 										<li style="margin: 0 auto;">
 										<a href="javascript:addBoard();" class="button primary" type="submit">등록하기</a>
 										<a href="${pageContext.request.contextPath}/reviewboard/ReviewBoardList.rb?page=${page}" class="button" type="submit">목록</a>
@@ -289,6 +288,5 @@
 		$(".imgs_wrap").disableSelection();
 	});
 	//--------------------------------------------------------------------------
-	</script>
 	</script>
 </html>

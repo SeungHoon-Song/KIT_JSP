@@ -6,7 +6,7 @@
 		INSERT INTO TABLE_FILES_REVIEW VALUES(#{file_Name}, #{board_Num})
 	</insert>
 	
-	<select id="getFileList" parameterType="_int" resultType="reviewFilesVO">
+	<select id="getFileList" parameterType="_int" resultType="string">
 		SELECT * FROM TABLE_FILES_REVIEW WHERE BOARD_NUM = #{board_Num}
 	</select>
 	
