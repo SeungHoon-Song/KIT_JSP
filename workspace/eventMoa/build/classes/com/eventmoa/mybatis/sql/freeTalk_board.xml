@@ -38,12 +38,6 @@
 		WHERE BOARD_NUM = #{board_Num}
 	</update>
 	
-<!-- 	<update id="updateBoardLikes" parameterType="_int">
-		UPDATE TABLE_BOARD_freeTalk 
-		SET BOARD_LIKES = BOARD_LIKES + 1 
-		WHERE BOARD_NUM = #{board_Num}
-	</update> -->
-	
 	<select id="getDetail" parameterType="_int" resultType="freeBoardVO">
 		SELECT * FROM TABLE_BOARD_freeTalk 
 		WHERE BOARD_NUM = #{board_Num}

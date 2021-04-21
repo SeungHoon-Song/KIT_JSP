@@ -28,9 +28,10 @@
       UPDATE TABLE_USER SET USER_PW = #{pw} WHERE USER_ID = #{id} AND USER_EMAIL = #{email2}
     </update>
 	
-	<select id="findPoint" parameterType="string" resultType="int">
+	<select id="findPoint" parameterType="string" resultType="_int">
 		SELECT USER_POINT FROM TABLE_USER WHERE USER_ID = #{id}
 	</select>
+	
 	<select id="Login" parameterType="map" resultType="_int">
 		SELECT COUNT(*) FROM TABLE_USER 
 		WHERE USER_ID = #{id} AND USER_PW = #{pw}

@@ -15,13 +15,12 @@ public class PointChargeAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		ActionForward forward = null;
+		int point = Integer.parseInt(req.getParameter("point"));
 		PointDAO p_dao = new PointDAO();
+		UserDAO u_dao = new UserDAO();
 		HttpSession session = req.getSession();
-		
 		UserVO u_vo = new UserVO();
 		u_vo.setUser_Id((String)session.getAttribute("session_id"));
-		
-		int point = Integer.parseInt(req.getParameter("point"));
 		u_vo.setUser_Point(point);
 		
 		String user_id = (String)session.getAttribute("session_id");
@@ -34,7 +33,6 @@ public class PointChargeAction implements Action{
 			if(p_dao.usePoint(p_vo)) {} // 결제 내역으로 등록 
 			
 			forward = new ActionForward();
-			UserDAO u_dao = new UserDAO();
 			String new_point = u_dao.getUserPoint(user_id);
 			session.setAttribute("user_Point", new_point);
 			forward.setRedirect(true);
