@@ -118,3 +118,22 @@
 .slick-arrow.slick-hidden {
     display: none;
 }
+
+button#next {
+    bottom: auto;
+    right: 0;
+    position: absolute;
+}
+
+button#prev {
+    left: auto;
+    bottom: -3.5%;
+    position: absolute;
+    display: flex;
+}
+
+@media screen and (max-width: 480px) {
+    button#next, button#prev {
+        display: none !important;
+    }
+}

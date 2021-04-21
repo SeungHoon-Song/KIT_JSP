@@ -81,7 +81,9 @@ public class EventDAO {
 		session.update("EventBoard.updateLikeCount", board_Num);
 	}
 	
-	
+	public void deleteBoard(int board_Num) {
+		session.delete("EventBoard.deleteBoard", board_Num);
+	}
 	// --------------------- 댓글 -----------------------
 	
 	// 댓글 넣기 
@@ -94,6 +96,10 @@ public class EventDAO {
 		return session.selectList("EventBoard.getReplyList", board_Num);
 	}
 	
+	//댓글 삭제
+	public boolean deleteReply(int reply_Num) {
+		return session.delete("EventBoard.deleteReply", reply_Num) == 1;
+	}
 	
 	
 }

@@ -44,7 +44,7 @@ public class searchKeywordAction implements Action {
 		endPage = endPage > realEndPage ? realEndPage : endPage;
 		
 		req.setAttribute("EventBoardList", e_dao.getBoardList(startRow, endRow));
-		req.setAttribute("FreeBoardList", f_dao.getBoardList(startRow, endRow));
+		req.setAttribute("FreeBoardList", f_dao.getBoardList(startRow, endRow,category));
 		req.setAttribute("category", category);
 		req.setAttribute("keyword", keyword);
 		req.setAttribute("totalCnt", totalCnt);

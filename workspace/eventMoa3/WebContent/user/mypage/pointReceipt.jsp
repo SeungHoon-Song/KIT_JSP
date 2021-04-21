@@ -21,6 +21,14 @@
 			margin: 0;
 			padding: 0;
 		}
+
+		a#btn_open {
+			width: 20%;
+			text-align: center;
+			margin: 0 auto;
+			display: inherit;
+			margin-bottom: 30%;
+		}
 		</style>
 		
 	</head>
@@ -28,7 +36,13 @@
 	<body class="is-preload">
 	
 	<c:set var="point_vo" value="${point_vo}"/>
-	
+	<c:if test="${session_id eq null}">
+         <script>
+            alert("로그인 후 이용해주세요");
+            location.replace("${pageContext.request.contextPath}/main.us");
+         </script>
+     </c:if>
+	 
 	<!-- sideBar -->
 <jsp:include page="${pageContext.request.contextPath}/assets/public/sideBar.jsp"></jsp:include>
 		<!-- Header -->
@@ -50,51 +64,32 @@
 		 	   <tbody>
 				  <tr>
 		     	     <td height="30" bgcolor="#f8f8fd" style="padding-left:20px" class="black_b_s">
-		           회원님의 포인트 적립 내역입니다.
+		           ${user_Name} 회원님의 포인트 적립 내역입니다.
 		            <b><font color="f75151">포인트 적립에 관한 모든 내역</font></b>
 		           을 보실 수 있습니다. </td>
 	   			 </tr>
 	   		 </tbody>
 		   </table>
-			<form method="post" action="#" style="margin-bottom: 30%;">
          			<button id="dayToBtn">일별</button> 
          			<button id="dayToBtn">주별</button>
          			<button id="dayToBtn">월별</button>
          			<p></p>
-					<table class="alt">
+					<table class="alt"	>
 						<thead>
 							<tr>
+								<th></th>
 								<th>날짜</th>
 								<th>포인트</th>
 								<th style="text-align: center;">내역</th>
-								<th>잔여일(남음)</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>2021-03-29 13:42:05</td>
-								<td>500P</td>
-								<td>회원가입 감사 300포인트 지급 </td>
-								<td>7일</td>
-							</tr>
+						<tbody id="receiptList">
+						
 						</tbody>
 					</table>
-			</form>
-					<div id="two" style="text-align: center; vertical-align: middle; ">
-        					  <div class="button primary small" style="width: 15%;">
-		         				<a href="${pageContext.request.contextPath}/">이전</a>
-		         				</div>
-        					  <div class="button primary small" style="width: 5%;">
-			         					<!-- 페이지 수 --> 
-			         					<a href="${pageContext.request.contextPath}/">1</a>
-			               	</div>
-         					  <div class="button primary small" style="width: 15%;">
-		         				<a href="${pageContext.request.contextPath}/">다음</a>
-			               	</div>
-					</div>
+					<a href="#" class="button" id="btn_open">더보기</a>
 					
-							
-		</article>
+				</article>
 	</section>
 		
 
@@ -104,5 +99,54 @@
 		<!-- Footer -->
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
 			
+			
 	</body>
+
+	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script>
+		var page=1;
+		var cnt = 0;
+		var tbody = $("#receiptList");
+		
+		function getList(){
+	 		var check=false;
+	 		var content = ""
+		 	$.ajax({
+		 		url:"${pageContext.request.contextPath}/user/mypage/PointReceiptAction.us",
+		 		dataType:"text",
+		 		data:{"page":page},
+		 		contentType: "application/json",
+		 		success: function(list){
+		 			//for(){}
+		 			var receiptArray=JSON.parse(list);
+		 			if(JSON.parse(list).length==0){
+		 				alert("결제된 내역이 더 이상 없습니다.");
+		 				check=true;
+		 			}
+		 			for(let i=0; i<receiptArray.length;i++){
+		 				content+="<tr><td>"+receiptArray[i].point_Num+"</td>"
+						content+="<td>"+receiptArray[i].point_Date+"</td>"
+						content+="<td>"+receiptArray[i].point_Amount+"</td>"
+						content+="<td>"+receiptArray[i].point_Content+"</td>";
+		 				/* content+="<dl><dd class='#'>"+eventArray[i].board_Title+"</dd></dl><dl><dd class='#'>"+eventArray[i].board_Address+"</dd></dl></a></li>"; */
+		 				content+="</tr>";
+		 			}
+		 			
+		 			tbody.append(content);
+		 		}	
+		 	});
+		 	if(check){
+		 		return;
+		 	}
+		 	page+=1;
+	 	}
+	 	getList();
+	 	$("#btn_open").on("click",function(e){
+	 		//a테크 이동 막기
+	 		e.preventDefault();
+	 		getList();
+	 	});
+	 	
+	</script>
+	
 </html>

@@ -25,7 +25,7 @@ public class EventBoardListOKAction implements Action {
 		ActionForward forward = new ActionForward();
 
 		String temp = req.getParameter("page");
-
+		
 		int page = Integer.parseInt(req.getParameter("page"));
 		int boardSize = 15;
 

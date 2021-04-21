@@ -3,25 +3,26 @@
 <!-- alias  freeTalk_boardVO -->
 <mapper namespace="FreeBoard">
 	<!-- 게시글 리스트 -->
+	<!-- 이벤트 선택 해서 내림차순으로 정렬-->
 	<select id="listAll" parameterType="map" resultType="freeBoardVO">
 		SELECT * FROM 
-			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_freeTalk ORDER BY BOARD_NUM DESC) D) B
-		WHERE B.R BETWEEN #{startRow} AND #{endRow}
-	</select>
-
-	<select id="listView" parameterType="map" resultType="freeBoardVO">
-		SELECT * FROM 
-			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_freeTalk ORDER BY BOARD_VIEW DESC, BOARD_DATE DESC) D) B
-		WHERE B.R BETWEEN #{startRow} AND #{endRow}
-	</select>
-	
-	<select id="listLikes" parameterType="map" resultType="freeBoardVO">
-		SELECT * FROM 
-			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_freeTalk ORDER BY BOARD_LIKES DESC, BOARD_DATE DESC) D) B
-		WHERE B.R BETWEEN #{startRow} AND #{endRow}
+         (SELECT ROWNUM R, D.* FROM 
+            (SELECT * FROM TABLE_BOARD_freeTalk ORDER BY 
+            <if test="category != null and category != ''">
+                  <choose>
+                     <when test="category == 'recent'">
+                        BOARD_DATE DESC
+                     </when>
+                     <when test="category == 'view'">
+                        BOARD_VIEW DESC
+                     </when>
+                     <when test="category == 'likes'">
+                        BOARD_LIKES DESC
+                     </when>
+                  </choose>
+            </if>
+            ) D) B
+      WHERE B.R BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
 	<select id="getBoardCnt" resultType="_int">

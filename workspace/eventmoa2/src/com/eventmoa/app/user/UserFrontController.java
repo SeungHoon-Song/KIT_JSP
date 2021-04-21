@@ -14,8 +14,8 @@ import com.eventmoa.app.user.mypage.PointReceiptAction;
 import com.eventmoa.app.user.mypage.UserAddressModifyAction;
 import com.eventmoa.app.user.mypage.UserDeleteAccountOkAction;
 import com.eventmoa.app.user.mypage.UserEmailModifyAction;
-import com.eventmoa.app.user.mypage.UserFreeBoardListOkAction;
-import com.eventmoa.app.user.mypage.UserFreeBoardReplyListOkAction;
+import com.eventmoa.app.user.mypage.UserBoardListOkAction;
+import com.eventmoa.app.user.mypage.UserBoardReplyListOkAction;
 import com.eventmoa.app.user.mypage.UserNameModifyAction;
 import com.eventmoa.app.user.mypage.UserPwModifyAction;
 
@@ -263,17 +263,17 @@ public class UserFrontController extends HttpServlet {
 			}
 		}
 		/* 내가 쓴 글*/
-		else if (command.equals("/user/mypage/UserFreeBoardListOk.us")) {
+		else if (command.equals("/user/mypage/UserBoardListOk.us")) {
 			try {
-				 forward = new UserFreeBoardListOkAction().execute(req, resp);
+				 forward = new UserBoardListOkAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
 		/* 내가 쓴 댓글 */
-		else if (command.equals("/user/mypage/UserFreeBoardReplyListOk.us")) {
+		else if (command.equals("/user/mypage/UserBoardReplyListOk.us")) {
 			try {
-				forward = new UserFreeBoardReplyListOkAction().execute(req, resp);
+				forward = new UserBoardReplyListOkAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println(e);
 			}

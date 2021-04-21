@@ -6,21 +6,21 @@
 	<select id="listAll" parameterType="map" resultType="reviewBoardVO">
 		SELECT * FROM 
 			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_REVIEW ORDER BY BOARD_NUM DESC) D) B
-		WHERE B.R BETWEEN #{startRow} AND #{endRow}
-	</select>
-	
-	<select id="listView" parameterType="map" resultType="reviewBoardVO">
-		SELECT * FROM 
-			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_REVIEW ORDER BY BOARD_VIEW DESC, BOARD_DATE DESC) D) B
-		WHERE B.R BETWEEN #{startRow} AND #{endRow}
-	</select>
-	
-	<select id="listLikes" parameterType="map" resultType="reviewBoardVO">
-		SELECT * FROM 
-			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_REVIEW ORDER BY BOARD_LIKES DESC, BOARD_DATE DESC) D) B
+				(SELECT * FROM TABLE_BOARD_REVIEW ORDER BY 
+				<if test="category != null and category != ''">
+                  <choose>
+                     <when test="category == 'recent'">
+                        BOARD_DATE DESC
+                     </when>
+                     <when test="category == 'view'">
+                        BOARD_VIEW DESC
+                     </when>
+                     <when test="category == 'likes'">
+                        BOARD_LIKES DESC
+                     </when>
+                  </choose>
+            </if>
+            ) D) B
 		WHERE B.R BETWEEN #{startRow} AND #{endRow}
 	</select>
 	

@@ -23,13 +23,14 @@ public class ReviewBoardViewAction implements Action{
 		ReviewBoardDAO rr_dao = new ReviewBoardDAO();
 		ReviewBoardVO r_vo = null;
 		ReviewFilesDAO f_dao = new ReviewFilesDAO();
+		ReviewFilesVO rf_vo = new ReviewFilesVO();
 		
 		ActionForward forward = null;
 		int board_Num = Integer.parseInt(req.getParameter("board_Num").trim());
 		int page = Integer.parseInt(req.getParameter("page"));
 		r_vo = r_dao.getDetail(board_Num);
 
-		List<ReviewFilesVO> fileList = f_dao.getFileList(board_Num);
+		String fileList = f_dao.getFileList(board_Num);
 		List<ReviewReplyVO> replyList = rr_dao.getReplyList(board_Num);
 		
 		if(r_vo != null) {
@@ -37,6 +38,7 @@ public class ReviewBoardViewAction implements Action{
 			req.setAttribute("replies", replyList);
 			req.setAttribute("r_vo", r_vo);
 			req.setAttribute("page", page);
+			req.setAttribute("rf_vo", rf_vo);
 			if(fileList != null) {
 				req.setAttribute("files", fileList);
 			}

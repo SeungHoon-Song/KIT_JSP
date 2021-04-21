@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- alias  freeTalk_boardVO -->
+<mapper namespace="FreeBoard">
+	<!-- 게시글 리스트 -->
+	<!-- 이벤트 선택 해서 내림차순으로 정렬-->
+	<select id="listAll" parameterType="map" resultType="freeBoardVO">
+		SELECT * FROM 
+         (SELECT ROWNUM R, D.* FROM 
+            (SELECT * FROM TABLE_BOARD_freeTalk ORDER BY 
+            <if test="category != null and category != ''">
+                  <choose>
+                     <when test="category == 'recent'">
+                        BOARD_DATE DESC
+                     </when>
+                     <when test="category == 'view'">
+                        BOARD_VIEW DESC
+                     </when>
+                     <when test="category == 'likes'">
+                        BOARD_LIKES DESC
+                     </when>
+                  </choose>
+            </if>
+            ) D) B
+      WHERE B.R BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getBoardCnt" resultType="_int">
+		SELECT COUNT(*) FROM TABLE_BOARD_freeTalk
+	</select>
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertBoard" parameterType="freeBoardVO">
+		INSERT INTO TABLE_BOARD_freeTalk 
+		VALUES (BOARD_SEQ_freeTalk.NEXTVAL, 0, #{board_Title}, #{board_Content}, #{board_Id}, 0, current_date, 'FREE')
+	</insert>
+	
+	<update id="updateBoardView" parameterType="_int">
+		UPDATE TABLE_BOARD_freeTalk 
+		SET BOARD_VIEW = BOARD_VIEW + 1 
+		WHERE BOARD_NUM = #{board_Num}
+	</update>
+	
+	<select id="getDetail" parameterType="_int" resultType="freeBoardVO">
+		SELECT * FROM TABLE_BOARD_freeTalk 
+		WHERE BOARD_NUM = #{board_Num}
+	</select>
+	
+	<update id="updateBoard" parameterType="freeBoardVO">
+		UPDATE TABLE_BOARD_freeTalk 
+		SET BOARD_TITLE = #{board_Title}, BOARD_CONTENT = #{board_Content} 
+		WHERE BOARD_NUM = #{board_Num}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="_int">
+		DELETE FROM TABLE_BOARD_freeTalk 
+		WHERE BOARD_NUM = #{board_Num}
+	</delete>
+	
+	<select id="getBoardNum" resultType="_int">
+		SELECT BOARD_SEQ_freeTalk.CURRVAL FROM DUAL
+	</select>
+	
+	<!-- 댓글  -->
+	<insert id="insertReply" parameterType="freeReplyVO">
+		INSERT INTO TABLE_REPLY_freeTalk 
+		VALUES(REPLY_SEQ_freeTalk.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content}, current_date, 'FREE')
+	</insert>
+	
+	<select id="getReplyList" parameterType="_int" resultType="freeReplyVO">
+		SELECT * FROM TABLE_REPLY_freeTalk WHERE BOARD_NUM = #{board_Num} ORDER BY REPLY_NUM DESC
+	</select>
+	
+	<delete id="deleteReply" parameterType="_int">
+		DELETE FROM TABLE_REPLY_freeTalk WHERE REPLY_NUM = #{reply_Num}
+	</delete>
+	
+	<update id="updateReply" parameterType="freeReplyVO">
+		UPDATE TABLE_REPLY_freeTalk
+		SET REPLY_CONTENT = #{reply_Content}
+		WHERE REPLY_NUM = #{reply_Num}
+	</update>
+	
+	<!-- 추천  -->
+	<update id="updateBoardLikes" parameterType="_int">
+		UPDATE TABLE_BOARD_freeTalk 
+		SET BOARD_LIKES = BOARD_LIKES + 1 
+		WHERE BOARD_NUM = #{board_Num}
+	</update>
+	
+</mapper>

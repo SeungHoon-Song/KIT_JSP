@@ -9,8 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.eventmoa.action.ActionForward;
+import com.eventmoa.app.user.mypage.PointChargeAction;
+import com.eventmoa.app.user.mypage.PointReceiptAction;
 import com.eventmoa.app.user.mypage.UserAddressModifyAction;
+import com.eventmoa.app.user.mypage.UserDeleteAccountOkAction;
 import com.eventmoa.app.user.mypage.UserEmailModifyAction;
+import com.eventmoa.app.user.mypage.UserBoardListOkAction;
+import com.eventmoa.app.user.mypage.UserBoardReplyListOkAction;
 import com.eventmoa.app.user.mypage.UserNameModifyAction;
 import com.eventmoa.app.user.mypage.UserPwModifyAction;
 
@@ -236,6 +241,73 @@ public class UserFrontController extends HttpServlet {
 		else if (command.equals("/user/UserModifyPwOk.us")) {
 			try {
 				 forward = new UserPwModifyAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		/* 회원 탈퇴*/
+		else if (command.equals("/user/mypage/UserDeleteAccountOk.us")) {
+			try {
+				 forward = new ActionForward();
+				 forward.setRedirect(false);
+				 forward.setPath("/user/mypage/myPage_deleteAccount.jsp");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/user/UserDeleteAccountOk.us")) {
+			try {
+				 forward = new UserDeleteAccountOkAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		/* 내가 쓴 글*/
+		else if (command.equals("/user/mypage/UserBoardListOk.us")) {
+			try {
+				 forward = new UserBoardListOkAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		/* 내가 쓴 댓글 */
+		else if (command.equals("/user/mypage/UserBoardReplyListOk.us")) {
+			try {
+				forward = new UserBoardReplyListOkAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		/* 포인트 결제내역 */
+		else if (command.equals("/user/mypage/pointReceipt.us")) {
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/user/mypage/pointReceipt.jsp");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/user/mypage/PointReceiptAction.us")) {
+			try {
+				forward = new PointReceiptAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		/* 포인트 충전 */
+		else if (command.equals("/pointCharge.us")) {
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/user/mypage/pointCharge.jsp");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else if (command.equals("/PointChargeAction.us")) {
+			try {
+				forward = new PointChargeAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println(e);
 			}

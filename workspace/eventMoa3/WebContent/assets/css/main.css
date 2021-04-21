@@ -4301,6 +4301,19 @@ input, select, textarea {
 			padding-top: 0;
 		}
 
+		/* main section one */
+		#mainSection {
+			text-align: center; 
+			padding-top: 1%;
+		}
+		#mainSection ul.grid-icons {
+			border-left: outset; 
+			border-right: inset; 
+			border-bottom: inset; 
+			border-top: outset;
+			margin: 0 auto;
+		}
+
 		@media screen and (max-width: 980px) {
 
 			#main {
@@ -4309,9 +4322,18 @@ input, select, textarea {
 				margin-top: 10%;
 			}
 
-				#main > header {
-					padding: 5em 0 3em 0 ;
-				}
+			#main > header {
+				padding: 5em 0 3em 0 ;
+			}
+
+			/* main section one */
+			#mainSection {
+				text-align: center; 
+				text-align-last: center; 
+				margin: 0 auto; 
+				padding-top: 1%;
+			}
+			
 
 		}
 

@@ -26,6 +26,41 @@
 
 		}
 
+		input[type=file] {
+			display: none;
+		}
+		
+		.leaderImg, #leaderImg_0 {
+		    position: absolute;
+		    height: 1.5rem;
+		    padding: 0px 0.5rem;
+		    display: flex;
+		    -webkit-box-align: center;
+		    align-items: center;
+		    top: 0.5rem;
+		    left: 0.5rem;
+		    background-color: rgba(30, 29, 41, 0.32);
+		    color: rgb(255, 255, 255);
+		    border-radius: 12px;
+		    font-size: 12px;
+		    display: none;
+		}
+		
+		.deleteImg {
+		    width: 1.5rem;
+		    height: 1.5rem;
+		    background-position: center center;
+		    background-repeat: no-repeat;
+		    background-size: 12px 12px;
+		    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDEyIDEyIj4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTYuODQ4IDZsMy43NzYtMy43NzZhLjYuNiAwIDEgMC0uODQ4LS44NDhMNiA1LjE1IDIuMjI0IDEuMzc2YS42LjYgMCAwIDAtLjg0OC44NDhMNS4xNTIgNiAxLjM3NiA5Ljc3NWEuNi42IDAgMSAwIC44NDguODQ5TDYgNi44NDhsMy43NzYgMy43NzZhLjU5OC41OTggMCAwIDAgMS4wMjQtLjQyNS42LjYgMCAwIDAtLjE3Ni0uNDI0TDYuODQ4IDZ6IiBvcGFjaXR5PSIuNjQiLz4KPC9zdmc+Cg==);
+		    background-color: rgba(30, 29, 41, 0.32);
+		    border-radius: 50%;
+		    position: absolute;
+		    top: 0.5rem;
+		    right: 0.5rem;
+		    float: right;
+		    cursor: pointer;
+		}
 		@media screen and (max-width: 736px) {
 			textarea, input{
 				    width: 100% !important;
@@ -39,7 +74,30 @@
 			}
 
 		}
-		</style>
+		.imgDiv2-li {
+		    width: 202px;
+		    height: 202px;
+		    position: relative;
+		    border: 1px solid rgb(230, 229, 239);
+		    background: rgb(250, 250, 253);
+		    display: flex;
+		    -webkit-box-align: center;
+		    align-items: center;
+		    -webkit-box-pack: center;
+		    justify-content: center;
+		    flex-direction: column;
+		    color: rgb(155, 153, 169);
+		    font-size: 1rem;
+		    margin-right: 1rem;
+		    margin-bottom: 1rem;
+		    /* cursor: pointer; */
+		}
+		.sc-div img {
+		    height: 200px;
+		    width: 200px;
+		    margin-right: 5px;
+		}
+	</style>
 	</head>
 	
 	<body class="is-preload">
@@ -92,38 +150,38 @@
 							<textarea name="board_Content" id="board_Content" style="height:185px; resize: none;" minlength = "1"></textarea>
 						</td>
 					</tr>
-					<tr height="30px">
-						<td align="center" style="width: 11%;">
-							<div align="center">파일 첨부</div>
-						</td>
-						<td style="padding-left:10px;">
-							<input type="file" name="board_File1">
-							<input type="button" onclick="cancleFile('board_File1')" value="삭제">
-						</td>
-					</tr>
-					<tr height="30px">
-						<td align="center" style="width: 11%;">
-							<div align="center">파일 첨부</div>
-						</td>
-						<td style="padding-left:10px;">
-							<input type="file" name="board_File2">
-							<input type="button" onclick="cancleFile('board_File2')" value="삭제">
-						</td>
-					</tr>
-					<tr height="30px">
-						<td align="center" style="width: 11%;">
-							<div align="center">파일 첨부</div>
-						</td>
-						<td style="padding-left:10px; width: 28%;">
-							<input type="file" name="board_File3">
-							<input type="button" onclick="cancleFile('board_File3')" value="삭제">
-						</td>
-					</tr>
 				</table>
-				
+				<ul class="ulSection">
+				<li class="liSection"> 
+								<div class="imgDiv">
+										 이미지
+								</div>
+								<div class="sc-div">
+									<ul class="imgDiv2-ul" id="imgDiv2-ul">
+											<a href="javascript:" onclick="fileUploadAction();" id="fileText" style="cursor: pointer;">
+										<li class="imgDiv2-li asd" id="addImg-li" style="float: left;">
+												<i class="fas fa-camera"></i><br />이미지 등록</li></a>
+          									<input type="file" name="input_imgs_0" id="input_imgs_0"/>
+										<ul class="imgs_wrap">
+
+										</ul>
+
+									</ul>
+									<div class="imgDiv2-Btn">
+										<!-- <a href="javascript:" class="button" onclick="submitAction();">사진 등록</a> -->
+									</div>
+									<div class="imgDiv2 guideText" style="display: inline-block;">
+										<br>
+										<b> * 게시글에 올릴 사진을 올려주세요.</b>
+										<br>❗️ 용량이 큰 이미지를 올리실 경우 업로드가 안될 수도 있습니다. (용량 제한: 50M)
+										<br>❗️ 이미지는 1개만 등록할 수 있습니다.
+									</div>
+									</div>
+							</li>
+				</ul>
 				<div class="col-12">
 									<br>
-									<ul class="actions">
+									<ul class="actions" style="margin-top: 13%;">
 										<li style="margin: 0 auto;">
 										<a href="javascript:addBoard();" class="button primary" type="submit">등록하기</a>
 										<a href="${pageContext.request.contextPath}/reviewboard/ReviewBoardList.rb?page=${page}" class="button" type="submit">목록</a>
@@ -160,14 +218,75 @@
 			}
 				freeBoardform.submit();
 		}
+	</script>
+	<script>
+	$(document).ready(function(){
+		$("#input_imgs_0").on("change", handleImgFileSelect);
 		
-		function cancleFile(fileTagName){
-			if($.browser.msie){//ie일 때
-				//첨부파일 업로드 전의 태그를 복사해 놓고, 초기화 시 복사된 태그를 덮어 씌워준다.
-				$("input[name='" + fileTagName + "']").replaceWith($("input[name='" + fileTagName + "']").clone(true));
-			}else{//그 외 브라우저
-				$("input[name='" + fileTagName + "']").val("");
+	});	
+	function fileUploadAction() {
+		$("#input_imgs_0").trigger('click');
+	}
+	 
+	function handleImgFileSelect(e){ 
+		// 이미지 정보들을 초기화
+		sel_files = [];
+		$(".imgs_wrap").empty();
+
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		var index = 0;
+		var fileCnt = 1;
+
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")) {
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;
+			} else if (sel_files.length > 10 || index > 10) {
+				alert("이미지는 10개 이하로만 업로드가 가능합니다.");
+				return;
 			}
-		}
+			sel_files.push(f);
+
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var html = "<a href=\"javascript:void(0);\" id=\"img_id_"+index+"\">"
+					+" <li id='imageList_"+index+"' class='imgDiv2-li'><div id='leaderImg_"+index+"' class='leaderImg'></div>"
+					// +" <input type=\"file\" name='input_imgs_"+fileCnt+"'>"
+					+" <button type='button' class=\"deleteImg\" onclick=\"deleteImageAction("+index+")\"></button>"
+					+" <img src=\"" + e.target.result +"\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'>"
+					+" </li></a>";
+				$(".imgs_wrap").append(html);
+				index++;
+				fileCnt++;
+			document.getElementById("leaderImg_0").style.display = "block";
+			document.getElementById("leaderImg_0").innerHTML = "대표 이미지";
+			document.getElementById("imgCount").innerHTML = sel_files.length+"";
+			}
+			reader.readAsDataURL(f);
+		});
+
+		
+
+	}
+
+	function deleteImageAction(index) {
+		console.log("index : "+index);
+		console.log("sel length : "+sel_files.length);
+
+		sel_files.splice(index, 1);
+
+		var img_id = "#img_id_"+index;
+		$(img_id).remove();
+		document.getElementById("imgCount").innerHTML = ""+sel_files.length+"";
+	}
+
+	//-------------------------------이미지 드래그------------------------------------
+	$(function() {
+		$(".imgs_wrap").sortable();
+		$(".imgs_wrap").disableSelection();
+	});
+	//--------------------------------------------------------------------------
 	</script>
 </html>

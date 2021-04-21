@@ -25,21 +25,20 @@ public class ReviewBoardDeleteOkAction implements Action{
 		String uploadFolder = "/app/reviewFilesUpload";
 		ServletContext context= req.getSession().getServletContext();
 		String realPath= context.getRealPath(uploadFolder);
-		
 		int board_Num = Integer.parseInt(req.getParameter("board_Num"));
 		int page = Integer.parseInt(req.getParameter("page"));
 		
-		for(ReviewFilesVO file : f_dao.getFileList(board_Num)) {
-			File f = new File(realPath, file.getFile_Name());
+			File f = new File(realPath, f_dao.getFileList(board_Num));
+			System.out.println(f);
 			if(f.exists()) {
 				f.delete();
 			}
-		}
+			
 		f_dao.deleteFile(board_Num);
 		r_dao.deleteBoard(board_Num);
 		
 		forward.setRedirect(false);
-		forward.setPath(req.getContextPath() + "/reviewboard/ReviewBoardList.bo");
+		forward.setPath(req.getContextPath() + "/reviewboard/ReviewBoardList.rb");
 		
 		return forward;
 	}

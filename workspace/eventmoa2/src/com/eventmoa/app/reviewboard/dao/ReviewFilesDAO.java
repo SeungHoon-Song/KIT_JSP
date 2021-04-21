@@ -41,8 +41,8 @@ public class ReviewFilesDAO {
 		return check;
 	}
 	
-	public List<ReviewFilesVO> getFileList(int board_Num){
-		return session.selectList("ReviewFiles.getFileList", board_Num);
+	public String getFileList(int board_Num){
+		return session.selectOne("ReviewFiles.getFileList", board_Num);
 	}
 	public void deleteFile(int board_Num) {
 		session.delete("ReviewFiles.deleteFile", board_Num);

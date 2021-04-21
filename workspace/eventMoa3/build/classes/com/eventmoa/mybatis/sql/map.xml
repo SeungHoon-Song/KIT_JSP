@@ -3,11 +3,16 @@
 
 <mapper namespace="Map">
 	<select id="getAddress" parameterType="string" resultType="mapVO">
-		SELECT USER_ADDRESS, USER_ADDRESS_DETAIL, USER_ADDRESS_ETC FROM TABLE_USER 
+		SELECT USER_ADDRESS, USER_ADDRESS_ETC FROM TABLE_USER 
 		WHERE USER_ID = #{user_id}
 	</select>
 	
 	<select id="getAddressList" resultType="mapBoardVO">
 		SELECT BOARD_ADDRESS, BOARD_ADDRESS_DETAIL, BOARD_ADDRESS_ETC, BOARD_TITLE FROM TABLE_BOARD_EVENT
+	</select>
+
+	<select id="getEventboardAddress" parameterType="string" resultType="string">
+		SELECT BOARD_ADDRESS, BOARD_ADDRESS_ETC FROM TABLE_BOARD_EVENT 
+		WHERE BOARD_NUM =  #{board_Num}
 	</select>
 </mapper>

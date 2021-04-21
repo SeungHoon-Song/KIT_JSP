@@ -11,6 +11,7 @@ import com.eventmoa.action.ActionForward;
 import com.eventmoa.app.reviewboard.dao.ReviewBoardDAO;
 import com.eventmoa.app.reviewboard.dao.ReviewFilesDAO;
 import com.eventmoa.app.reviewboard.vo.ReviewBoardVO;
+import com.eventmoa.app.reviewboard.vo.ReviewFilesVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -20,6 +21,7 @@ public class ReviewBoardWriteOkAction implements Action{
 		ReviewBoardVO r_vo = new ReviewBoardVO();
 		ReviewBoardDAO r_dao = new ReviewBoardDAO();
 		ReviewFilesDAO f_dao = new ReviewFilesDAO();
+		ReviewFilesVO rf_vo = new ReviewFilesVO();
 		ActionForward forward = null;
 		
 		String uploadFolder = "/app/reviewFilesUpload";
@@ -39,6 +41,8 @@ public class ReviewBoardWriteOkAction implements Action{
 		r_vo.setBoard_Title(multi.getParameter("board_Title"));
 		r_vo.setBoard_Id(multi.getParameter("board_Id"));
 		r_vo.setBoard_Content(multi.getParameter("board_Content"));
+		
+		rf_vo.setFile_Name(multi.getFilesystemName("input_imgs_0"));
 		
 		if(r_dao.insertBoard(r_vo)) {
 			if(f_dao.insertFiles(r_dao.getBoardNum(), multi)) {

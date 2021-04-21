@@ -6,21 +6,18 @@
 	<select id="listAll" parameterType="map" resultType="reviewBoardVO">
 		SELECT * FROM 
 			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_REVIEW ORDER BY BOARD_NUM DESC) D) B
-		WHERE B.R BETWEEN #{startRow} AND #{endRow}
-	</select>
-	
-	<select id="listView" parameterType="map" resultType="reviewBoardVO">
-		SELECT * FROM 
-			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_REVIEW ORDER BY BOARD_VIEW DESC, BOARD_DATE DESC) D) B
-		WHERE B.R BETWEEN #{startRow} AND #{endRow}
-	</select>
-	
-	<select id="listLikes" parameterType="map" resultType="reviewBoardVO">
-		SELECT * FROM 
-			(SELECT ROWNUM R, D.* FROM 
-				(SELECT * FROM TABLE_BOARD_REVIEW ORDER BY BOARD_LIKES DESC, BOARD_DATE DESC) D) B
+				(SELECT * FROM TABLE_BOARD_REVIEW ORDER BY 
+				<if test="category != null and category != ''">
+                  <choose>
+                     <when test="category == 'recent'">
+                        BOARD_DATE DESC
+                     </when>
+                     <when test="category == 'view'">
+                        BOARD_VIEW DESC
+                     </when>
+                  </choose>
+            </if>
+            ) D) B
 		WHERE B.R BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
@@ -31,7 +28,7 @@
 	<!-- 리뷰 등록 -->
 	<insert id="insertBoard" parameterType="reviewBoardVO">
 		INSERT INTO TABLE_BOARD_REVIEW 
-		VALUES (BOARD_SEQ_REVIEW.NEXTVAL, 0, #{board_Title}, #{board_Content}, #{board_Id}, 0, current_date)
+		VALUES (BOARD_SEQ_REVIEW.NEXTVAL, #{board_Title}, #{board_Content}, #{board_Id}, 0, current_date, 'REVIEW')
 	</insert>
 	
 	<update id="updateBoardView" parameterType="_int">
@@ -63,7 +60,7 @@
 	<!-- 댓글 -->
 	<insert id="insertReply" parameterType="reviewReplyVO">
 		INSERT INTO TABLE_REPLY_REVIEW 
-		VALUES(BOARD_SEQ_REVIEW.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content}, current_date)
+		VALUES(BOARD_SEQ_REVIEW.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content}, current_date, 'REVIEW')
 	</insert>
 	
 	<select id="getReplyList" parameterType="_int" resultType="reviewReplyVO">
@@ -78,13 +75,6 @@
 		UPDATE TABLE_REPLY_REVIEW
 		SET REPLY_CONTENT = #{reply_Content}
 		WHERE REPLY_NUM = #{reply_Num}
-	</update>
-	
-	<!-- 추천 구현 예정-->
-	<update id="updateBoardLikes" parameterType="_int">
-		UPDATE TABLE_BOARD_REVIEW 
-		SET BOARD_LIKES = BOARD_LIKES + 1 
-		WHERE BOARD_NUM = #{board_Num}
 	</update>
 	
 </mapper>

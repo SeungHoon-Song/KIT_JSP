@@ -25,6 +25,7 @@ public class EventBoardWriterOkAction implements Action {
 		ActionForward forward = null;
 		
 		// 업로드
+//		String realPath = "/Users/corner/eventMoa-Project/workspace/eventMoa/WebContent/app/eventFilesUpload";
 		String uploadFolder = "/app/eventFilesUpload";
 		ServletContext context= req.getSession().getServletContext();
 		String realPath= context.getRealPath(uploadFolder);
@@ -50,6 +51,8 @@ public class EventBoardWriterOkAction implements Action {
 		ev_vo.setEVT_START_DT(multi.getParameter("datepicker1"));
 		ev_vo.setEVT_END_DT(multi.getParameter("datepicker2"));
 		
+		System.out.println(multi.getParameter("callNumber"));
+		System.out.println(multi.getParameter("phoneNumber"));
 		if(multi.getParameter("callNumber") != null ) {
 			ev_vo.setBoard_CallNumber(multi.getParameter("callNumber"));
 		} else {

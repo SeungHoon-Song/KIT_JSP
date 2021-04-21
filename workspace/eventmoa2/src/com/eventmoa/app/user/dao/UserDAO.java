@@ -221,12 +221,12 @@ public class UserDAO {
 	
 	//내가 쓴 글
 	public List<FreeBoardVO> getBoardList(int startRow, int endRow, String board_Id) {
-		HashMap<String, Object> pageMap = new HashMap<>();
-		
-		pageMap.put("startRow", startRow);
-		pageMap.put("endRow", endRow);
-		pageMap.put("board_Id", board_Id);
-		
+		 HashMap<String, Object> pageMap = new HashMap<>();
+	      
+	     pageMap.put("startRow", startRow);
+	     pageMap.put("endRow", endRow);
+	     pageMap.put("board_Id", board_Id);
+	     
 		return session.selectList("User.listAll", pageMap);
 	}
 	

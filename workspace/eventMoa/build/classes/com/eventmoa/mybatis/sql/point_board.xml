@@ -11,7 +11,13 @@
 <!-- 포인트 적립 -->
 	<insert id="insertPoint" parameterType="pointVO">
 		INSERT INTO TABLE_BOARD_POINT 
-		VALUES (BOARD_SEQ_POINT.NEXTVAL, SYSDATE, #{point_Amount}, #{point_Content}, #{user_Id})
+		VALUES (BOARD_SEQ_POINT.NEXTVAL, current_date, #{point_Amount}, #{point_Content}, #{user_Id})
+	</insert>
+	
+	<!-- 포인트 사용-->
+	<insert id="usePoint" parameterType="pointVO">
+		INSERT INTO TABLE_BOARD_POINT 
+		VALUES (BOARD_SEQ_POINT.NEXTVAL, current_date, #{point_Amount}, #{point_Content}, #{user_Id}) 
 	</insert>
 	
 	<!-- 결제내역 리스트 -->

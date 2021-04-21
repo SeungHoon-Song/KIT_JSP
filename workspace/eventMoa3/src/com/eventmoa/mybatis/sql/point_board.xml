@@ -2,7 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- alias  point_boardVO -->
 <mapper namespace="PointBoard">
- 
+ 	<update id="charge" parameterType="userVO">
+ 		UPDATE TABLE_USER 
+ 		SET USER_POINT = USER_POINT + #{user_Point}
+ 		WHERE USER_ID = #{user_Id}
+ 	</update>
+
+<!-- 포인트 적립 -->
+	<insert id="insertPoint" parameterType="pointVO">
+		INSERT INTO TABLE_BOARD_POINT 
+		VALUES (BOARD_SEQ_POINT.NEXTVAL, SYSDATE, #{point_Amount}, #{point_Content}, #{user_Id})
+	</insert>
+	
+	<!-- 결제내역 리스트 -->
+	<select id="getReceiptList" parameterType="map" resultType="pointVO">
+ 	SELECT * FROM 
+			(SELECT ROWNUM R, D.* FROM 
+				(SELECT * FROM TABLE_BOARD_POINT WHERE USER_ID = #{user_Id} ORDER BY POINT_NUM DESC) D) B
+		WHERE B.R BETWEEN #{startRow} AND #{endRow}
+	</select>
+
+
 </mapper>
 
 

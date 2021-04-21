@@ -96,6 +96,10 @@ public class EventDAO {
 		return session.selectList("EventBoard.getReplyList", board_Num);
 	}
 	
+	//댓글 삭제
+	public boolean deleteReply(int reply_Num) {
+		return session.delete("EventBoard.deleteReply", reply_Num) == 1;
+	}
 	
 	
 }

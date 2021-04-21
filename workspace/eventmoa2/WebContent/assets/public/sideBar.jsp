@@ -210,7 +210,7 @@
 	</div>
     <hr style="margin: 1em 0;">
 	<div class="button small delta" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
-		<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo">
+		<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo?category=recent">
 		<img src="${pageContext.request.contextPath}/images/sidebar/board.png" style="width: auto;
 		display: block;"> 
 		　자유 게시판
@@ -218,7 +218,7 @@
 	</div>
 	<hr style="margin: 1em 0;">
 	<div class="button small delta" style="display: flex; margin: 0 auto; width: 95%; box-shadow: none;">
-		<a href="${pageContext.request.contextPath}/reviewboard/ReviewBoardList.rb">
+		<a href="${pageContext.request.contextPath}/reviewboard/ReviewBoardList.rb?category=recent">
 		<img src="${pageContext.request.contextPath}/images/sidebar/review.png" style="width: auto;
 		display: block;"> 
 		　후기 게시판

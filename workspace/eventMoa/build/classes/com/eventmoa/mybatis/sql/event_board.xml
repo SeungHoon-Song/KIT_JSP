@@ -43,12 +43,6 @@
 		WHERE BOARD_NUM = #{board_Num}
 	</update>
 	
-	<update id="updateLikeCount" parameterType="_int">
-		UPDATE TABLE_BOARD_EVENT 
-		SET BOARD_LIKE = BOARD_LIKE + 1 
-		WHERE BOARD_NUM = #{board_Num}
-	</update>
-	
 	<delete id="deleteBoard" parameterType="_int">
 		DELETE FROM TABLE_BOARD_EVENT WHERE BOARD_NUM = #{board_Num}
 	</delete>
@@ -73,7 +67,7 @@
 	
 	<insert id="insertReply" parameterType="eventReplyVO">
 		INSERT INTO TABLE_REPLY_EVENT 
-		VALUES (REPLY_SEQ_EVENT.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content}, current_date, #{reply_Star})
+		VALUES (REPLY_SEQ_EVENT.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content}, current_date, #{reply_Star}, 'EVENT')
 	</insert>
 	
 	<delete id="deleteReply" parameterType="_int">
@@ -84,5 +78,10 @@
 		UPDATE TABLE_REPLY_EVENT
 		SET REPLY_CONTENT = #{reply_Content}
 		WHERE REPLY_NUM = #{reply_Num}
+	</update>
+	
+	<!-- 글 등록시 포인트 차감-->
+	<update id="usePoint" parameterType="map">
+		UPDATE TABLE_USER SET USER_POINT = (USER_POINT - #{point}) WHERE user_Id = #{user_Id}
 	</update>
  </mapper>

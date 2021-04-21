@@ -27,6 +27,7 @@
 		}
 		.star_rating a:first-child {margin-left:0;}
 		.star_rating a.on {color:#777;}
+		a.star {color: #777;}
 		.intro{
 			display:inline-block;
 			margin-right:3%;
@@ -50,12 +51,20 @@
 		.col_desc{
 			margin-top: 3%;
 		}
+
+		#dayToBtn {
+			cursor: pointer;
+			height: 30%;
+			margin: 0;
+			/* width: 10%;
+			padding: 0; */
+		}
 		</style>
 	</head>
 	
 	<body class="is-preload">
 		<c:set var="e_vo" value="${e_vo}"/>
-		<c:set var="replies" value="${replies}"/>
+		<c:set var="replyList" value="${replyList}"/>
 		<c:set var="files" value="${files}"/>
 		
 		<c:set var="session_id" value="${session_id}" />
@@ -186,10 +195,11 @@
 							<a href="javascript:deleteBoard()"><div class="button small" style="float: right; margin-top: 2%;">삭제</div></a>
 						</c:if>
 						<a href="${pageContext.request.contextPath}/eventboard/EventBoardList.ev?page=${page}"><div class="button small" style="float: right; margin-top: 2%;">목록</div></a>
-						</div>
-
-				<section style="padding:3%;">
-					<form method="post" action="#">
+					</div>
+			
+						<!-- 댓글 -->
+				<section style="padding:3%; margin-top: 5%;">
+					<form method="post" action="#" name="replyForm">
 						<div class="col-12">
 							<p class="star_rating" style="display:inline">
 						    <a href="#" class="on">★</a>
@@ -198,68 +208,24 @@
 						    <a href="#" class="on">★</a>
 						    <a href="#" class="on">★</a>
 						</p>
-							<textarea name="reply" id="reply" rows="4" style="resize:none;"></textarea>
-							<a style="float:right; font-size:0.9rem;">등록</a>
+					</br>
+						<span id="startext">평가하기</span>
+						<c:if test="${session_id == null}" >
+							<textarea name="content" id="reply" rows="4" style="resize:none;" readonly="readonly">
+							로그인 후 이용 가능한 서비스 입니다.</textarea>
+						</c:if>
+						<c:if test="${session_id != null }">
+							<textarea name="reply_Content" id="reply" rows="4" style="resize:none;"></textarea>
+							<button id="dayToBtn" style="float:right; font-size:0.9rem;" onclick="insertReply()">등록</button>
+						</c:if>
+							<!-- <textarea name="reply" id="reply" rows="4" style="resize:none;"></textarea> -->
 						</div>
 					</form>
-				</section>
-				<article class="column col6">
-					<span style="font-size:35px; display:block">5.0</span>
-					<p class="star_rating" style="display:inline">
-					    <a href="#" class="on">★</a>
-					    <a href="#" class="on">★</a>
-					    <a href="#" class="on">★</a>
-					    <a href="#" class="on">★</a>
-					    <a href="#" class="on">★</a>
-					</p>
-					<span class="content">좋아요! 맛있어요!</span>
-					<span id="writer" class="date">03.31</span>
-					<span id="writer">작성자</span>
-					<p class="col_desc"><span></span></p>
-				</article>
-				<article class="column col6">
-					<span style="font-size:35px; display:block">4.0</span>
-					<p class="star_rating" style="display:inline">
-					    <a href="#" class="on">★</a>
-					    <a href="#" class="on">★</a>
-					    <a href="#" class="on">★</a>
-					    <a href="#" class="on">★</a>
-					    <a href="#">★</a>
-					</p>
-					<span class="content">좋아요! 맛있어요!</span>
-					<span id="writer" class="date">03.31</span>
-					<span id="writer">작성자</span>
-					<p class="col_desc"><span></span></p>
-				</article>
-				<article class="column col6">
-					<span style="font-size:35px; display:block">3.0</span>
-					<p class="star_rating" style="display:inline">
-					    <a href="#" class="on">★</a>
-					    <a href="#" class="on">★</a>
-					    <a href="#" class="on">★</a>
-					    <a href="#">★</a>
-					    <a href="#">★</a>
-					</p>
-					<span class="content">좋아요! 맛있어요!</span>
-					<span id="writer" class="date">03.31</span>
-					<span id="writer">작성자</span>
-					<p class="col_desc"><span></span></p>
-				</article>
-				<article class="column col6">
-					<span style="font-size:35px; display:block">2.0</span>
-					<p class="star_rating" style="display:inline">
-					    <a href="#" class="on">★</a>
-					    <a href="#" class="on">★</a>
-					    <a href="#">★</a>
-					    <a href="#">★</a>
-					    <a href="#">★</a>
-					</p>
-					<span class="content">좋아요! 맛있어요!</span>
-					<span id="writer" class="date">03.31</span>
-					<span id="writer">작성자</span>
-					<p class="col_desc"><span></span></p>
-				</article>
-			
+					
+				</section> 
+				<div id="reCon">
+
+				</div>
 			
 			
 			
@@ -270,13 +236,14 @@
 		<!-- Footer -->
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
 
-		
+			<script>var contextPath = "${pageContext.request.contextPath}";</script>
 			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014e09a77678170402c5f935f0a72af&libraries=services,clusterer,drawing"></script>
 <script>
 	function deleteBoard(){
 		boardForm.submit();
 	}
 	//평점
+
 	$( ".star_rating a" ).click(function() {
 	    $(this).parent().children("a").removeClass("on");
 	    $(this).addClass("on").prevAll("a").addClass("on");
@@ -284,6 +251,112 @@
 	});
 	</script>
 
+<script>
+
+		var cnt = 0;
+		var replyContent = $("#reCon");
+		var board_Num = "${e_vo.getBoard_Num()}";
+		var reply_Date = "${reply.getReply_Date()}";
+		var id = '${session_id}';
+
+		function getList(){
+	 		var content = "";
+		 	$.ajax({
+				url : contextPath + "/eventboard/EventReplyList.ev?board_Num=" + board_Num,
+		 		dataType:"text",
+		 		contentType: "application/json",
+		 		success: function(list){
+		 			//for(){}
+		 			var replyArray=JSON.parse(list);
+		 			for(let i=0; i<replyArray.length;i++){
+						 var star = replyArray[i].reply_Star;
+						 var r_content = replyArray[i].reply_Content;
+						 var r_num = replyArray[i].reply_Num;
+						 var year = replyArray[i].reply_Date.substr(0,4);
+						 var monts = replyArray[i].reply_Date.substr(5,2);
+						 var day = replyArray[i].reply_Date.substr(8,2);
+						 var r_id = replyArray[i].user_Id;
+						content += "<article class='column col6'> <span style='font-size:35px; display:block;'></span>";
+						content += "<p class='star_rating' style='display:inline;'><a class='star'>"+star+"</a></p>";
+						content += "<span class='content'>"+ r_content +"</span>";
+						content += "<span id='writer' class='date'>작성일: "+year+"-"+monts+"-"+day+"</span>";
+						content += "<span id='writer'>작성자: "+ r_id+"</span>";
+						if(r_id == id){
+							content += "<br><button id='dayToBtn' style='float:right; font-size:0.9rem;' onclick='javascript:deleteReply("+r_num+")'>삭제</button>"
+						} 
+						content += "<p class='col_desc'></p></article>";
+		 			}
+		 			
+		 			replyContent.append(content);
+		 		}	
+		 	});
+	 	}
+	 	getList();
+
+	// <!-- 댓글 -->
+	
+	var score = 1;
+	function insertReply() {
+		score = $('.on').length;
+		var reply_Content = $("textarea[name='reply_Content']").val();
+			$.ajax({
+				url : contextPath + "/eventboard/EventReplyAdd.ev",
+				type : "post",
+				data : {"reply_Content" : reply_Content, "board_Num" : board_Num, "reply_Date" : reply_Date, "reply_Star" : score},
+				dataType : "text",
+				success : function(result){
+					alert(result);
+				}
+			});
+	}
+		function deleteReply(reply_Num){
+			var conX = confirm('정말 삭제 하시겠습니까?');
+			if(conX) {
+				$.ajax({
+					url : contextPath + "/eventboard/EventReplyDeleteOk.ev",
+					type : "post",
+					data : {"reply_Num" : reply_Num},
+					dataType : "text",
+					success : function(result){
+						alert(result);
+					}
+				});
+			}
+		}
+		
+	/* 	function updateReply(num){
+			if(!check){
+				var textarea = $("textarea#" + num);
+				var a_ready = $("a#ready" + num);
+				var a_ok = $("a#ok" + num);
+				
+				textarea.removeAttr("readonly");
+				textarea.css("background-color", "rgba(144, 144, 144, 0.075)");
+				textarea.css("border", "solid 1px");
+				textarea.css("border-color", "#9DC2E5");
+				a_ready.hide();
+				a_ok.show();
+				check = true;
+			}else{
+				alert("수정 중인 댓글이 있습니다.");
+			}
+		} */
+		
+	/* 	function updateOkReply(reply_Num, seq){
+			var content = $("textarea#" + seq).val();
+			$.ajax({
+				url : contextPath + "/eventboard/EventReplyModifyOk.bo",
+				type : "post",
+				data : {"reply_Num" : reply_Num, "content" : content},
+				dataType : "text",
+				success : function(result){
+					alert(result);
+					check = false;
+					getList();
+				}
+			});
+		} */
+	</script>
 	   <script>
 	      //이미지 슬라이더
 	      $(".slider").slick({
@@ -303,12 +376,10 @@
 	   <script>
 	      var mapContainer = document.getElementById('map'); // 지도를 표시할 div
 	      var eventAddressesJSON = "";
-	      var pageContext = "${pageContext.request.contextPath}";
 	      var geocoder = new kakao.maps.services.Geocoder();
-		//   var boardNum = ${e_vo.getBoard_Num()} + "";
+
 	      $.ajax({
-	         url : pageContext + "/map/getEventAddress.map",
-	        //  url : pageContext + "/map/getEventMap.map",
+	         url : contextPath + "/map/getEventAddress.map",
 			// data : boardNum,
 	         dataType : "text",
 	         success : function(addresses){

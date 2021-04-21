@@ -11,6 +11,7 @@ public class FreeReplyVO {
 	private String user_Id;
 	private String reply_Content;
 	private String reply_Date;
+	private String board_Category;
 	
 	public FreeReplyVO() {;}
 
@@ -52,5 +53,13 @@ public class FreeReplyVO {
 
 	public void setReply_Date(String reply_Date) {
 		this.reply_Date = reply_Date;
+	}
+
+	public String getBoard_Category() {
+		return board_Category;
+	}
+
+	public void setBoard_Category(String board_Category) {
+		this.board_Category = board_Category;
 	}
 }

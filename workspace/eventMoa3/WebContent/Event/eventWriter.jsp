@@ -61,27 +61,30 @@
 					<div class="tagNav-div3">
 						<a class="tagNav-div-a" href="javascript:listPage();">목록</a>
 					</div>
+					<div class="tagNav-div3" style="margin-left: auto;">
+						회원 ID : &nbsp; <a class="tagNav-div-a">${session_id}</a>
+					</div>
 				</nav>
 			</div>
 			
 			<div class="mainManager">
 				<main class="mainClass">
 					<section class="mainSection">
-						<form name="writeEventForm" action="${pageContext.request.contextPath}/eventboard/EventWriterOk.ev" method="post" enctype="multipart/form-data">
+						<form name="writeEventForm" id="writeEventForm" action="${pageContext.request.contextPath}/eventboard/EventWriterOk.ev" method="post" enctype="multipart/form-data">
 						<h2>기본정보<span>*필수항목</span></h2>
 						<ul class="ulSection">
 							<li class="liSection"> 
 								<div class="imgDiv">
 										 이미지
 										<span>*</span>
-										<small>(${i}/10)</small>
+										<small>(<font id="imgCount"></font>/1)</small>
 								</div>
 								<div class="sc-div">
 									<ul class="imgDiv2-ul" id="imgDiv2-ul">
+											<a href="javascript:" onclick="fileUploadAction();" id="fileText" style="cursor: pointer;">
 										<li class="imgDiv2-li asd" id="addImg-li">
-											<a href="javascript:" onclick="fileUploadAction();" id="fileText"><i class="fas fa-camera" style="margin-left: 40%;"></i><br />이미지 등록</a>
-          									<input type="file" name="input_imgs[]" id="input_imgs" multiple="multiple"/>
-										</li>
+												<i class="fas fa-camera"></i><br />이미지 등록</li></a>
+          									<input type="file" name="input_imgs_0" id="input_imgs_0"/>
 										<ul class="imgs_wrap">
 
 										</ul>
@@ -93,8 +96,8 @@
 									<div class="imgDiv2 guideText">
 										<br>
 										<b> * 게시글에 올릴 사진을 올려주세요.</b>
-										<br>❗️ 용량이 큰 이미지를 여러 개 올리실 경우 업로드가 안될 수도 있습니다. (총 용량 제한: 50M)
-										<br>❗️ 같은 이미지를 여러번 올릴 수 없습니다.
+										<br>❗️ 용량이 큰 이미지를 올리실 경우 업로드가 안될 수도 있습니다. (용량 제한: 50M)
+										<br>❗️ 이미지는 1개만 등록할 수 있습니다.
 									</div>
 									</div>
 							</li>
@@ -126,9 +129,7 @@
 									</span>
 									<div class="contentDiv2">
 										<!-- <textarea name="textarea" id="textarea" onkeyup="xSize(this)" rows="10" -->
-										<textarea name="content" id="content" class="content" onkeyup="xSize(this)" rows="10"
-												style="resize:inherit;width:100%;height:200px;overflow-y:hidden" 
-												placeholder="내용은 비우지 마시고, 1 ~ 3000자 이내로 입력해주시길 바랍니다."></textarea>
+										<textarea name="content" id="content" class="content" onkeyup="xSize(this)" rows="10" style="resize:inherit;width:100%;height:200px;overflow-y:hidden" placeholder="내용은 비우지 마시고, 1 ~ 3000자 이내로 입력해주시길 바랍니다."></textarea>
 										<script>
 											function xSize(e)
 											{
@@ -284,9 +285,10 @@
 			var form = document.writeEventForm;
 			function addBoard(){
 				var regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
-				var telNum = form.phoneNumber.value; //"010-111-1111"
-				var calNum = form.callNumber.value; // "1111-1111"
+				var phoneNumberRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
 
+				var phoneNumber = $("#phoneNumber").val();
+				var callNumber = $("#callNumber").val();
 				//    유효성 검사  
 				if(form.titleName.value.length > 40 ) {
 					alert("제목은 40자 이상 넘길 수 없습니다.");
@@ -333,17 +335,33 @@
 					alert("상세주소를 정확히 입력하지 않으면 정확한 위치 확인이 불가능합니다.");
 					return;
 				}
-				else if (form.phoneNumber.value.length < 7 && form.callNumber.value.length < 7){
+				else if (form.phoneNumber.value.length < 1 && form.callNumber.value.length < 1){
 					alert("서비스 연락망은 둘 중에 하나는 입력하셔야 합니다.");
 					return;
+				} 
+/* 				else if (form.callNumber.value.length > 1 ) {
+					callValidator(callNumber);
 				}
-				else if(!regExp.test(telNum) && !regExp.test(calNum)) {
-					alert("연락처 양식에 맞게 작성해주세요.");
-					return;
+				else if (form.phoneNumber.value.length > 1) {
+					 telValidator(phoneNumber);
 				}
-				
-				
-
+				function telValidator(args) {
+					var msg = '유효하지 않는 번호입니다.';
+					// IE 브라우저에서는 당연히 var msg로 변경
+					if (/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/.test(args)) {
+					} else {
+						alert(msg);
+						return;
+					}
+				}
+				function callValidator(args) {
+					if (/^[0-9]{3,4}-[0-9]{4}/.test(args)){
+					} else {
+						alert(msg);
+						return;
+					}
+				}
+ */
 			var x = confirm("정말 이대로 글을 등록하시겠습니까?");
 				if(x) {
 					$("#fileText").text("업로드 중...");
@@ -377,15 +395,20 @@
 			}
 
 			// ----------------------------------썸네일----------------------------------
+			/* 
+			 NOTE - this is Thumbnail 
+			 Author - CORNER
+			 */
 			// 이미지 정보 담는 배열
 			var sel_files = [];
+			
 
 			$(document).ready(function(){
-				$("#input_imgs").on("change", handleImgFileSelect);
+				$("#input_imgs_0").on("change", handleImgFileSelect);
 				
 			});	
 			function fileUploadAction() {
-				$("#input_imgs").trigger('click');
+				$("#input_imgs_0").trigger('click');
 			}
 			 
 			function handleImgFileSelect(e){ 
@@ -403,6 +426,9 @@
 					if(!f.type.match("image.*")) {
 						alert("확장자는 이미지 확장자만 가능합니다.");
 						return;
+					} else if (sel_files.length > 10 || index > 10) {
+						alert("이미지는 10개 이하로만 업로드가 가능합니다.");
+						return;
 					}
 					sel_files.push(f);
 
@@ -410,17 +436,21 @@
 					reader.onload = function(e) {
 						var html = "<a href=\"javascript:void(0);\" id=\"img_id_"+index+"\">"
 							+" <li id='imageList_"+index+"' class='imgDiv2-li'><div id='leaderImg_"+index+"' class='leaderImg'></div>"
-							+" <input type=\"file\" name='input_imgs_"+fileCnt+"'>"
+							// +" <input type=\"file\" name='input_imgs_"+fileCnt+"'>"
 							+" <button type='button' class=\"deleteImg\" onclick=\"deleteImageAction("+index+")\"></button>"
 							+" <img src=\"" + e.target.result +"\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'>"
 							+" </li></a>";
 						$(".imgs_wrap").append(html);
 						index++;
+						fileCnt++;
 					document.getElementById("leaderImg_0").style.display = "block";
 					document.getElementById("leaderImg_0").innerHTML = "대표 이미지";
+					document.getElementById("imgCount").innerHTML = sel_files.length+"";
 					}
 					reader.readAsDataURL(f);
 				});
+ 
+				
 
 			}
 
@@ -432,50 +462,9 @@
 
 				var img_id = "#img_id_"+index;
 				$(img_id).remove();
+				document.getElementById("imgCount").innerHTML = ""+sel_files.length+"";
 			}
-
-
-			function submitAction() {
-				console.log("업로드 파일 갯수 : "+sel_files.length);
-				var data = new FormData();
-
-				for ( var i = 0, len=sel_files.length; i<len; i++){
-					var name = "image_"+i;
-					data.append(name, sel_files[i]);
-				}
-				data.append("image_count", sel_files.length);
-
  
-				// 컨트롤러 송신
-				// var req = new XMLHttpRequest();
-				// req.open("POST", contextPath + "/AddImgOkAction.ev");
-
-				// req.onload = function(e) {
-				// 	if(this.status == 200 ) {
-				// 		console.log("Result : "+e.currentTarget.responseText);
-				// 	}
-				// }
-				// req.send(data);
-				$.ajax({
-					url: contextPath + "/eventboard/EventWriterOk.ev",
-					enctype: "multipart/form-data",
-					type: "post",
-					data: data,
-					processData: false,
-					contentType: false,
-					timeout: 500000,
-					success: function() {
-						$("#fileText").text("업로드 중...");
-						setTimeout(function(){
-							$("#fileText").text("이미지 등록");
-						}, 5000);
-					},
-					error:function(){	//통신 오류
-	 					alert("네트워크 서버가 불안정합니다. 다시 시도해주세요. (연결 유실) ");
-	 				}
-				});
-				
-			}
 			//-------------------------------이미지 드래그------------------------------------
 			$(function() {
 				$(".imgs_wrap").sortable();

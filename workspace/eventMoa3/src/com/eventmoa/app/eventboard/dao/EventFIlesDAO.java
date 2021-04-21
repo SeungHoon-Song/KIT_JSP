@@ -50,6 +50,9 @@ public class EventFilesDAO {
 		return session.selectList("EventFiles.getFileList", board_Num);
 	}
 	
+	public void deleteFile(int board_Num) {
+		session.delete("EventFiles.deleteFiles", board_Num);
+	}
 	
 	
 	

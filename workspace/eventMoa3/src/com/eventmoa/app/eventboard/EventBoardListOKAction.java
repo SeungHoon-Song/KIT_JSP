@@ -25,7 +25,7 @@ public class EventBoardListOKAction implements Action {
 		ActionForward forward = new ActionForward();
 
 		String temp = req.getParameter("page");
-
+		
 		int page = Integer.parseInt(req.getParameter("page"));
 		int boardSize = 15;
 
@@ -40,15 +40,18 @@ public class EventBoardListOKAction implements Action {
 			JSONObject jsonObj=new JSONObject();
 			jsonObj.put("board_Num", board.getBoard_Num());
 			jsonObj.put("board_Title",board.getBoard_Title());
-//			jsonObj.put("board_Content", board.getBoard_Content());
-//			jsonObj.put("board_Id", board.getBoard_Id());
-//			jsonObj.put("board_View", board.getBoard_View());
-//			jsonObj.put("board_Date", board.getBoard_Date());
+			jsonObj.put("board_Content", board.getBoard_Content());
+			jsonObj.put("board_Id", board.getBoard_Id());
+			jsonObj.put("board_View", board.getBoard_View());
+			jsonObj.put("board_Date", board.getBoard_Date());
 			jsonObj.put("board_Zipcode", board.getBoard_Zipcode());
 			jsonObj.put("board_Address", board.getBoard_Address());
 			jsonObj.put("board_Address_Detail", board.getBoard_Address_Detail());
 			jsonObj.put("board_Address_Etc", board.getBoard_Address_etc());
 			jsonObj.put("file_name", board.getFile_name());
+			jsonObj.put("board_CallNumber", board.getBoard_CallNumber());
+			jsonObj.put("board_PhoneNumber", board.getBoard_PhoneNumber());
+			
 			
 			jsonArray.add(jsonObj);
 		}

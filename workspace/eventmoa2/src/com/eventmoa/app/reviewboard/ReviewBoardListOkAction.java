@@ -17,6 +17,7 @@ public class ReviewBoardListOkAction implements Action{
 		ActionForward forward =new ActionForward();
 		
 		String temp = req.getParameter("page");
+		String category = req.getParameter("category");
 
 		int page = temp == null ? 1 : Integer.parseInt(temp);
 		
@@ -42,9 +43,8 @@ public class ReviewBoardListOkAction implements Action{
 		req.setAttribute("endPage", endPage);
 		req.setAttribute("nowPage", page);
 		req.setAttribute("realEndPage", realEndPage);
-		req.setAttribute("boardList", r_dao.getBoardList(startRow, endRow));
-		req.setAttribute("boardListView", r_dao.getBoardListView(startRow, endRow));
-		req.setAttribute("boardListLikes", r_dao.getBoardListLikes(startRow, endRow));
+		req.setAttribute("category", category);
+		req.setAttribute("boardList", r_dao.getBoardList(startRow, endRow, category));
 		
 		forward.setRedirect(false);
 		forward.setPath("/community/reviewList.jsp");

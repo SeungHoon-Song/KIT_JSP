@@ -8,39 +8,21 @@
 편하게 복사해서 작업하세요.
 -->
 <html>
-<head>
-<title>내가 쓴 댓글 | 이벤트 모아(Event Moa)</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
-<meta name="author" content="corner3499">
-<!-- title Icon -->
-<link rel="shortcut icon" type="image/x-icon"
-	href="${pageContext.request.contextPath}/images/title-icon.png">
-<style>
-.column{
+	<head>
+		<title>내가 쓴 댓글 | 이벤트 모아(Event Moa)</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<meta name="author" content="corner3499">
+		<!-- title Icon -->
+		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/title-icon.png">
+		<style>
+ 		.column{
  			padding: 45px !important;
  		}
-.fa-search {
-	width: 20%;
-}
-
-@media screen and (max-width: 670px) {
-	#category {
-		display: none;
-		padding-left: 10%;
-	}
-}
-.td_article{
-	display: flex;
-}
-.td_date{
-	text-align: center;
-}
-</style>
-</head>
-
-<body class="is-preload">
+		</style>
+	</head>
+	
+	<body class="is-preload">
 	  <c:set var="list" value="${replyList}"/>
       <c:set var="totalCnt" value="${totalCnt}"/>
       <c:set var="startPage" value="${startPage}"/>
@@ -64,7 +46,7 @@
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/logo.jsp"></jsp:include>
 		<section id="banner">
 			<article class="column col4">
-				<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px; text-align: center;">내가 쓴 댓글</h1>
+				<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px; text-align: center;">내가 쓴 글</h1>
 				<p class="col_desc"> </p>
 		
 						<form method="post" action="#" class="combined" style="margin-bottom: 0;">
@@ -77,8 +59,8 @@
 	         			<table border="1" cellpadding="0" cellspacing="0" width="900px">
 	         			<thead>
 										<tr>
-											<th style="text-align: center;">게시글 번호</th>
-											<th style="text-align: center;">댓글</th>
+											<th style="text-align: center;">게시판</th>
+											<th style="text-align: center;width: 60%;">내용</th>
 											<th style="text-align: center;">날짜</th>
 										</tr>
 									</thead>
@@ -86,14 +68,39 @@
                <c:when test="${list != null and fn:length(list) > 0}">
 	               <c:forEach var="b_bean" items="${list}">
 	               	<tr align="center" valign="middle" onmouseover="this.style.backgroudColor='F8F8F8'" onmouseout="this.style.backgroundColor='FFFFFF'">
-	               		<td height="23" style="font-family:Tahoma; font-size:10pt; width: 12%;">
+	               		<td height="23" style="display: none;">
 	               			${b_bean.getBoard_Num()}
+	               		</td>
+	               		<td height="23" style="font-family:Tahoma; font-size:10pt;">
+	               			<c:if test="${b_bean.getBoard_Category() == 'FREE'}">
+	               				자유게시판
+	               			</c:if>
+	               			<c:if test="${b_bean.getBoard_Category() == 'EVENT'}">
+	               				이벤트게시판
+	               			</c:if>
+	               			<c:if test="${b_bean.getBoard_Category() == 'REVIEW'}">
+	               				후기게시판
+	               			</c:if>
 	               		</td>
 	               		<td style="font-family:Tahoma; font-size:10pt;">
 	               			<div align="left">
-	               				<a href="${pageContext.request.contextPath}/freeboard/FreeBoardView.bo?board_Num=${b_bean.getBoard_Num()}&page=${nowPage}">
-	               					${b_bean.getReply_Content()}
+	               			<c:if test="${b_bean.getBoard_Category() == 'FREE'}">
+	               				<a href="${pageContext.request.contextPath}/freeboard/FreeBoardView.bo?board_Num=${b_bean.getBoard_Num()}&page=${nowPage}">${b_bean.getReply_Content()}
 	               				</a>
+	               			</c:if>
+	               			<c:if test="${b_bean.getBoard_Category() == 'EVENT'}">
+	               				<a href="${pageContext.request.contextPath}/eventboard/EventView.ev?board_Num=${b_bean.getBoard_Num()}&page=${nowPage}">${b_bean.getReply_Content()}
+	               				</a>
+	               			</c:if>
+	               			<c:if test="${b_bean.getBoard_Category() == 'REVIEW'}">
+	               				<a href="${pageContext.request.contextPath}/reviewboard/ReviewBoardView.rb?board_Num=${b_bean.getBoard_Num()}&page=${nowPage}">${b_bean.getReply_Content()}
+	               				</a>
+	               			</c:if>	
+	               			</div>
+	               		</td>
+	               		<td style="display: none;">
+	               			<div align="center">
+	               				${b_bean.getUser_Id()}
 	               			</div>
 	               		</td>
 	               		<td>
@@ -106,14 +113,14 @@
 	           </c:when>
 	           <c:otherwise>
 	           	<tr>
-	           		<td colspan="3" align="center">등록된 댓글이 없습니다.</td>
+	           		<td colspan="5" align="center">등록된 댓글이 없습니다.</td>
 	           	</tr>
 	           </c:otherwise>
                </c:choose>
          </table>
          <div id="two" style="text-align: center; vertical-align: middle; ">
          			<c:if test="${nowPage >1}">
-         				<a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardReplyListOk.us?page=${nowPage - 1}">&lt;이전</a>
+         				<a href="${pageContext.request.contextPath}/user/mypage/UserBoardReplyListOk.us?page=${nowPage - 1}">&lt;이전</a>
          			</c:if>
 	         		<c:forEach var="i" begin="${startPage}" end="${endPage}">
 	         			<c:choose>
@@ -121,14 +128,14 @@
 	         				<a style="border: solid 1px;border-color: darkgray; background-color: #fff; color: #72bee1; margin: 0 2px; padding-left: 4px;">${i}&nbsp;</a>
 	         				</c:when>
 	         				<c:otherwise>
-	         					<a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardReplyListOk.us?page=${i}" style="margin: 0 2px;">${i}&nbsp;</a>
+	         					<a href="${pageContext.request.contextPath}/user/mypage/UserBoardReplyListOk.us?page=${i}" style="margin: 0 2px;">${i}&nbsp;</a>
 	         				</c:otherwise>
 	         			</c:choose>
 	         		</c:forEach>
          			<c:if test="${realEndPage != nowPage}">
-         				<a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardReplyListOk.us?page=${nowPage + 1}">다음&gt;</a>
+         				<a href="${pageContext.request.contextPath}/user/mypage/UserBoardReplyListOk.us?page=${nowPage + 1}">다음&gt;</a>
          			</c:if>
-         			<br>        
+         			<br>							         
 		</div>
 			</article>
 						</section>
@@ -139,4 +146,5 @@
 			<jsp:include page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
 			<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 			<script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
+	</body>
 </html>

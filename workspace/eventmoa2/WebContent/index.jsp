@@ -16,6 +16,7 @@
 	href="${pageContext.request.contextPath}/assets/css/map.css">
 </head>
 
+
 <body class="is-preload">
 
 	<c:set var="session_id" value="${session_id}" />
@@ -215,7 +216,7 @@
 				</li>
 				<li>
 					<div class="inner">
-						<a href="${pageContext.request.contextPath}/main.us"> <span
+						<a href="https://forms.gle/eFAe9L6vn7PR4XgUA"> <span
 							class="icon solid fa-cog major"></span>
 							<h3>문의하기</h3>
 						</a>
@@ -232,7 +233,7 @@
 
 
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014e09a77678170402c5f935f0a72af&libraries=services,clusterer,drawing"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=48502393c0ed760f273812559dafbfac&libraries=services,clusterer,drawing"></script>
 	   <script>
 	      //이미지 슬라이더
 	      $(".slider").slick({

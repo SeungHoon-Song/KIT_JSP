@@ -26,7 +26,7 @@ public class EventBoardViewOKAction implements Action{
 		EventFilesDAO ef_dao = new EventFilesDAO();
 		ActionForward forward = null;
 		
-		int boardNum =Integer.parseInt(req.getParameter("board_Num").trim());
+		int boardNum =Integer.parseInt(req.getParameter("board_Num"));
 		int page = Integer.parseInt(req.getParameter("page"));
 		
 		e_vo = e_dao.getDetail(boardNum);
@@ -34,13 +34,12 @@ public class EventBoardViewOKAction implements Action{
 		List<EventFilesVO> filesList = ef_dao.getFileList(boardNum);
 		List<EventReplyVO> replyList =  reply_dao.getReplyList(boardNum);
 		
-		
 		if(e_vo != null ) {
-			e_dao.updateReadCount(boardNum); // 조회수
-			req.setAttribute("replies", replyList);
+			// 버그 오류로 인해 조회수 메소드 잠금
+//			e_dao.updateReadCount(boardNum); // 조회수
+			req.setAttribute("replyList", replyList);
 			req.setAttribute("e_vo", e_vo);
 			req.setAttribute("page", page);
-			
 			if(filesList != null) {
 				req.setAttribute("files", filesList);
 			}

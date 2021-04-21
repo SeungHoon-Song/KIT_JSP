@@ -10,6 +10,7 @@ public class FreeReplyVO {
 	private int board_Num;
 	private String user_Id;
 	private String reply_Content;
+	private String reply_Date;
 	
 	public FreeReplyVO() {;}
 
@@ -43,5 +44,13 @@ public class FreeReplyVO {
 
 	public void setReply_Content(String reply_Content) {
 		this.reply_Content = reply_Content;
+	}
+
+	public String getReply_Date() {
+		return reply_Date;
+	}
+
+	public void setReply_Date(String reply_Date) {
+		this.reply_Date = reply_Date;
 	}
 }

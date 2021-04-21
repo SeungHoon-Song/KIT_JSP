@@ -10,6 +10,10 @@ public class EventReplyVO {
 	private int board_Num;
 	private String user_Id;
 	private String reply_Content;
+	private String reply_Date;
+	private String reply_Star;
+	private String board_Category;
+	
 	
 	public EventReplyVO() {;}
 
@@ -44,4 +48,30 @@ public class EventReplyVO {
 	public void setReply_Content(String reply_Content) {
 		this.reply_Content = reply_Content;
 	}
+
+	public String getReply_Date() {
+		return reply_Date;
+	}
+
+	public void setReply_Date(String reply_Date) {
+		this.reply_Date = reply_Date;
+	}
+
+	public String getReply_Star() {
+		return reply_Star;
+	}
+
+	public void setReply_Star(String reply_Star) {
+		this.reply_Star = reply_Star;
+	}
+
+	public String getBoard_Category() {
+		return board_Category;
+	}
+
+	public void setBoard_Category(String board_Category) {
+		this.board_Category = board_Category;
+	}
+	
+	
 }

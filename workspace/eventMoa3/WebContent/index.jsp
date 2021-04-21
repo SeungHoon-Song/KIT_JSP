@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE HTML>
+    pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>이벤트 모아 (Event Moa)</title>
@@ -14,6 +15,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/map.css">
 </head>
+
 
 <body class="is-preload">
 
@@ -141,17 +143,17 @@
 						</div>
 						<div class="col-4">
 							<span class="image fit"><img
-								src="${pageContext.request.contextPath}/images/banner/banner1.jpg"
+								src="${pageContext.request.contextPath}/images/eventAD/1.jpg"
 								alt="" /></span>
 						</div>
 						<div class="col-4">
 							<span class="image fit"><img
-								src="${pageContext.request.contextPath}/images/banner/banner2.jpg"
+								src="${pageContext.request.contextPath}/images/eventAD/2.jpg"
 								alt="" /></span>
 						</div>
 						<div class="col-4">
 							<span class="image fit"><img
-								src="${pageContext.request.contextPath}/images/banner/banner3.jpg"
+								src="${pageContext.request.contextPath}/images/eventAD/3.jpg"
 								alt="" /></span>
 						</div>
 					</div>
@@ -173,55 +175,57 @@
 
 
 		<!-- KAKAO MAP -->
-		<article class="column col4">
-			<h2 class="col_tit" style="text-align: center;">MAP</h2>
-			<div id="map" style="border-radius: 10px;"></div>
-		</article>
-
+		<c:if test="${userStatus eq true}">
+			<article class="column col4">
+				<h2 class="col_tit" style="text-align: center;">MAP</h2>
+				<div id="map" style="border-radius: 10px;"></div>
+			</article>
+		</c:if>
 
 	</div>
 	<!-- div id="main" end -->
-	<!-- One -->
-	<section id="one" class="wrapper spotlight"
-		style="text-align: center; text-align-last: center; margin: 0 auto; padding-left: 40%; padding-top: 1%;">
-		<ul class="grid-icons"
-			style="border-left: outset; border-right: inset; border-bottom: inset; border-top: outset;">
-			<li>
-				<div class="inner">
-					<a href="${pageContext.request.contextPath}/Event/nowEvent.jsp">
-						<span class="icon solid fa-check major"></span>
-						<h3>최신 이벤트</h3>
-					</a>
-				</div>
-			</li>
-			<li>
-				<div class="inner">
-					<a
-						href="${pageContext.request.contextPath}/user/mypage/myPage_list.jsp">
-						<span class="icon solid fa-user-lock major"></span>
-						<h3>내 정보</h3>
-					</a>
-				</div>
-			</li>
-			<li>
-				<div class="inner">
-					<a href="${pageContext.request.contextPath}/community/freeTalk.jsp">
-						<span class="icon solid fa-comment major"></span>
-						<h3>자유게시판 베스트</h3>
-					</a>
-				</div>
-			</li>
-			<li>
-				<div class="inner">
-					<a href="${pageContext.request.contextPath}/index.jsp"> <span
-						class="icon solid fa-cog major"></span>
-						<h3>문의하기</h3>
-					</a>
-				</div>
-			</li>
-		</ul>
 
-	</section>
+	<!-- One -->
+	<div id="mainSection">
+		<section id="one" class="wrapper spotlight">
+			<ul class="grid-icons">
+				<li>
+					<div class="inner">
+						<a href="${pageContext.request.contextPath}/eventboard/EventBoardList.ev">
+							<span class="icon solid fa-check major"></span>
+							<h3>최신 이벤트</h3>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div class="inner">
+						<a
+							href="${pageContext.request.contextPath}/mypage/myPage.us">
+							<span class="icon solid fa-user-lock major"></span>
+							<h3>내 정보</h3>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div class="inner">
+						<a href="${pageContext.request.contextPath}/freeboard/FreeBoardList.bo">
+							<span class="icon solid fa-comment major"></span>
+							<h3>자유게시판</h3>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div class="inner">
+						<a href="https://forms.gle/eFAe9L6vn7PR4XgUA"> <span
+							class="icon solid fa-cog major"></span>
+							<h3>문의하기</h3>
+						</a>
+					</div>
+				</li>
+			</ul>
+
+		</section>
+	</div>
 	<!-- Footer -->
 	<jsp:include
 		page="${pageContext.request.contextPath}/assets/public/footer.jsp"></jsp:include>
@@ -229,10 +233,7 @@
 
 
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014e09a77678170402c5f935f0a72af&libraries=services,clusterer,drawing"></script>
-	<script>
-	 <script type="text/javascript"
-	      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6cdc63540559ff9bbde7b39a1878ce94&libraries=services,clusterer,drawing"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=48502393c0ed760f273812559dafbfac&libraries=services,clusterer,drawing"></script>
 	   <script>
 	      //이미지 슬라이더
 	      $(".slider").slick({

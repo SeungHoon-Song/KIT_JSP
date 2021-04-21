@@ -78,14 +78,42 @@ public class EventBoardFrontController extends HttpServlet{
 					System.out.println(e);
 				}
 				break;
-				// IMG 임시 첨부 컨트롤러 // 재사용 용도가 될 것 같아서 eventboard/ 뺐음.
-//			case "/AddImgOkAction.ev":
-//				try {
-//					forward = new AddImgOkAction().execute(req, resp);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//				break;
+			case "/eventboard/EventDeleteOk.ev":
+				try {
+					forward = new EventBoardDeleteOkAction().execute(req, resp);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				break;
+			case "/AddImgOkAction.ev":
+				try {
+					forward = new AddImgOkAction().execute(req, resp);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+//			댓글
+			case "/eventboard/EventReplyAdd.ev":
+				try {
+					forward = new EventReplyAddOkAction().execute(req, resp);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+				break;
+			case "/eventboard/EventReplyList.ev":
+				try {
+					forward = new EventReplyListOkAction().execute(req, resp);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				break;
+			case "/eventboard/EventReplyDeleteOk.ev":
+				try {
+					forward = new EventReplyDeleteOkAction().execute(req, resp);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				break;
 			default:
 				try {
 					forward = new ActionForward();

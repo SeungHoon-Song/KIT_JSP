@@ -53,9 +53,9 @@
         		<h1 style="color: #444; font-size: 20px; font-weight: bold; letter-spacing: -2px;">나의 활동</h1>
         		<div class="col-6 col-12-medium" style="margin: 0 0 -2em 0;">
         			<ul class="actions" style="display: inline-flex;">
-						<li><a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardListOk.us" class="button" style="display: flex; margin: 0 auto;">
+						<li><a href="${pageContext.request.contextPath}/user/mypage/UserBoardListOk.us" class="button" style="display: flex; margin: 0 auto;">
 						<img src="${pageContext.request.contextPath}/images/user/board.png" style="width: auto;">　내가 쓴 글　　</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/mypage/UserFreeBoardReplyListOk.us" class="button" style="display: flex; margin: 0 auto;">
+						<li><a href="${pageContext.request.contextPath}/user/mypage/UserBoardReplyListOk.us" class="button" style="display: flex; margin: 0 auto;">
 						<img src="${pageContext.request.contextPath}/images/user/comment.png" style="width: auto;">　내가 쓴 댓글　</a></li>
 					</ul>
 				</div>

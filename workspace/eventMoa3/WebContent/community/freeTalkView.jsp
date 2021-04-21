@@ -20,7 +20,7 @@
  		}
  		
  		@media screen and (max-width: 980px){
- 		#td1 {
+ 		#td1 #replyTd {
  			width: 30% !important;
  			}
  		}
@@ -40,6 +40,7 @@
 	 	<c:set var="f_vo" value="${f_vo}"/>
 		<c:set var="replies" value="${replies}"/>
 		<c:set var="files" value="${files}"/>
+		<c:set var="r_vo" value="${r_vo}"/>
 
 		<!-- Header -->
 		<jsp:include page="${pageContext.request.contextPath}/assets/public/header.jsp"></jsp:include>
@@ -113,6 +114,7 @@
 		var check = false;
 		var pageContext = "${pageContext.request.contextPath}";
 		var board_Num = "${f_vo.getBoard_Num()}";
+		var reply_Date = "${r_vo.getReply_Date()}";
 		
 		//댓글 추가
 		function insertReply(){
@@ -120,7 +122,7 @@
 			$.ajax({
 				url : pageContext + "/freeboard/FreeBoardReplyOk.bo",
 				type : "post",
-				data : {"reply_Content" : reply_Content, "board_Num" : board_Num},
+				data : {"reply_Content" : reply_Content, "board_Num" : board_Num, "reply_Date" : reply_Date},
 				dataType : "text",
 				success : function(result){
 					alert(result);
@@ -145,16 +147,16 @@
 			
 		    if(replys != null && replys.length != 0){
 		    	$.each(replys, function(index, reply){
-		    		text += "<tr style='border-top: solid 1px; border-color: #e3e3e3;'><td align='center' width='150px'>" + reply.user_Id + "</td>";
+		    		text += "<tr style='border-top: solid 1px; border-color: #e3e3e3;'><td align='center' width='150px' id='replyTd'>" + reply.user_Id + "</td>";
 		    		text += "<td valign='top' style='padding-left:10px;'>";
 		    		text += "<textarea name='content" + (index + 1) + "' id='"+ (index + 1) +"' class='re' style='height:85px; resize:none; border: none; background-color: white;' readonly>"+ reply.reply_Content +"</textarea>";
-
+		    		text += "<p style='float: right;'>" + reply.reply_Date + "</p>";
 		    		if("${session_id}" == reply.user_Id){
 		    			text +="<a id='ready"+ (index + 1) + "' href='javascript:updateReply(" + (index + 1) + ")'>[수정]</a>";
 		    			text +="<a id='ok" + (index + 1) + "' href='javascript:updateOkReply(" + reply.reply_Num + ", " + (index+1)+ ")' style='display:none;'>[수정 완료]</a>";
 		    			text += "<a href='javascript:deleteReply(" + reply.reply_Num + ")'>[삭제]</a>";
 		    		}
-		    		text +="</td><tr>";
+		    		text +="</td></tr>";
 		    	});
 		    }else{
 		    	text += "<tr align='center' style='border-top: solid 1px; border-color: #e3e3e3;'><td align='center' width='150px' colspan='2'>등록된 댓글이 없습니다.</td></tr>"

@@ -62,7 +62,7 @@
 		<!-- FreeTalk -->
 		<section id="banner">
 			<article class="column col4">
-				<h2 class="col_tit" style="text-align: left; color: black;">인증후기 글쓰기</h2>
+				<h2 class="col_tit" style="text-align: left; color: black;">자유게시판 글쓰기</h2>
 				<p class="col_desc"> </p>
 		
 						<form method="post" action="${pageContext.request.contextPath}/freeboard/FreeBoardWriteOk.bo" class="combined" name="freeBoardform" enctype="multipart/form-data" style="margin-bottom: 0;">
@@ -73,7 +73,7 @@
 							<div align="center">제 목</div>
 						</td>
 						<td style="padding-left:10px;">
-							<input name="board_Title" type="text" size="50" maxlength="100" value=""/>
+							<input name="board_Title" id="board_Title" type="text" size="50" maxlength="100" value="" minlength = "1"/>
 						</td>
 					</tr>
 					<tr height="30px">
@@ -89,7 +89,7 @@
 							<div align="center">내 용</div>
 						</td>
 						<td style="padding-left:10px;">
-							<textarea name="board_Content" style="height:185px; resize: none;"></textarea>
+							<textarea name="board_Content" id="board_Content" style="height:185px; resize: none;" minlength = "1"></textarea>
 						</td>
 					</tr>
 					<tr height="30px">
@@ -145,8 +145,20 @@
 	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
 	<script>
+		var form = document.freeBoardform;
+		
 		function addBoard(){
-			freeBoardform.submit();
+			if(!form.board_Title.value){
+				alert("제목을 입력해주세요.");
+				form.board_Title.focus();
+				return;
+			}
+			else if(!form.board_Content.value){
+				alert("내용을 입력해주세요.");
+				form.board_Content.focus();
+				return;
+			}
+				freeBoardform.submit();
 		}
 		
 		function cancleFile(fileTagName){

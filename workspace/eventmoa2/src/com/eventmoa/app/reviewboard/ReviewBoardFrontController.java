@@ -10,14 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.eventmoa.action.ActionForward;
 import com.eventmoa.app.freeboard.FileDownloadAction;
-import com.eventmoa.app.freeboard.FreeBoardListOkAction;
-import com.eventmoa.app.freeboard.FreeBoardModifyAction;
-import com.eventmoa.app.freeboard.FreeBoardModifyOkAction;
-import com.eventmoa.app.freeboard.FreeBoardReplyDeleteOkAction;
-import com.eventmoa.app.freeboard.FreeBoardReplyListAction;
-import com.eventmoa.app.freeboard.FreeBoardReplyModifyOkAction;
-import com.eventmoa.app.freeboard.FreeBoardReplyOkAction;
-import com.eventmoa.app.freeboard.FreeBoardWriteOkAction;
 
 public class ReviewBoardFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -96,7 +88,7 @@ public class ReviewBoardFrontController extends HttpServlet {
 			req.setAttribute("page", req.getParameter("page"));
 			forward.setPath("/community/reviewWrite.jsp");
 			break;
-		case "/reviewboard/FreeBoardReplyOk.rb":
+		case "/reviewboard/ReviewBoardReplyOk.rb":
 			try {
 				forward = new ReviewBoardReplyOkAction().execute(req, resp);
 			} catch (Exception e) {
