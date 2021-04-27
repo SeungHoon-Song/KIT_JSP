@@ -80,6 +80,11 @@
 		WHERE REPLY_NUM = #{reply_Num}
 	</update>
 	
+	<!-- 댓글 평점 -->
+	<select id="getReplyStar" parameterType="_int" resultType="_float">
+		SELECT ROUND(AVG(LENGTH(REPLY_STAR)),2) FROM TABLE_REPLY_EVENT WHERE BOARD_NUM = #{board_Num}
+	</select>
+	
 	<!-- 글 등록시 포인트 차감-->
 	<update id="usePoint" parameterType="map">
 		UPDATE TABLE_USER SET USER_POINT = (USER_POINT - #{point}) WHERE user_Id = #{user_Id}
