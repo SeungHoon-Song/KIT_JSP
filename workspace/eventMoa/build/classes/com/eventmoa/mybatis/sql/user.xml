@@ -143,4 +143,62 @@
 	+ (SELECT COUNT(*) FROM TABLE_REPLY_EVENT WHERE USER_ID = #{user_Id}) 
 	+ (SELECT COUNT(*) FROM TABLE_REPLY_REVIEW WHERE USER_ID = #{user_Id}) FROM DUAL
 	</select>
+	
+	<!-- 검색 리스트 -->
+	<!-- 
+	<select id="searchList" parameterType="map" resultType="freeBoardVO">
+		SELECT * FROM(SELECT ROWNUM AS RN, D.* FROM(
+			SELECT * FROM
+				(SELECT ROWNUM R, D.* FROM 
+					(SELECT * FROM TABLE_BOARD_EVENT
+			(
+			SELECT BOARD_NUM, BOARD_CATEGORY, BOARD_TITLE, BOARD_DATE FROM TABLE_BOARD_FREETALK A 
+			<trim prefix="WHERE" prefixOverrides="AND">
+					<if test="keyword != null and keyword != ''">
+						AND (
+								BOARD_CONTENT LIKE '%'|| #{keyword} ||'%' 
+								OR BOARD_TITLE LIKE '%'|| #{keyword} ||'%' 
+							)
+					</if>
+					<if test="category != null and category != ''">
+						AND BOARD_Address LIKE '%'|| #{category} ||'%' 
+	           		 </if>
+	           	</trim>
+			UNION ALL
+			SELECT BOARD_NUM, BOARD_CATEGORY, BOARD_TITLE, BOARD_DATE FROM TABLE_BOARD_EVENT B 
+			<trim prefix="WHERE" prefixOverrides="AND">
+					<if test="keyword != null and keyword != ''">
+						AND (
+								BOARD_CONTENT LIKE '%'|| #{keyword} ||'%' 
+								OR BOARD_TITLE LIKE '%'|| #{keyword} ||'%' 
+							)
+					</if>
+					<if test="category != null and category != ''">
+						AND BOARD_Address LIKE '%'|| #{category} ||'%' 
+	           		 </if>
+			</trim> 
+			UNION ALL
+			SELECT BOARD_NUM, BOARD_CATEGORY, BOARD_TITLE, BOARD_DATE FROM TABLE_BOARD_REVIEW C 
+						<trim prefix="WHERE" prefixOverrides="AND">
+					<if test="keyword != null and keyword != ''">
+						AND (
+								BOARD_CONTENT LIKE '%'|| #{keyword} ||'%' 
+								OR BOARD_TITLE LIKE '%'|| #{keyword} ||'%' 
+							)
+					</if>
+					<if test="category != null and category != ''">
+						AND BOARD_Address LIKE '%'|| #{category} ||'%' 
+	           		 </if>
+			</trim>  
+			) 
+			ORDER BY BOARD_DATE DESC) D) B
+		WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="searchBoardCnt" resultType="_int">
+		SELECT (SELECT COUNT(*) FROM TABLE_BOARD_FREETALK ) 
+	+ (SELECT COUNT(*) FROM TABLE_BOARD_EVENT ) 
+	+ (SELECT COUNT(*) FROM TABLE_BOARD_REVIEW ) FROM DUAL
+	</select> 
+	-->
 </mapper>

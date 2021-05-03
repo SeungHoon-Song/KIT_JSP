@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- alias  freeTalk_boardVO -->
+<mapper namespace="ReviewBoard">
+	<!-- 리뷰 게시판 리스트 -->
+	<select id="listAll" parameterType="map" resultType="reviewBoardVO">
+		SELECT * FROM 
+			(SELECT ROWNUM R, D.* FROM 
+				(SELECT * FROM TABLE_BOARD_REVIEW ORDER BY 
+				<if test="category != null and category != ''">
+                  <choose>
+                     <when test="category == 'recent'">
+                        BOARD_DATE DESC
+                     </when>
+                     <when test="category == 'view'">
+                        BOARD_VIEW DESC
+                     </when>
+                  </choose>
+            </if>
+            ) D) B
+		WHERE B.R BETWEEN #{startRow} AND #{endRow}
+	</select>
+	<select id="getBoardCnt" resultType="_int">
+		SELECT COUNT(*) FROM TABLE_BOARD_REVIEW
+	</select>
+<!-- 검색 -->
+	<select id="searchList" parameterType="map" resultType="reviewBoardVO">
+		SELECT * FROM 
+			(SELECT ROWNUM R, D.* FROM 
+				(SELECT * FROM TABLE_BOARD_REVIEW
+				<trim prefix="WHERE" prefixOverrides="AND">
+					<if test="keyword != null and keyword != '' and category == ''">
+						AND (
+								BOARD_CONTENT LIKE '%'|| #{keyword} ||'%' 
+								OR BOARD_TITLE LIKE '%'|| #{keyword} ||'%' 
+								OR BOARD_Id LIKE '%'|| #{keyword} ||'%' 
+							)
+					</if>
+					<if test="keyword != '' and category != ''">
+						AND (
+								BOARD_CONTENT LIKE '%'|| #{keyword} ||'%' 
+								OR BOARD_TITLE LIKE '%'|| #{keyword} ||'%' 
+								OR BOARD_ID LIKE '%'|| #{keyword} ||'%' 
+								OR BOARD_CONTENT LIKE '%'|| #{category} ||'%' 
+								OR BOARD_TITLE LIKE '%'|| #{category} ||'%'
+							)
+					</if>
+					<if test="category != null and category != '' and keyword == ''">
+						AND (
+								BOARD_CONTENT LIKE '%'|| #{category} ||'%' 
+								OR BOARD_TITLE LIKE '%'|| #{category} ||'%'
+							)
+	           		 </if>
+	           	</trim>
+							ORDER BY
+					<if test="category3 != null and category3 != ''">
+					 <choose>
+	                     <when test="category3 == 'recent'">
+	                        BOARD_DATE DESC
+	                     </when>
+	                     <when test="category3 == 'view'">
+	                        BOARD_VIEW DESC
+	                     </when>
+                 	 </choose>
+					</if>
+							) D) B
+      WHERE B.R BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="searchEventList" parameterType="_int" resultType="string">
+		SELECT A.BOARD_TITLE FROM TABLE_BOARD_EVENT A INNER JOIN TABLE_BOARD_REVIEW B 
+		ON A.BOARD_NUM = B.#{e_board_Num};
+	</select>
+	
+	<!-- 리뷰 등록 -->
+	<insert id="insertBoard" parameterType="reviewBoardVO">
+		INSERT INTO TABLE_BOARD_REVIEW
+		(BOARD_NUM, BOARD_TITLE, BOARD_CONTENT, BOARD_ID, BOARD_VIEW, BOARD_DATE, BOARD_CATEGORY, E_BOARD_NUM, E_BOARD_TITLE)
+		VALUES (BOARD_SEQ_REVIEW.NEXTVAL, #{board_Title}, #{board_Content}, #{board_Id}, 0, current_date, 'REVIEW', #{e_board_Num}, #{e_board_Title})
+	</insert>
+	
+	<update id="updateBoardView" parameterType="_int">
+		UPDATE TABLE_BOARD_REVIEW 
+		SET BOARD_VIEW = BOARD_VIEW + 1 
+		WHERE BOARD_NUM = #{board_Num}
+	</update>
+	
+	<select id="getDetail" parameterType="_int" resultType="reviewBoardVO">
+		SELECT * FROM TABLE_BOARD_REVIEW 
+		WHERE BOARD_NUM = #{board_Num}
+	</select>
+	
+	<update id="updateBoard" parameterType="reviewBoardVO">
+		UPDATE TABLE_BOARD_REVIEW 
+		SET BOARD_TITLE = #{board_Title}, BOARD_CONTENT = #{board_Content} 
+		WHERE BOARD_NUM = #{board_Num}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="_int">
+		DELETE FROM TABLE_BOARD_REVIEW 
+		WHERE BOARD_NUM = #{board_Num}
+	</delete>
+	
+	<select id="getBoardNum" resultType="_int">
+		SELECT BOARD_SEQ_REVIEW.CURRVAL FROM DUAL
+	</select>
+	
+	<!-- 댓글 -->
+	<insert id="insertReply" parameterType="reviewReplyVO">
+		INSERT INTO TABLE_REPLY_REVIEW
+		VALUES(BOARD_SEQ_REVIEW.NEXTVAL, #{board_Num}, #{user_Id}, #{reply_Content}, current_date, 'REVIEW')
+	</insert>
+	
+	<select id="getReplyList" parameterType="_int" resultType="reviewReplyVO">
+		SELECT * FROM TABLE_REPLY_REVIEW WHERE BOARD_NUM = #{board_Num} ORDER BY REPLY_NUM DESC
+	</select>
+	
+	<delete id="deleteReply" parameterType="_int">
+		DELETE FROM TABLE_REPLY_REVIEW WHERE REPLY_NUM = #{reply_Num}
+	</delete>
+	
+	<update id="updateReply" parameterType="reviewReplyVO">
+		UPDATE TABLE_REPLY_REVIEW
+		SET REPLY_CONTENT = #{reply_Content}
+		WHERE REPLY_NUM = #{reply_Num}
+	</update>
+	
+</mapper>
